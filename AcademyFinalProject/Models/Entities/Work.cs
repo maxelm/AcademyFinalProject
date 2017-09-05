@@ -10,7 +10,7 @@ namespace AcademyFinalProject.Models.Entities
             OrderToWork = new HashSet<OrderToWork>();
         }
 
-        public int Wik { get; set; }
+        public int Wid { get; set; }
         public string Type { get; set; }
         public decimal StandardHourlyRate { get; set; }
 

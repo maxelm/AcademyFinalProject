@@ -13,6 +13,15 @@ namespace AcademyFinalProject.Models.Entities
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Work> Work { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer(@"Data Source=ACADEMY-7115W44;Initial Catalog=AcademyFinalProjectDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            }
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Customer>(entity =>
@@ -55,6 +64,8 @@ namespace AcademyFinalProject.Models.Entities
                 entity.Property(e => e.Oid).HasColumnName("OID");
 
                 entity.Property(e => e.Cid).HasColumnName("CID");
+
+                entity.Property(e => e.OrderReceived).HasColumnType("date");
 
                 entity.HasOne(d => d.C)
                     .WithOne(p => p.Order)

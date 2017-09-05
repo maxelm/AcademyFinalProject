@@ -19,6 +19,5 @@ namespace AcademyFinalProject.Models.Entities
         public DateTime RequestedStartDate { get; set; }
 
         public Order Order { get; set; }
-
     }
 }

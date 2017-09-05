@@ -124,9 +124,9 @@ namespace AcademyFinalProject.Models.Entities
 
             modelBuilder.Entity<Work>(entity =>
             {
-                entity.HasKey(e => e.Wik);
+                entity.HasKey(e => e.WID);
 
-                entity.Property(e => e.Wik).HasColumnName("WIK");
+                entity.Property(e => e.WID).HasColumnName("WID");
 
                 entity.Property(e => e.StandardHourlyRate).HasColumnType("money");
 

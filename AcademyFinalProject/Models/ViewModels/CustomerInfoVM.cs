@@ -37,6 +37,7 @@ namespace AcademyFinalProject.Models.ViewModels
         [Display(Name = "Stad")]
         public string City { get; set; }
         
+        [Display(Name = "Övriga Kommentarer")]
         public string TextBox { get; set; }
     }
 }

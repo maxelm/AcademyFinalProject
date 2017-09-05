@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using AcademyFinalProject.Models.Entities;
 
 namespace AcademyFinalProject
 {
@@ -19,6 +20,7 @@ namespace AcademyFinalProject
             // Local copy of Azure DB
             var connString = "Data Source=ACADEMY-7115W44;Initial Catalog=AcademyFinalProjectDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
+            services.AddDbContextPool<AcademyDbContext>(o => o.UseSqlServer(connString));  //TODO: Add server retry + Ask if contextPOOL makes a difference
             services.AddMvc();
         }
 

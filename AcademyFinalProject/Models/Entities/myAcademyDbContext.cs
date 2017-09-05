@@ -13,6 +13,7 @@ namespace AcademyFinalProject.Models.Entities
             
         }
 
+
         // TODO: Insert DB API. full CRUD
         
     }

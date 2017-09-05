@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using AcademyFinalProject.Models.Entities;
+using AcademyFinalProject.Models;
 
 namespace AcademyFinalProject
 {
@@ -25,6 +26,9 @@ namespace AcademyFinalProject
 
             services.AddDbContextPool<AcademyDbContext>(o => o.UseSqlServer(connString));  //TODO: Add server retry + Ask if contextPOOL makes a difference
             services.AddMvc();
+            services.AddSingleton<IContentService, DevContentService>(); //using dev
+            //services.AddSingleton<IContentService, ReleaseContentService>(); //using Release
+
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

@@ -3,14 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AcademyFinalProject.Models.ViewModels;
+using AcademyFinalProject.Models.Entities;
 
 namespace AcademyFinalProject.Models
 {
-    public class DevContentService : IContentService
+    public class ReleaseContentService : IContentService
     {
+        AcademyDbContext context;
+
+        public ReleaseContentService(AcademyDbContext context)
+        {
+            this.context = context;
+        }
+
         public CustomerInfoVM GetCustomerInfo()
         {
-            return new CustomerInfoVM() { FirstName = "Diar", LastName = "Marqus" };
+            throw new NotImplementedException();
         }
 
         public ListInquiryVM[] GetOfferInquiries()

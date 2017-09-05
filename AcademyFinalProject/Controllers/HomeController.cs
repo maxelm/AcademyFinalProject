@@ -4,22 +4,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AcademyFinalProject.Models.Entities;
+using AcademyFinalProject.Models;
 
 namespace AcademyFinalProject.Controllers
 {
     public class HomeController : Controller
     {
 
-        AcademyDbContext context;
+        IContentService contentService;
 
-        public HomeController(AcademyDbContext context)
+        public HomeController(IContentService contentService)
         {
-            this.context = context;
+            this.contentService = contentService;
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(contentService.GetCustomerInfo());
         }
 
         public IActionResult CustomerRequestOffer()

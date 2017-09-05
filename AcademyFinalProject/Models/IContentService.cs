@@ -10,9 +10,9 @@ namespace AcademyFinalProject.Models
     {
         void SaveContact();
         void SaveProductsToOrder();
-        //ListInquiryVM[] GetOfferInquiries();
+        ListInquiryVM[] GetOfferInquiries();
         CustomerInfoVM GetCustomerInfo();
-        //SelectedProducts GetSelectedProducts();
+        SelectedProductsVM GetSelectedProducts();
         void SaveAmountOfWork();
         int[] GetWorkHourlyRates();
     }

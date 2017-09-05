@@ -8,32 +8,32 @@ namespace AcademyFinalProject.Models.ViewModels
 {
     public class CustomerInfoVM
     {
-        [Required]
+        [Required(ErrorMessage = "Ange ditt förnamn")]
         [Display (Name = "Förnamn")]
         public string FirstName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Ange ditt efternamn")]
         [Display(Name = "Efternamn")]
         public string LastName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Ange din E-mail")]
         [EmailAddress]
         [Display(Name = "E-mail")]
         public string Email { get; set; }
         
-        [Required]
+        [Required(ErrorMessage = "Ange ditt telefonnummer")]
         [Display(Name = "Telefon")]
         public string PhoneNumber { get; set; }
         
-        [Required]
+        [Required(ErrorMessage = "Ange din gatuadress")]
         [Display(Name = "Gatuadress")]
         public string Street { get; set; }
         
-        [Required]
+        [Required(ErrorMessage = "Ange din postkod")]
         [Display(Name = "Postkod")]
         public string Zip { get; set; }
         
-        [Required]
+        [Required(ErrorMessage = "Ange din stad")]
         [Display(Name = "Stad")]
         public string City { get; set; }
         

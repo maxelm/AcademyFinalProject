@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace AcademyFinalProject.Models.ViewModels
 {
-    public class TESTVM
+    public class ProductSelectionVM
     {
     }
 }

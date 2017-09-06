@@ -15,5 +15,7 @@ namespace AcademyFinalProject.Models
         SelectedProductsVM GetSelectedProducts();
         void SaveAmountOfWork();
         int[] GetWorkHourlyRates();
+        CreateOfferWrapperVM CreateOfferWrapperVM();
+
     }
 }

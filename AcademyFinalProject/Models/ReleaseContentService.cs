@@ -16,6 +16,11 @@ namespace AcademyFinalProject.Models
             this.context = context;
         }
 
+        public CreateOfferWrapperVM CreateOfferWrapperVM()
+        {
+            throw new NotImplementedException();
+        }
+
         public CustomerInfoVM GetCustomerInfo()
         {
             throw new NotImplementedException();

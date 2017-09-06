@@ -14,5 +14,6 @@ namespace AcademyFinalProject.Models.ViewModels
         public DateTime RequestedStartDate { get; set; }
         public DateTime OrderReceived { get; set; }
         public bool IsComplete { get; set; }
+        public int CID { get; set; }
     }
 }

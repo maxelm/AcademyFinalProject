@@ -3,14 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AcademyFinalProject.Models.ViewModels;
+using AcademyFinalProject.Models.Entities;
 
 namespace AcademyFinalProject.Models
 {
     public class DevContentService : IContentService
     {
+        AcademyDbContext context;
+
         public CustomerInfoVM GetCustomerInfo()
         {
             return new CustomerInfoVM() { FirstName = "Diar", LastName = "Marqus" };
+        }
+
+        public CustomerRequestOfferWrapperVM GetFirstView()
+        {
+            var x = new CustomerRequestOfferWrapperVM
+            {
+                CustomerInfo = new CustomerInfoVM { FirstName = "Max" },
+                ProjectInfoSelection = new ProjectInfoSelectionVM { SquareMeter = 10 }
+
+            };
+
+            return x;
         }
 
         public ListInquiryVM[] GetOfferInquiries()

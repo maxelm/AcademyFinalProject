@@ -21,13 +21,13 @@ namespace AcademyFinalProject
             // Local SQL server
             var connString = "Data Source=(localdb)/MSSQLLocalDB;Initial Catalog=AcademyFinalProjectDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-            services.AddDbContext<AcademyDbContext>(o => o.UseSqlServer(connString));
+            //services.AddDbContext<AcademyDbContext>(o => o.UseSqlServer(connString));
 
 
             services.AddDbContextPool<AcademyDbContext>(o => o.UseSqlServer(connString));  //TODO: Add server retry + Ask if contextPOOL makes a difference
             services.AddMvc();
-            services.AddSingleton<IContentService, DevContentService>(); //using dev
-            //services.AddSingleton<IContentService, ReleaseContentService>(); //using Release
+            //services.AddSingleton<IContentService, DevContentService>(); //using dev
+            services.AddSingleton<IContentService, ReleaseContentService>(); //using Release
 
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace AcademyFinalProject.Models.ViewModels
 {
+    [Bind(Prefix = nameof(CustomerRequestOfferWrapperVM.CustomerInfo))]
     public class CustomerInfoVM
     {
         [Required(ErrorMessage = "Ange ditt förnamn")]
@@ -23,7 +25,7 @@ namespace AcademyFinalProject.Models.ViewModels
         
         [Required(ErrorMessage = "Ange ditt telefonnummer")]
         [Display(Name = "Telefon")]
-        public string PhoneNumber { get; set; }
+        public string Phone { get; set; }
         
         [Required(ErrorMessage = "Ange din gatuadress")]
         [Display(Name = "Gatuadress")]

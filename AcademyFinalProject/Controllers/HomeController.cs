@@ -20,7 +20,7 @@ namespace AcademyFinalProject.Controllers
 
         public IActionResult Index()
         {
-            return View(contentService.GetCustomerInfo());
+            return View(contentService.GetFirstView());
         }
 
         public IActionResult CustomerRequestOffer()

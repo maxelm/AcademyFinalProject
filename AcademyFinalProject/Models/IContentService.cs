@@ -11,10 +11,11 @@ namespace AcademyFinalProject.Models
         void SaveContact();
         void SaveProductsToOrder();
         ListInquiryVM[] GetOfferInquiries();
-        CustomerInfoVM GetCustomerInfo();
-        SelectedProductsVM GetSelectedProducts();
+        CustomerInfoVM GetCustomerInfoById(int id);
+        SelectedProductsVM GetSelectedProductsByCid(int cid);
         void SaveAmountOfWork();
-        int[] GetWorkHourlyRates();
         CustomerRequestOfferWrapperVM GetFirstView();
+        ProductSelectionVM GetProductLists();
+        CreateOfferWrapperVM GetOfferRequestById(int id);
     }
 }

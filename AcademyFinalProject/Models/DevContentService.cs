@@ -11,9 +11,14 @@ namespace AcademyFinalProject.Models
     {
         AcademyDbContext context;
 
-        public CustomerInfoVM GetCustomerInfo()
+        public CustomerInfoVM GetCustomerInfoById()
         {
             return new CustomerInfoVM() { FirstName = "Diar", LastName = "Marqus" };
+        }
+
+        public CustomerInfoVM GetCustomerInfoById(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public CustomerRequestOfferWrapperVM GetFirstView()
@@ -33,7 +38,22 @@ namespace AcademyFinalProject.Models
             throw new NotImplementedException();
         }
 
-        public SelectedProductsVM GetSelectedProducts()
+        public CreateOfferWrapperVM GetOfferRequestById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ProductSelectionVM GetProductLists()
+        {
+            throw new NotImplementedException();
+        }
+
+        public SelectedProductsVM GetSelectedProductsByCid()
+        {
+            throw new NotImplementedException();
+        }
+
+        public SelectedProductsVM GetSelectedProductsByCid(int cid)
         {
             throw new NotImplementedException();
         }

@@ -13,33 +13,34 @@ namespace AcademyFinalProject.Models.ViewModels
         [Required(ErrorMessage = "Skriv in antal tim.")]
         public int DemolitionHours { get; set; }
         [Required(ErrorMessage = "Skriv in tim deb.")]
-        public int HourlyRateDemolition { get; set; }
+        public decimal HourlyRateDemolition { get; set; }
 
         [Required(ErrorMessage = "Skriv in antal tim.")]
         public int DrainHours { get; set; }
         [Required(ErrorMessage = "Skriv in tim deb.")]
-        public int HourlyRateDrain { get; set; }
+        public decimal HourlyRateDrain { get; set; }
 
         [Required(ErrorMessage = "Skriv in antal tim.")]
         public int VentilationHours { get; set; }
         [Required(ErrorMessage = "Skriv in tim deb.")]
-        public int HourlyRateVentilation { get; set; }
+        public decimal HourlyRateVentilation { get; set; }
 
         [Required(ErrorMessage = "Skriv in antal tim.")]
         public int TileHours { get; set; }
         [Required(ErrorMessage = "Skriv in tim deb.")]
-        public int HourlyRateTile { get; set; }
+        public decimal HourlyRateTile { get; set; }
 
         [Required(ErrorMessage = "Skriv in antal tim.")]
         public int ElectricityHours { get; set; }
         [Required(ErrorMessage = "Skriv in tim deb.")]
-        public int HourlyRateElectricity { get; set; }
+        public decimal HourlyRateElectricity { get; set; }
 
         [Required(ErrorMessage = "Skriv in antal tim")]
         public int MountingHours { get; set; }
         [Required(ErrorMessage = "Skriv in tim deb.")]
-        public int HourlyRateMounting { get; set; }
+        public decimal HourlyRateMounting { get; set; }
 
-        public int Summary { get; set; }
+        public int TotalAmountOfHours { get; set; }
+        public decimal TotalWorkCost { get; set; }
     }
 }

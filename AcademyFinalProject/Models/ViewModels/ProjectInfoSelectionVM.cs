@@ -8,7 +8,22 @@ using System.Threading.Tasks;
 
 namespace AcademyFinalProject.Models.ViewModels
 {
-    //[Bind(Prefix = nameof(CustomerRequestOfferWrapperVM.ProjectInfoSelection))]
+    public enum ProjectType
+    {
+        BadrumsRenovering = 0,
+        EndastKakling = 1,
+    }
+
+    public enum PropertyType
+    {
+        Radhus = 0,
+        Villa = 1,
+        BRF = 2,
+        Lägenhet = 3,
+    }
+
+
+    [Bind(Prefix = nameof(CustomerRequestOfferWrapperVM.ProjectInfoSelection))]
     public class ProjectInfoSelectionVM
     {
         public SelectListItem[] ProjectTypeItems { get; set; }

@@ -46,7 +46,9 @@ namespace AcademyFinalProject.Models.ViewModels
         [Required(ErrorMessage = "Skriv in tim deb.")]
         public decimal HourlyRateMounting { get; set; }
 
+        [Display(Name = "Total Hours")]
         public int TotalAmountOfHours { get; set; }
+        [Display(Name = "Total Cost")]
         public decimal TotalWorkCost { get; set; }
     }
 }

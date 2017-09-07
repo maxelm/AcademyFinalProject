@@ -26,9 +26,9 @@ namespace AcademyFinalProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult CreateOffer(int cid)
+        public IActionResult CreateOffer(int id)
         {
-            return View(contentService.CreateOfferWrapperVM());
+            return View(contentService.GetOfferRequestByCID(id));
         }
           
         [HttpPost]

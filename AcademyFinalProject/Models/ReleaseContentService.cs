@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AcademyFinalProject.Models.ViewModels;
 using AcademyFinalProject.Models.Entities;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace AcademyFinalProject.Models
 {
@@ -40,11 +41,11 @@ namespace AcademyFinalProject.Models
             this.context = context;
         }
 
-        public CustomerInfoVM GetCustomerInfoById(int id) // REDO FÖR TESTING
+        public ShowCustomerInfoVM GetCustomerInfoByCID(int cid) // REDO FÖR TESTING
         {
-            Customer cust = context.Customer.FirstOrDefault(c => c.Cid == id);
-            return new CustomerInfoVM
+            return context.Customer.Where(c => c.Cid == cid).Select(cust => new ShowCustomerInfoVM
             {
+                CID = cid,
                 FirstName = cust.FirstName,
                 LastName = cust.LastName,
                 Street = cust.Street,
@@ -52,15 +53,16 @@ namespace AcademyFinalProject.Models
                 City = cust.City,
                 Email = cust.Email,
                 Phone = cust.Phone,
-                TextBox = cust.CustomerMessage,
-            };
+                TextBox = cust.CustomerMessage
+            }).SingleOrDefault();
+
         }
 
         public CustomerRequestOfferWrapperVM GetFirstView() // REDO FÖR TESTING
         {
             return new CustomerRequestOfferWrapperVM()
             {
-                CustomerInfo = new CustomerInfoVM(),
+                CustomerInfo = new CreateCustomerInfoVM(),
                 ProjectInfoSelection = GetProjectInfoLists(),
                 ProductSelection = GetProductLists(),
             };
@@ -130,29 +132,59 @@ namespace AcademyFinalProject.Models
             return context.Product.Where(p => p.Category == productCategory).Select(p => new SelectListItem { Text = p.Name, Value = $"{p.Pid.ToString()}_{p.Price}" }).ToArray();
         }
 
-        public SelectedProductsVM GetSelectedProductsByCid(int cid) // REDO FÖR TESTING
+        public SelectedProductsVM GetSelectedProductsByCID(int cid) // REDO FÖR TESTING
         {
-            IEnumerable<Product> pList = context.Customer.FirstOrDefault(c => c.Cid == cid).Order.OrderToProduct.Select(i => i.P);
+            var x = context.Customer.FirstOrDefault(c => c.Cid == cid).Order;
 
-            return new SelectedProductsVM
+            //TODO Fixa syntax
+            var test1 = context.Customer
+                .Include(c => c.Order)
+                .Include(c => c.Order.OrderToProduct)
+                //.Include(c => c.Order.OrderToProduct.)
+                .FirstOrDefault(c => c.Cid == cid)
+                .Order
+                .OrderToProduct;
+
+            var test2 = context.Customer
+                .Where(c => c.Cid == cid)
+                .SelectMany(c => c.Order.OrderToProduct.Select(otp => otp.P))
+                .ToArray();
+
+            //test1.Order = context.Order.FirstOrDefault(o => o.Cid == cid);
+
+            var validation = context.Customer.FirstOrDefault(c => c.Cid == cid).Order.OrderToWork;
+
+            return null;
+            if (validation != null)
             {
-                Shower = GetProductName(PCategory.Shower, pList),
-                ShowerPrice = GetProductPrice(PCategory.Shower, pList),
-                Toilet = GetProductName(PCategory.Toilet, pList),
-                ToiletPrice = GetProductPrice(PCategory.Toilet, pList),
-                Sink = GetProductName(PCategory.Sink, pList),
-                SinkPrice = GetProductPrice(PCategory.Sink, pList),
-                Cabinet = GetProductName(PCategory.Cabinet, pList),
-                CabinetPrice = GetProductPrice(PCategory.Cabinet, pList),
-                Faucet = GetProductName(PCategory.Faucet, pList),
-                FaucetPrice = GetProductPrice(PCategory.Faucet, pList),
-                Lightning = GetProductName(PCategory.Lighting, pList),
-                LightningPrice = GetProductPrice(PCategory.Lighting, pList),
-                Tile = GetProductName(PCategory.Tile, pList),
-                TilePrice = GetProductPrice(PCategory.Tile, pList),
-                Clinker = GetProductName(PCategory.Clinker, pList),
-                ClinkerPrice = GetProductPrice(PCategory.Clinker, pList),
-            };
+
+                if ((validation.Count() > 0))
+                {
+                    IEnumerable<Product> pList = context.Customer.FirstOrDefault(c => c.Cid == cid).Order.OrderToProduct.Select(i => i.P);
+
+                    return new SelectedProductsVM
+                    {
+                        Shower = GetProductName(PCategory.Shower, pList),
+                        ShowerPrice = GetProductPrice(PCategory.Shower, pList),
+                        Toilet = GetProductName(PCategory.Toilet, pList),
+                        ToiletPrice = GetProductPrice(PCategory.Toilet, pList),
+                        Sink = GetProductName(PCategory.Sink, pList),
+                        SinkPrice = GetProductPrice(PCategory.Sink, pList),
+                        Cabinet = GetProductName(PCategory.Cabinet, pList),
+                        CabinetPrice = GetProductPrice(PCategory.Cabinet, pList),
+                        Faucet = GetProductName(PCategory.Faucet, pList),
+                        FaucetPrice = GetProductPrice(PCategory.Faucet, pList),
+                        Lightning = GetProductName(PCategory.Lighting, pList),
+                        LightningPrice = GetProductPrice(PCategory.Lighting, pList),
+                        Tile = GetProductName(PCategory.Tile, pList),
+                        TilePrice = GetProductPrice(PCategory.Tile, pList),
+                        Clinker = GetProductName(PCategory.Clinker, pList),
+                        ClinkerPrice = GetProductPrice(PCategory.Clinker, pList),
+                    };
+                }
+            }
+
+            else return new SelectedProductsVM();
         }
 
         private decimal GetProductPrice(PCategory productCategory, IEnumerable<Product> productList)// REDO FÖR TESTING
@@ -273,19 +305,19 @@ namespace AcademyFinalProject.Models
              */
         }
 
-        public CreateOfferWrapperVM GetOfferRequestById(int id) // REDO FÖR TESTING
+        public CreateOfferWrapperVM GetOfferRequestByCID(int cid) // REDO FÖR TESTING
         {
             return new CreateOfferWrapperVM
             {
-                CustomerInfoVM = GetCustomerInfoById(id),
-                SelectedProductsVM = GetSelectedProductsByCid(id),
+                ShowCustomerInfoVM = GetCustomerInfoByCID(cid),
+                SelectedProductsVM = GetSelectedProductsByCID(cid),
                 AmountOfWorkVM = GetAmountOfWorkVM(),
             };
         }
 
         private AmountOfWorkVM GetAmountOfWorkVM() // REDO FÖR TESTING
         {
-            IQueryable<Work> wList = context.Work.Select(w => w);
+            var wList = context.Work.Select(w => w).ToArray();
 
             return new AmountOfWorkVM
             {
@@ -298,7 +330,7 @@ namespace AcademyFinalProject.Models
             };
         }
 
-        private decimal GetHrlyRate(WorkType workType, IQueryable<Work> wList) // REDO FÖR TESTING
+        private decimal GetHrlyRate(WorkType workType, Work[] wList) // REDO FÖR TESTING
         {
             return wList.FirstOrDefault(w => w.Type == nameof(workType)).StandardHourlyRate;
         }

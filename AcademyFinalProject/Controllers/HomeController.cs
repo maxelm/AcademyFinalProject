@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AcademyFinalProject.Models.Entities;
 using AcademyFinalProject.Models;
+using System.Data.SqlClient;
 
 namespace AcademyFinalProject.Controllers
 {
@@ -28,6 +29,7 @@ namespace AcademyFinalProject.Controllers
             return View();
         }
 
+        [HttpGet]
         public IActionResult Inquiries()
         {
             return View(contentService.GetOfferInquiries());

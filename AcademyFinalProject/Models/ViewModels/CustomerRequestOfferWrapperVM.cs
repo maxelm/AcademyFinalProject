@@ -7,7 +7,7 @@ namespace AcademyFinalProject.Models.ViewModels
 {
     public class CustomerRequestOfferWrapperVM
     {
-        public CustomerInfoVM CustomerInfo { get; set; }
+        public CreateCustomerInfoVM CustomerInfo { get; set; }
         public ProductSelectionVM ProductSelection { get; set; }
         public ProjectInfoSelectionVM ProjectInfoSelection { get; set; }
     }

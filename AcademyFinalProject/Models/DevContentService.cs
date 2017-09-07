@@ -11,12 +11,12 @@ namespace AcademyFinalProject.Models
     {
         AcademyDbContext context;
 
-        public CustomerInfoVM GetCustomerInfoById()
+        public CreateCustomerInfoVM GetCustomerInfoById()
         {
-            return new CustomerInfoVM() { FirstName = "Diar", LastName = "Marqus" };
+            return new CreateCustomerInfoVM() { FirstName = "Diar", LastName = "Marqus" };
         }
 
-        public CustomerInfoVM GetCustomerInfoById(int id)
+        public CreateCustomerInfoVM GetCustomerInfoById(int id)
         {
             throw new NotImplementedException();
         }
@@ -25,7 +25,7 @@ namespace AcademyFinalProject.Models
         {
             var x = new CustomerRequestOfferWrapperVM
             {
-                CustomerInfo = new CustomerInfoVM { FirstName = "Max" },
+                CustomerInfo = new CreateCustomerInfoVM { FirstName = "Max" },
                 ProjectInfoSelection = new ProjectInfoSelectionVM { SquareMeter = 10 }
 
             };
@@ -49,7 +49,7 @@ namespace AcademyFinalProject.Models
             return inquiries.ToArray();
         }
 
-        public CreateOfferWrapperVM GetOfferRequestById(int id)
+        public CreateOfferWrapperVM GetOfferRequestByCID(int id)
         {
             throw new NotImplementedException();
         }
@@ -64,7 +64,7 @@ namespace AcademyFinalProject.Models
             throw new NotImplementedException();
         }
 
-        public SelectedProductsVM GetSelectedProductsByCid(int cid)
+        public SelectedProductsVM GetSelectedProductsByCID(int cid)
         {
             throw new NotImplementedException();
         }
@@ -102,19 +102,19 @@ namespace AcademyFinalProject.Models
         public CreateOfferWrapperVM CreateOfferWrapperVM()
         {
             CreateOfferWrapperVM createOfferWrapper = new CreateOfferWrapperVM();
-            createOfferWrapper.CustomerInfoVM = new CustomerInfoVM();
+            createOfferWrapper.ShowCustomerInfoVM = new ShowCustomerInfoVM();
             createOfferWrapper.AmountOfWorkVM = new AmountOfWorkVM();
             createOfferWrapper.SelectedProductsVM = new SelectedProductsVM();
 
-            createOfferWrapper.CustomerInfoVM.CID = 1;
-            createOfferWrapper.CustomerInfoVM.FirstName = "Diar";
-            createOfferWrapper.CustomerInfoVM.LastName = "Marq";
-            createOfferWrapper.CustomerInfoVM.PhoneNumber = "0703042332";
-            createOfferWrapper.CustomerInfoVM.Street = "SolnaGatan 43";
-            createOfferWrapper.CustomerInfoVM.TextBox = "Övrig text is the shiz";
-            createOfferWrapper.CustomerInfoVM.Zip = "73143";
-            createOfferWrapper.CustomerInfoVM.Email = "Diar@gmai.com";
-            createOfferWrapper.CustomerInfoVM.City = "Stockholm";
+            createOfferWrapper.ShowCustomerInfoVM.CID = 1;
+            createOfferWrapper.ShowCustomerInfoVM.LastName = "Marq";
+            createOfferWrapper.ShowCustomerInfoVM.Phone = "0703042332";
+            createOfferWrapper.ShowCustomerInfoVM.FirstName = "Diar";
+            createOfferWrapper.ShowCustomerInfoVM.Street = "SolnaGatan 43";
+            createOfferWrapper.ShowCustomerInfoVM.TextBox = "Övrig text is the shiz";
+            createOfferWrapper.ShowCustomerInfoVM.Zip = "73143";
+            createOfferWrapper.ShowCustomerInfoVM.Email = "Diar@gmai.com";
+            createOfferWrapper.ShowCustomerInfoVM.City = "Stockholm";
             createOfferWrapper.SelectedProductsVM.Cabinet = "Skåp";
             createOfferWrapper.SelectedProductsVM.Clinker = "Klinker";
             createOfferWrapper.SelectedProductsVM.Faucet = "Blandare";
@@ -127,5 +127,9 @@ namespace AcademyFinalProject.Models
             return createOfferWrapper;
         }
 
+        ShowCustomerInfoVM IContentService.GetCustomerInfoByCID(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

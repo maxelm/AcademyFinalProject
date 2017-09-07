@@ -7,8 +7,8 @@ namespace AcademyFinalProject.Models.ViewModels
 {
     public class CreateOfferWrapperVM
     {
-        public CustomerInfoVM CustomerInfoVM { get; set; }
-        public SelectedProductsVM SelectedProductsVM { get; set; }
-        public AmountOfWorkVM AmountOfWorkVM { get; set; }
+        public CustomerInfoVM CustomerInfoVM { get; set; } 
+        public SelectedProductsVM SelectedProductsVM { get; set; } 
+        public AmountOfWorkVM AmountOfWorkVM { get; set; } 
     }
 }

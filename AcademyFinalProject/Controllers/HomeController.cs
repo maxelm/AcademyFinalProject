@@ -27,5 +27,10 @@ namespace AcademyFinalProject.Controllers
         {
             return View();
         }
+
+        public IActionResult Inquiries()
+        {
+            return View(contentService.GetOfferInquiries());
+        }
     }
 }

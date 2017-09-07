@@ -43,37 +43,37 @@
                 <legend style="font-size:20px; font-weight: bold">Kundinformation</legend><br />
                 <table id="KundinfoTabell">
                     <tr>
-                        <td style="font-weight:bold"><label asp-for="@Model.CustomerInfoVM.FirstName"></label></td>
+                        <td style="font-weight:bold"><label asp-for="CustomerInfoVM.FirstName"></label></td>
                         <td>@Model.CustomerInfoVM.FirstName</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:bold"><label asp-for="@Model.CustomerInfoVM.LastName"></label></td>
+                        <td style="font-weight:bold"><label asp-for="CustomerInfoVM.LastName"></label></td>
                         <td>@Model.CustomerInfoVM.LastName</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:bold"><label asp-for="@Model.CustomerInfoVM.PhoneNumber"></label></td>
+                        <td style="font-weight:bold"><label asp-for="CustomerInfoVM.PhoneNumber"></label></td>
                         <td>@Model.CustomerInfoVM.PhoneNumber</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:bold"><label asp-for="@Model.CustomerInfoVM.Street"></label></td>
+                        <td style="font-weight:bold"><label asp-for="CustomerInfoVM.Street"></label></td>
                         <td>@Model.CustomerInfoVM.Street</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:bold"><label asp-for="@Model.CustomerInfoVM.PhoneNumber"></label></td>
+                        <td style="font-weight:bold"><label asp-for="CustomerInfoVM.PhoneNumber"></label></td>
                         <td>
                             @Model.CustomerInfoVM.City
                         </td>
                     </tr>
                     <tr>
-                        <td style="font-weight:bold"><label asp-for="@Model.CustomerInfoVM.Zip"></label></td>
+                        <td style="font-weight:bold"><label asp-for="CustomerInfoVM.Zip"></label></td>
                         <td>@Model.CustomerInfoVM.Zip</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:bold"><label asp-for="@Model.CustomerInfoVM.Email"></label></td>
+                        <td style="font-weight:bold"><label asp-for="CustomerInfoVM.Email"></label></td>
                         <td>@Model.CustomerInfoVM.Email</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:bold"><label asp-for="@Model.CustomerInfoVM.TextBox"></label></td>
+                        <td style="font-weight:bold"><label asp-for="CustomerInfoVM.TextBox"></label></td>
                         <td>@Model.CustomerInfoVM.TextBox</td>
                     </tr>
                 </table>
@@ -86,35 +86,35 @@
                 <legend style="font-size:20px; font-weight: bold">Material</legend><br />
                 <table>
                     <tr>
-                        <td style="font-weight:bold"><label asp-for="@Model.SelectedProductsVM.Cabinet"></label></td>
+                        <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Cabinet"></label></td>
                         <td>@Model.SelectedProductsVM.Cabinet</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:bold"><label asp-for="@Model.SelectedProductsVM.Clinker"></label></tdstyle="font-weight:bold">
+                        <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Clinker"></label></td>
                         <td>@Model.SelectedProductsVM.Clinker</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:bold"><label asp-for="@Model.SelectedProductsVM.Faucet"></label></td>
+                        <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Faucet"></label></td>
                         <td>@Model.SelectedProductsVM.Faucet</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:bold"><label asp-for="@Model.SelectedProductsVM.Lightning"></label></td>
+                        <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Lightning"></label></td>
                         <td>@Model.SelectedProductsVM.Lightning</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:bold"><label asp-for="@Model.SelectedProductsVM.Shower"></label></td>
+                        <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Shower"></label></td>
                         <td>@Model.SelectedProductsVM.Shower</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:bold"><label asp-for="@Model.SelectedProductsVM.Sink"></label></td>
+                        <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Sink"></label></td>
                         <td>@Model.SelectedProductsVM.Sink</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:bold"><label asp-for="@Model.SelectedProductsVM.Tile"></label></td>
+                        <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Tile"></label></td>
                         <td>@Model.SelectedProductsVM.Tile</td>
                     </tr>
                     <tr>
-                        <td style="font-weight:bold"><label asp-for="@Model.SelectedProductsVM.Toilet"></label></td>
+                        <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Toilet"></label></td>
                         <td>@Model.SelectedProductsVM.Toilet</td>
                     </tr>
                 </table>
@@ -125,7 +125,7 @@
         <div id="ArbetsKostnader">
             <fieldset style="background-color: #eeeeee">
                 <legend style="font-size:20px; font-weight: bold">Arbetskostnader</legend><br />
-                <form asp-controller="Company" asp-action="CreateOffer">
+                <form asp-controller="Company" asp-action="CreateOffer" asp-route-id="@Model.CustomerInfoVM.CID">
                     <table id="ArbetskostnadTabell">
                         <thead>
                             <tr>
@@ -179,7 +179,7 @@
                         </tbody>
                     </table>
                     <p><label asp-for="AmountOfWorkVM.Summary"></label></p><br />
-                            <input type="submit" value="Submit!" />
+                            <input type="submit" value="Skapa Offert!" />
                 </form>
             </fieldset>
         </div>

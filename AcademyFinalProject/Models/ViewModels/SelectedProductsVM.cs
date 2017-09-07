@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace AcademyFinalProject.Models.ViewModels
 {
+    [Bind(Prefix = nameof(CreateOfferWrapperVM.SelectedProductsVM))]
     public class SelectedProductsVM
     {
         [Display(Name = "Dusch")]

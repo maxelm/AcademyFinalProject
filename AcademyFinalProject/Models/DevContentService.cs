@@ -57,6 +57,11 @@ namespace AcademyFinalProject.Models
         public CreateOfferWrapperVM CreateOfferWrapperVM()
         {
             CreateOfferWrapperVM createOfferWrapper = new CreateOfferWrapperVM();
+            createOfferWrapper.CustomerInfoVM = new CustomerInfoVM();
+            createOfferWrapper.AmountOfWorkVM = new AmountOfWorkVM();
+            createOfferWrapper.SelectedProductsVM = new SelectedProductsVM();
+
+            createOfferWrapper.CustomerInfoVM.CID = 1;
             createOfferWrapper.CustomerInfoVM.FirstName = "Diar";
             createOfferWrapper.CustomerInfoVM.LastName = "Marq";
             createOfferWrapper.CustomerInfoVM.PhoneNumber = "0703042332";

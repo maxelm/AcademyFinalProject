@@ -23,12 +23,12 @@ namespace AcademyFinalProject.Models
 
     enum WorkType
     {
-        Demolition = 0,
-        Drain = 1,
-        Ventilation = 2,
-        Tile = 3,
-        Electricity = 4,
-        Mounting = 5,
+        Demolition = 1,
+        Drain = 2,
+        Ventilation = 3,
+        Tile = 4,
+        Electricity = 5,
+        Mounting = 6,
     }
 
     public class ReleaseContentService : IContentService
@@ -165,14 +165,58 @@ namespace AcademyFinalProject.Models
             return productList.FirstOrDefault(p => p.Category == nameof(productCategory)).Name;
         }
 
-        public int[] GetWorkHourlyRates()
+        public void SaveAmountOfWork(AmountOfWorkVM work, int cid) // REDO FÖR TESTING (kanske bör göra extra metod)
         {
-            throw new NotImplementedException();
-        }
+            var orderId = context.Customer.FirstOrDefault(c => c.Cid == cid).Order.Oid;
+            var orderToWork = context.Customer.FirstOrDefault(c => c.Cid == cid).Order.OrderToWork;
 
-        public void SaveAmountOfWork()
-        {
-            throw new NotImplementedException();
+            orderToWork.Add(new OrderToWork
+            {
+                Oid = orderId,
+                Wid = Convert.ToInt32(WorkType.Demolition),
+                AmountOfHours = work.DemolitionHours,
+                HourlyRate = work.HourlyRateDemolition
+            });
+
+            orderToWork.Add(new OrderToWork
+            {
+                Oid = orderId,
+                Wid = Convert.ToInt32(WorkType.Drain),
+                AmountOfHours = work.DrainHours,
+                HourlyRate = work.HourlyRateDrain,
+            });
+
+            orderToWork.Add(new OrderToWork
+            {
+                Oid = orderId,
+                Wid = Convert.ToInt32(WorkType.Ventilation),
+                AmountOfHours = work.VentilationHours,
+                HourlyRate = work.HourlyRateVentilation,
+            });
+
+            orderToWork.Add(new OrderToWork
+            {
+                Oid = orderId,
+                Wid = Convert.ToInt32(WorkType.Tile),
+                AmountOfHours = work.TileHours,
+                HourlyRate = work.HourlyRateTile,
+            });
+
+            orderToWork.Add(new OrderToWork
+            {
+                Oid = orderId,
+                Wid = Convert.ToInt32(WorkType.Electricity),
+                AmountOfHours = work.ElectricityHours,
+                HourlyRate = work.HourlyRateElectricity,
+            });
+
+            orderToWork.Add(new OrderToWork
+            {
+                Oid = orderId,
+                Wid = Convert.ToInt32(WorkType.Mounting),
+                AmountOfHours = work.MountingHours,
+                HourlyRate = work.HourlyRateMounting,
+            });
         }
 
         public void SaveContact(CustomerRequestOfferWrapperVM c) // WIP 
@@ -227,19 +271,6 @@ namespace AcademyFinalProject.Models
              * 4. Order / Order2Product förmodar jag läggs inte till i tabellen automatiskt??
              * 5. SelectedListItems - Vad för object kan det vara? komplexa? msåte ha ProductID.
              */
-
-
-
-        }
-
-        public void SaveContact()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SaveProductsToOrder()
-        {
-            throw new NotImplementedException();
         }
 
         public CreateOfferWrapperVM GetOfferRequestById(int id) // REDO FÖR TESTING
@@ -254,7 +285,7 @@ namespace AcademyFinalProject.Models
 
         private AmountOfWorkVM GetAmountOfWorkVM() // REDO FÖR TESTING
         {
-            var wList = context.Work.Select(w => w);
+            IQueryable<Work> wList = context.Work.Select(w => w);
 
             return new AmountOfWorkVM
             {
@@ -271,5 +302,7 @@ namespace AcademyFinalProject.Models
         {
             return wList.FirstOrDefault(w => w.Type == nameof(workType)).StandardHourlyRate;
         }
+
+
     }
 }

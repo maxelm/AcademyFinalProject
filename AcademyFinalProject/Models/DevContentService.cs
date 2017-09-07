@@ -68,7 +68,17 @@ namespace AcademyFinalProject.Models
             throw new NotImplementedException();
         }
 
+        public void SaveAmountOfWork(AmountOfWorkVM work, int cid)
+        {
+            throw new NotImplementedException();
+        }
+
         public void SaveContact()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveContact(CustomerRequestOfferWrapperVM c)
         {
             throw new NotImplementedException();
         }

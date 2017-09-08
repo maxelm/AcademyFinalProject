@@ -1,0 +1,168 @@
+﻿@model FinalOfferVM
+
+<fieldset id="BigFieldset">
+    <legend id="BigFieldsetLegend">Offert</legend>
+    <div>
+        <fieldset id="CustomerInfo">
+            <table id="Bestallare">
+                <thead>
+                    <tr>
+                        <th>Beställare:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>@Model.FirstName @Model.LastName</td></tr>
+                    <tr><td>@Model.Street</td></tr>
+                    <tr><td>@Model.Zip @Model.City</td></tr>
+                    <tr><td>@Model.Phone</td></tr>
+                </tbody>
+            </table>
+        </fieldset>
+
+        <fieldset id="WorkInfo">
+            <table id="Bestallare">
+                <thead>
+                    <tr>
+                        <th>Uppdrag:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>@Model.SelectedProjectType</tr>
+                    <tr><td>@Model.SquareMeter kvm</td></tr>
+                    <tr><td>@Model.SelectedPropertyType</td></tr>
+                    <tr><td>@Model.SelectedPropertyType</td></tr>
+                </tbody>
+            </table>
+        </fieldset>
+
+        <fieldset id="CompanyInfo">
+            <table id="Bestallare">
+                <thead>
+                    <tr>
+                        <th>Företaget:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>JM Vatteservice</td></tr>
+                    <tr><td>Org.nr: 1234-5678-12</td></tr>
+                    <tr><td>Kungsgatan 4</td></tr>
+                    <tr><td>123 43 Stockholm</td></tr>
+                </tbody>
+            </table>
+        </fieldset>
+        <hr id="BigHr" /><br />
+    </div>
+
+
+    <div>
+        <h3>MaterialKostnader</h3>
+        <table id="Artiklar">
+            <thead>
+                <tr>
+                    <th>Artiklar:</th>
+                    <th>Pris:</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>@Model.Cabinet</td><td>@Model.CabinetPrice</td></tr>
+                <tr><td>@Model.Clinker</td><td>@Model.ClinkerPrice</td></tr>
+                <tr><td>@Model.Lightning</td><td>@Model.LightningPrice</td></tr>
+                <tr><td>@Model.Shower</td><td>@Model.ShowerPrice</td></tr>
+                <tr><td>@Model.Sink</td><td>@Model.SinkPrice</td></tr>
+                <tr><td>@Model.Tile</td><td>@Model.TilePrice</td></tr>
+                <tr><td>@Model.Toilet</td><td>@Model.ToiletPrice</td></tr>
+                <tr><td>@Model.Faucet</td><td>@Model.FaucetPrice</td></tr>
+                <tr style="font-weight:bold;"><td>Totala arbetskostnader</td><td>@Model.TotalProductCost</td></tr>
+            </tbody>
+        </table>
+    </div><br />
+    <hr id="SmallHr" /><br />
+
+    <div>
+        <h3>Arbetskostnader</h3>
+        <table id="Arbete">
+            <thead>
+                <tr>
+                    <th>Arbete</th>
+                    <th>Antal tim</th>
+                    <th>Tim deb</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><label asp-for="DemolitionHours"></label></td>
+                    <td>@Model.DemolitionHours</td>
+                    <td>@Model.HourlyRateDemolition</td>
+                </tr>
+                <tr>
+                    <td><label asp-for="VentilationHours"></label></td>
+                    <td>@Model.VentilationHours</td>
+                    <td>@Model.VentilationHours</td>
+                </tr>
+                <tr>
+                    <td><label asp-for="ElectricityHours"></label></td>
+                    <td>@Model.ElectricityHours</td>
+                    <td>@Model.HourlyRateElectricity</td>
+                </tr>
+                <tr>
+                    <td><label asp-for="TileHours"></label></td>
+                    <td>@Model.TileHours</td>
+                    <td>@Model.HourlyRateTile</td>
+                </tr>
+                <tr>
+                    <td><label asp-for="DrainHours"></label></td>
+                    <td>@Model.DrainHours</td>
+                    <td>@Model.HourlyRateDrain</td>
+                </tr>
+                <tr>
+                    <td><label asp-for="MountingHours"></label></td>
+                    <td>@Model.MountingHours</td>
+                    <td>@Model.HourlyRateMounting</td>
+                </tr>
+                <tr style="font-weight:bold;"><td>Antal Timmar</td><td>@Model.TotalAmountOfHours</td></tr>
+                <tr style="font-weight:bold;"><td>Totala Arbetskostnader</td><td>@Model.TotalWorkCost</td></tr>
+            </tbody>
+        </table>
+    </div><br />
+    <hr id="SmallHr" /><br />
+
+
+    <div>
+        <h3>Resekostnader</h3>
+        <table id="Resekostnader">
+            <thead>
+                <tr>
+                    <th>Antal mil:</th>
+                    <th>Kr/mil</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>20</td><td>30</td></tr>
+                <tr style="font-weight:bold;"><td>Total summa</td><td>600 kr</td></tr>
+            </tbody>
+        </table>
+    </div><br />
+    <hr id="SmallHr" /><br />
+
+
+    <div>
+        <h3>Rotavdrag</h3>
+        <table id="Resekostnader">
+            <thead>
+                <tr>
+                    <th>Antalet personer som är berättigade för ROT</th>
+                    <th>Pris efter ROT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>1</td><td>Arbetskosntader minus rot</td></tr>
+            </tbody>
+        </table>
+    </div><br />
+    <hr id="SmallHr" /><br />
+
+    <p style="font-weight:bold; text-align:center; ">Totala summan här: </p>
+
+</fieldset>
+<link rel="stylesheet" href="~/FinalOfferStyle.css">
+

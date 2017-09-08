@@ -12,7 +12,7 @@ namespace AcademyFinalProject.Models.ViewModels
         public string FirstName { get; set; }
 
         [Display(Name = "Efternamn")]
-        public string LastName { get; set; }
+        public string LastName { get; set; } 
 
         [Display(Name = "E-mail")]
         public string Email { get; set; }
@@ -31,6 +31,15 @@ namespace AcademyFinalProject.Models.ViewModels
 
         [Display(Name = "Övriga Kommentarer")]
         public string TextBox { get; set; } // TODO: Behöver vi denna?
+
+        [Display(Name = "Uppdragstyp")]
+        public string SelectedProjectType { get; set; }
+
+        [Display(Name = "Kvm")]
+        public int SquareMeter { get; set; }
+
+        [Display(Name = "Fastighet")]
+        public string SelectedPropertyType { get; set; }
 
         [Display(Name = "Dusch")]
         public string Shower { get; set; }

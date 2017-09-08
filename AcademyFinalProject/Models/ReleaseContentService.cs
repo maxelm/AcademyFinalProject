@@ -335,6 +335,9 @@ namespace AcademyFinalProject.Models
             return wList.FirstOrDefault(w => w.Type == nameof(workType)).StandardHourlyRate;
         }
 
-
+        public FinalOfferVM GetFinalOffer(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

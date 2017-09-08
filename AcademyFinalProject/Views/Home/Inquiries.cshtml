@@ -1,20 +1,18 @@
 ﻿@model ListInquiryVM[]
 
 <style type="text/css">
-
-
 </style>
 <div class="ListOfInquiries" style="margin:0 auto; background-color:#eeeeee">
     <div class="NewInquiries">
         <h1>Nya förfrågningar</h1>
-        <table border="0" id="NewInquiriesTable" class="display" style="width:80%;" >
+        <table border="0" id="NewInquiriesTable" class="table" style="width:80%;" >
             <thead>
                 <tr>
-                    <th onclick="sortTable(0)">Namn</th>
-                    <th onclick="sortTable(1)">Fastighet</th>
-                    <th onclick="sortTable(2)">KVM</th>
-                    <th onclick="sortTable(3)">Öns. byggstart</th>
-                    <th onclick="sortTable(4)">Inskickat</th>
+                    <th>Namn</th>
+                    <th>Fastighet</th>
+                    <th>KVM</th>
+                    <th>Öns. byggstart</th>
+                    <th>Inskickat</th>
                 </tr>
             </thead>
             <tbody>

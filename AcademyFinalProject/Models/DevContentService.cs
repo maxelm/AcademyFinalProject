@@ -9,7 +9,7 @@ namespace AcademyFinalProject.Models
 {
     public class DevContentService : IContentService
     {
-        AcademyDbContext context;
+        //AcademyDbContext context;
 
         public CreateCustomerInfoVM GetCustomerInfoById()
         {
@@ -51,7 +51,30 @@ namespace AcademyFinalProject.Models
 
         public CreateOfferWrapperVM GetOfferRequestByCID(int id)
         {
-            throw new NotImplementedException();
+            CreateOfferWrapperVM createOfferWrapper = new CreateOfferWrapperVM();
+            createOfferWrapper.ShowCustomerInfoVM = new ShowCustomerInfoVM();
+            createOfferWrapper.AmountOfWorkVM = new AmountOfWorkVM();
+            createOfferWrapper.SelectedProductsVM = new SelectedProductsVM();
+
+            createOfferWrapper.ShowCustomerInfoVM.CID = 1;
+            createOfferWrapper.ShowCustomerInfoVM.LastName = "Marq";
+            createOfferWrapper.ShowCustomerInfoVM.Phone = "0703042332";
+            createOfferWrapper.ShowCustomerInfoVM.FirstName = "Diar";
+            createOfferWrapper.ShowCustomerInfoVM.Street = "SolnaGatan 43";
+            createOfferWrapper.ShowCustomerInfoVM.TextBox = "Övrig text is the shiz";
+            createOfferWrapper.ShowCustomerInfoVM.Zip = "73143";
+            createOfferWrapper.ShowCustomerInfoVM.Email = "Diar@gmai.com";
+            createOfferWrapper.ShowCustomerInfoVM.City = "Stockholm";
+            createOfferWrapper.SelectedProductsVM.Cabinet = "Skåp";
+            createOfferWrapper.SelectedProductsVM.Clinker = "Klinker";
+            createOfferWrapper.SelectedProductsVM.Faucet = "Blandare";
+            createOfferWrapper.SelectedProductsVM.Lightning = "Belysning";
+            createOfferWrapper.SelectedProductsVM.Shower = "Duschenzi";
+            createOfferWrapper.SelectedProductsVM.Sink = "Handfatski";
+            createOfferWrapper.SelectedProductsVM.Tile = "Kakel";
+            createOfferWrapper.SelectedProductsVM.Toilet = "Toalett";
+
+            return createOfferWrapper;
         }
 
         public ProductSelectionVM GetProductLists()
@@ -101,35 +124,62 @@ namespace AcademyFinalProject.Models
 
         public CreateOfferWrapperVM CreateOfferWrapperVM()
         {
-            CreateOfferWrapperVM createOfferWrapper = new CreateOfferWrapperVM();
-            createOfferWrapper.ShowCustomerInfoVM = new ShowCustomerInfoVM();
-            createOfferWrapper.AmountOfWorkVM = new AmountOfWorkVM();
-            createOfferWrapper.SelectedProductsVM = new SelectedProductsVM();
-
-            createOfferWrapper.ShowCustomerInfoVM.CID = 1;
-            createOfferWrapper.ShowCustomerInfoVM.LastName = "Marq";
-            createOfferWrapper.ShowCustomerInfoVM.Phone = "0703042332";
-            createOfferWrapper.ShowCustomerInfoVM.FirstName = "Diar";
-            createOfferWrapper.ShowCustomerInfoVM.Street = "SolnaGatan 43";
-            createOfferWrapper.ShowCustomerInfoVM.TextBox = "Övrig text is the shiz";
-            createOfferWrapper.ShowCustomerInfoVM.Zip = "73143";
-            createOfferWrapper.ShowCustomerInfoVM.Email = "Diar@gmai.com";
-            createOfferWrapper.ShowCustomerInfoVM.City = "Stockholm";
-            createOfferWrapper.SelectedProductsVM.Cabinet = "Skåp";
-            createOfferWrapper.SelectedProductsVM.Clinker = "Klinker";
-            createOfferWrapper.SelectedProductsVM.Faucet = "Blandare";
-            createOfferWrapper.SelectedProductsVM.Lightning = "Belysning";
-            createOfferWrapper.SelectedProductsVM.Shower = "Duschenzi";
-            createOfferWrapper.SelectedProductsVM.Sink = "Handfatski";
-            createOfferWrapper.SelectedProductsVM.Tile = "Kakel";
-            createOfferWrapper.SelectedProductsVM.Toilet = "Toalett";
-
-            return createOfferWrapper;
+            throw new NotImplementedException();
         }
 
         ShowCustomerInfoVM IContentService.GetCustomerInfoByCID(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public FinalOfferVM GetFinalOffer(int id)
+        {
+            return new FinalOfferVM
+            {
+                FirstName = "Diar",
+                LastName = "Marqus",
+                Email = "Diar@gmail.com",
+                City = "Stockholm",
+                Phone = "070312132",
+                Zip = "73132",
+                Street = "Gatan 23",
+                Cabinet = "ItalianoSkåp",
+                CabinetPrice = 500,
+                Clinker = "Klinker",
+                ClinkerPrice = 500,
+                Faucet = "Blandaren",
+                FaucetPrice = 500,
+                Lightning = "Belysning",
+                LightningPrice = 500,
+                Sink = "Handfatet",
+                SinkPrice = 500,
+                Tile = "Italienskt kakel",
+                TilePrice = 500,
+                Shower = "DubbelDusch",
+                ShowerPrice = 500,
+                Toilet = "Toalettenski",
+                ToiletPrice = 500,
+                DemolitionHours = 7,
+                HourlyRateDemolition = 100,
+                DrainHours = 6,
+                HourlyRateDrain = 120,
+                ElectricityHours = 3,
+                HourlyRateElectricity = 115,
+                MountingHours = 5,
+                HourlyRateMounting = 110,
+                TileHours = 8,
+                HourlyRateTile = 180,
+                VentilationHours = 3,
+                HourlyRateVentilation = 112,
+                ROTDiscount = 0,
+                TotalAmountOfHours = 0,
+                TotalProductCost = 0,
+                TextBox = "Övrigt",
+                TotalWorkCost = 0,
+                SelectedProjectType = "Badrumsrenovering",
+                SelectedPropertyType = "Radhus",
+                SquareMeter = 50
+            };
         }
     }
 }

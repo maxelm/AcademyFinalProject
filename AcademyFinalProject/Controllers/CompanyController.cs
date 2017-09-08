@@ -39,9 +39,16 @@ namespace AcademyFinalProject.Controllers
                 return View(createOfferWrapperVM);
             }
 
-            //om den går igenom så lägger vi till den till databasen och ändrar iscompleted till true.
+            //Om den går igenom så lägger vi till Arbetskostnader för ordern i
+            //databasen och ändrar iscompleted till true.
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(FinalOffer), new { id = id });
+        }
+
+        [HttpGet]
+        public IActionResult FinalOffer(int id)
+        {
+           return View(contentService.GetFinalOffer(id));
         }
     }
 }

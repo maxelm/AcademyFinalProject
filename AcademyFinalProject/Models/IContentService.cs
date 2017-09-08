@@ -16,5 +16,6 @@ namespace AcademyFinalProject.Models
         CustomerRequestOfferWrapperVM GetFirstView();
         ProductSelectionVM GetProductLists();
         CreateOfferWrapperVM GetOfferRequestByCID(int id);
+        FinalOfferVM GetFinalOffer(int id);
     }
 }

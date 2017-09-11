@@ -39,6 +39,7 @@ fieldset {
 .CustReqOffer_table {
     width: 100%;
 }
+
 /*send & reset button on startpage*/
 .button {
     display: inline-block;
@@ -79,35 +80,104 @@ fieldset {
             opacity: 1;
             right: 0;
         }
-/* end */
+/* END */
 
-.validationsummary {
-    border: 1px solid #b08b34;
-    background: transparent url() no-repeat 12px 30px;
-    padding: 0px 0px 13px 0px;
-    font-size:12px;
-    width:99%;
+/* Nikola - Final Offer */
+
+#BigFieldset {
+    background-color: #eeeeee;
+    resize: both;
+    margin: auto;
+    width: 80%;
 }
-.validationheader {
-    left:0px;
-    position:relative;
-    font-size:11px;
-    background-color:#e5d9bd;
-    color:#56300a;
-    height:14px;
-    font-weight:bold;
-    border-bottom:1px solid #b08b34;
-    padding-top:3px;
+
+#BigFieldsetLegend {
+    font-size: 60px;
+    font-weight: bold;
+    text-align: center;
 }
-.validationsummary ul {
-    padding-top:5px;
-    padding-left:45px;
-    list-style:none;
-    font-size:11px;
-    color:#982b12;
-    font-style:italic;
+
+#CustomerInfo, #WorkInfo, #CompanyInfo {
+    border: hidden;
+    display: inline-block;
+    margin-left: 14%;
 }
-.validationsummary ul li {
-    padding: 2px 0px 0px 15px;
-    
+
+#Bestallare th {
+    font-weight: bold;
+    margin-left: 10px;
+    text-align: left;
 }
+
+hr {
+    border: none;
+    height: 2px;
+    color: #333;
+    background-color: #333;
+}
+
+#SmallHr {
+    border: none;
+    height: 1px;
+    width: 85%;
+}
+
+#Resekostnader th, #Artiklar th, #Arbete th {
+    font-weight: bold;
+    margin-left: 10px;
+    text-align: left;
+}
+
+#Artiklar, #Arbete, #Resekostnader {
+    border-collapse: collapse;
+    width: 70%;
+    margin: auto
+}
+
+    #Resekostnader td, #Resekostnader tr,
+    #Artiklar tr, #Artiklar td,
+    #Arbete tr, #Arbete td {
+        border: 1px solid black;
+    }
+
+h3 {
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Nikola - Create Offer*/
+
+#row1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#column1 {
+    display: flex;
+    flex-direction: column;
+}
+
+#column2 {
+    display: flex;
+    flex-direction: column;
+}
+
+#column3 {
+    display: flex;
+    flex-direction: column;
+}
+
+
+h1 {
+    text-align: center;
+}
+
+table {
+    width: 100%;
+}
+
+#ArbetskostnadTabell td {
+    font-weight: bold;
+}
+/* END */

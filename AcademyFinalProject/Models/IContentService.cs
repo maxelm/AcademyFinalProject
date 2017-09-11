@@ -8,12 +8,14 @@ namespace AcademyFinalProject.Models
 {
     public interface IContentService
     {
-        void SaveContact();
-        void SaveProductsToOrder();
+        void SaveContact(CustomerRequestOfferWrapperVM c);
         ListInquiryVM[] GetOfferInquiries();
-        CustomerInfoVM GetCustomerInfo();
-        SelectedProductsVM GetSelectedProducts();
-        void SaveAmountOfWork();
-        int[] GetWorkHourlyRates();
+        ShowCustomerInfoVM GetCustomerInfoByCID(int id);
+        SelectedProductsVM GetSelectedProductsByCID(int cid);
+        void SaveAmountOfWork(AmountOfWorkVM work, int cid);
+        CustomerRequestOfferWrapperVM GetFirstView();
+        ProductSelectionVM GetProductLists();
+        CreateOfferWrapperVM GetOfferRequestByCID(int id);
+        FinalOfferVM GetFinalOffer(int id);
     }
 }

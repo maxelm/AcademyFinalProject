@@ -7,6 +7,7 @@ using AcademyFinalProject.Models.Entities;
 using AcademyFinalProject.Models;
 using AcademyFinalProject.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Data.SqlClient;
 
 namespace AcademyFinalProject.Controllers
 {
@@ -22,7 +23,7 @@ namespace AcademyFinalProject.Controllers
 
         public IActionResult Index()
         {
-            return View(contentService.GetCustomerInfo());
+            return View(contentService.GetFirstView());
         }
 
         public IActionResult CustomerRequestOffer()
@@ -103,5 +104,10 @@ namespace AcademyFinalProject.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public IActionResult Inquiries()
+        {
+            return View(contentService.GetOfferInquiries());
+        }
     }
 }

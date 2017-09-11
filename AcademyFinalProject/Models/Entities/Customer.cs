@@ -17,6 +17,7 @@ namespace AcademyFinalProject.Models.Entities
         public int SquareMeter { get; set; }
         public string PropertyType { get; set; }
         public DateTime RequestedStartDate { get; set; }
+        public string CustomerMessage { get; set; }
 
         public Order Order { get; set; }
     }

@@ -1,0 +1,66 @@
+﻿body {
+}
+
+#BigFieldset {
+    background-color: #eeeeee;
+    resize: both;
+    margin: auto;
+    width: 80%;
+}
+
+#BigFieldsetLegend {
+    font-size: 60px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#CustomerInfo, #WorkInfo, #CompanyInfo {
+    border: hidden;
+    display: inline-block;
+    margin-left: 14%;
+}
+
+#Bestallare th {
+    font-weight: bold;
+    margin-left: 10px;
+    text-align: left;
+}
+
+hr {
+    border: none;
+    height: 2px;
+    color: #333;
+    background-color: #333;
+}
+
+#SmallHr {
+    border: none;
+    height: 1px;
+    /*color: #333;
+    background-color: #333;*/
+    width:85%;
+}
+
+#Resekostnader th, #Artiklar th, #Arbete th {
+    font-weight: bold;
+    margin-left: 10px;
+    text-align: left;
+}
+
+#Artiklar, #Arbete, #Resekostnader {
+    border-collapse: collapse;
+    /*border-style: hidden;*/
+    width: 70%;
+    margin: auto
+}
+
+    #Resekostnader td, #Resekostnader tr,
+    #Artiklar tr, #Artiklar td,
+    #Arbete tr, #Arbete td {
+        border: 1px solid black;
+    }
+
+h3 {
+    text-align: center;
+    font-weight: bold;
+}

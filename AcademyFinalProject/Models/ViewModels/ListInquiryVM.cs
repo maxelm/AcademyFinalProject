@@ -7,6 +7,7 @@ namespace AcademyFinalProject.Models.ViewModels
 {
     public class ListInquiryVM
     {
+        public int CID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string ProjectType { get; set; }

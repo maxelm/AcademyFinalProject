@@ -5,7 +5,13 @@
     <UserSecretsId>db97dc06-a624-472d-be2f-a673745da6f5</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup> //TODO: Check if needed and merge CSS file.
+    <None Include="wwwroot\FinalOfferStyle.css" />
+    <None Include="wwwroot\InquiriesTableScript.js" />
+  </ItemGroup>
+
   <ItemGroup>
+    <PackageReference Include="jQuery" Version="3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
   </ItemGroup>
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace AcademyFinalProject.Models.ViewModels
 {
+    [Bind(Prefix = nameof(CustomerRequestOfferWrapperVM.ProductSelection))]
     public class ProductSelectionVM
     {
         public SelectListItem[] ShowerItems { get; set; }

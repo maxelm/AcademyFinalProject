@@ -8,13 +8,10 @@ namespace AcademyFinalProject.Models.Entities
 {
     public partial class AcademyDbContext : DbContext
     {
-        public AcademyDbContext(DbContextOptions<AcademyDbContext> options) : base(options)
+
+        public AcademyDbContext(DbContextOptions<AcademyDbContext> context) : base(context)
         {
-            
+
         }
-
-
-        // TODO: Insert DB API. full CRUD
-        
     }
 }

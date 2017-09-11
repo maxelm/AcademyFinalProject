@@ -13,13 +13,20 @@ namespace AcademyFinalProject.Models.Entities
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<Work> Work { get; set; }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer(@"Data Source=ACADEMY-7115W44;Initial Catalog=AcademyFinalProjectDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            }
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Customer>(entity =>
             {
-                entity.HasKey(e => e.Cid);
-
-                entity.Property(e => e.Cid).HasColumnName("CID");
+                entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
 
                 entity.Property(e => e.City).IsRequired();
 
@@ -31,12 +38,6 @@ namespace AcademyFinalProject.Models.Entities
 
                 entity.Property(e => e.Phone).IsRequired();
 
-                entity.Property(e => e.ProjectType).IsRequired();
-
-                entity.Property(e => e.PropertyType).IsRequired();
-
-                entity.Property(e => e.RequestedStartDate).HasColumnType("date");
-
                 entity.Property(e => e.Street).IsRequired();
 
                 entity.Property(e => e.Zip)
@@ -46,21 +47,27 @@ namespace AcademyFinalProject.Models.Entities
 
             modelBuilder.Entity<Order>(entity =>
             {
-                entity.HasKey(e => e.Oid);
-
-                entity.HasIndex(e => e.Cid)
+                entity.HasIndex(e => e.CustomerId)
                     .HasName("UQ__Order__C1F8DC58A77CE810")
                     .IsUnique();
 
-                entity.Property(e => e.Oid).HasColumnName("OID");
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
-                entity.Property(e => e.Cid).HasColumnName("CID");
+                entity.Property(e => e.CustomerId).HasColumnName("CustomerID");
 
                 entity.Property(e => e.OrderReceived).HasColumnType("date");
 
-                entity.HasOne(d => d.C)
+                entity.Property(e => e.ProjectType).IsRequired();
+
+                entity.Property(e => e.PropertyType).IsRequired();
+
+                entity.Property(e => e.RequestedStartDate).HasColumnType("date");
+
+                entity.Property(e => e.ViableRotcandidates).HasColumnName("ViableROTCandidates");
+
+                entity.HasOne(d => d.Customer)
                     .WithOne(p => p.Order)
-                    .HasForeignKey<Order>(d => d.Cid)
+                    .HasForeignKey<Order>(d => d.CustomerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Order__CID__1B0907CE");
             });
@@ -69,21 +76,21 @@ namespace AcademyFinalProject.Models.Entities
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.Oid).HasColumnName("OID");
-
-                entity.Property(e => e.Pid).HasColumnName("PID");
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
                 entity.Property(e => e.Price).HasColumnType("money");
 
-                entity.HasOne(d => d.O)
+                entity.Property(e => e.ProductId).HasColumnName("ProductID");
+
+                entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderToProduct)
-                    .HasForeignKey(d => d.Oid)
+                    .HasForeignKey(d => d.OrderId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__OrderToProd__OID__1BFD2C07");
 
-                entity.HasOne(d => d.P)
+                entity.HasOne(d => d.Product)
                     .WithMany(p => p.OrderToProduct)
-                    .HasForeignKey(d => d.Pid)
+                    .HasForeignKey(d => d.ProductId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__OrderToProd__PID__1CF15040");
             });
@@ -94,30 +101,26 @@ namespace AcademyFinalProject.Models.Entities
 
                 entity.Property(e => e.HourlyRate).HasColumnType("money");
 
-                entity.Property(e => e.Oid).HasColumnName("OID");
+                entity.Property(e => e.OrderId).HasColumnName("OrderID");
 
-                entity.Property(e => e.Wid).HasColumnName("WID");
+                entity.Property(e => e.WorkId).HasColumnName("WorkID");
 
-                entity.HasOne(d => d.O)
+                entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderToWork)
-                    .HasForeignKey(d => d.Oid)
+                    .HasForeignKey(d => d.OrderId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__OrderToWork__OID__1DE57479");
 
-                entity.HasOne(d => d.W)
+                entity.HasOne(d => d.Work)
                     .WithMany(p => p.OrderToWork)
-                    .HasForeignKey(d => d.Wid)
+                    .HasForeignKey(d => d.WorkId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__OrderToWork__WID__1ED998B2");
             });
 
             modelBuilder.Entity<Product>(entity =>
             {
-                entity.HasKey(e => e.Pid);
-
-                entity.Property(e => e.Pid).HasColumnName("PID");
-
-                entity.Property(e => e.Category).IsRequired();
+                entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
                 entity.Property(e => e.Name).IsRequired();
 
@@ -126,13 +129,13 @@ namespace AcademyFinalProject.Models.Entities
 
             modelBuilder.Entity<Work>(entity =>
             {
-                entity.HasKey(e => e.Wid);
+                entity.Property(e => e.WorkId).HasColumnName("WorkID");
 
-                entity.Property(e => e.Wid).HasColumnName("WID");
+                entity.Property(e => e.Description)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.StandardHourlyRate).HasColumnType("money");
-
-                entity.Property(e => e.Type).IsRequired();
             });
         }
     }

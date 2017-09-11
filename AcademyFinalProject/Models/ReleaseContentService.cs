@@ -40,10 +40,10 @@ namespace AcademyFinalProject.Models
         {
             this.context = context;
         }
-
+  
         public ShowCustomerInfoVM GetCustomerInfoByCID(int cid) // REDO FÖR TESTING
         {
-            return context.Customer.Where(c => c.Cid == cid).Select(cust => new ShowCustomerInfoVM
+            return context.Customer.Where(c => c.CustomerId == cid).Select(cust => new ShowCustomerInfoVM
             {
                 CID = cid,
                 FirstName = cust.FirstName,
@@ -53,7 +53,7 @@ namespace AcademyFinalProject.Models
                 City = cust.City,
                 Email = cust.Email,
                 Phone = cust.Phone,
-                TextBox = cust.CustomerMessage
+                TextBox = cust.Order.CustomerMessage
             }).SingleOrDefault();
 
         }
@@ -101,12 +101,12 @@ namespace AcademyFinalProject.Models
         {
             return context.Customer.Select(c => new ListInquiryVM
             {
-                CID = c.Cid,
+                CID = c.CustomerId,
                 FirstName = c.FirstName,
                 LastName = c.LastName,
-                ProjectType = c.ProjectType,
-                SquareMeter = c.SquareMeter,
-                RequestedStartDate = c.RequestedStartDate,
+                ProjectType = c.Order.ProjectType,
+                SquareMeter = c.Order.SquareMeter,
+                RequestedStartDate = c.Order.RequestedStartDate,
                 OrderReceived = c.Order.OrderReceived,
                 IsComplete = c.Order.IsComplete,
             }).ToArray();
@@ -116,43 +116,43 @@ namespace AcademyFinalProject.Models
         {
             return new ProductSelectionVM()
             {
-                ShowerItems = SetSelectItem("Dusch"),
-                ToiletItems = SetSelectItem("Toalett"),
-                SinkItems = SetSelectItem("Handfat"),
-                CabinetItems = SetSelectItem("Skåp"),
-                FaucetItems = SetSelectItem("Blandare"),
-                LightingItems = SetSelectItem("Belysning"),
-                TileItems = SetSelectItem("Kakel"),
-                ClinkerItems = SetSelectItem("Klinker"),
+                ShowerItems = SetSelectItem(PCategory.Shower),
+                ToiletItems = SetSelectItem(PCategory.Toilet),
+                SinkItems = SetSelectItem(PCategory.Sink),
+                CabinetItems = SetSelectItem(PCategory.Cabinet),
+                FaucetItems = SetSelectItem(PCategory.Faucet),
+                LightingItems = SetSelectItem(PCategory.Lighting),
+                TileItems = SetSelectItem(PCategory.Tile),
+                ClinkerItems = SetSelectItem(PCategory.Clinker),
             };
         }
 
-        private SelectListItem[] SetSelectItem(string productCategory) // REDO FÖR TESTING
+        private SelectListItem[] SetSelectItem(PCategory productCategory) // REDO FÖR TESTING
         {
-            return context.Product.Where(p => p.Category == productCategory).Select(p => new SelectListItem { Text = p.Name, Value = $"{p.Pid.ToString()}_{p.Price}" }).ToArray();
+            return context.Product.Where(p => p.Category == Convert.ToInt32(productCategory)).Select(p => new SelectListItem { Text = p.Name, Value = $"{p.ProductId.ToString()}_{p.Price}" }).ToArray();
         }
 
         public SelectedProductsVM GetSelectedProductsByCID(int cid) // REDO FÖR TESTING
         {
-            var x = context.Customer.FirstOrDefault(c => c.Cid == cid).Order;
+            var x = context.Customer.FirstOrDefault(c => c.CustomerId == cid).Order;
 
             //TODO Fixa syntax
             var test1 = context.Customer
                 .Include(c => c.Order)
                 .Include(c => c.Order.OrderToProduct)
                 //.Include(c => c.Order.OrderToProduct.)
-                .FirstOrDefault(c => c.Cid == cid)
+                .FirstOrDefault(c => c.CustomerId == cid)
                 .Order
                 .OrderToProduct;
 
             var test2 = context.Customer
-                .Where(c => c.Cid == cid)
-                .SelectMany(c => c.Order.OrderToProduct.Select(otp => otp.P))
+                .Where(c => c.CustomerId == cid)
+                .SelectMany(c => c.Order.OrderToProduct.Select(otp => otp.Product))
                 .ToArray();
 
             //test1.Order = context.Order.FirstOrDefault(o => o.Cid == cid);
 
-            var validation = context.Customer.FirstOrDefault(c => c.Cid == cid).Order.OrderToWork;
+            var validation = context.Customer.FirstOrDefault(c => c.CustomerId == cid).Order.OrderToWork;
 
             return null;
             if (validation != null)
@@ -160,7 +160,7 @@ namespace AcademyFinalProject.Models
 
                 if ((validation.Count() > 0))
                 {
-                    IEnumerable<Product> pList = context.Customer.FirstOrDefault(c => c.Cid == cid).Order.OrderToProduct.Select(i => i.P);
+                    IEnumerable<Product> pList = context.Customer.FirstOrDefault(c => c.CustomerId == cid).Order.OrderToProduct.Select(i => i.Product);
 
                     return new SelectedProductsVM
                     {
@@ -189,63 +189,63 @@ namespace AcademyFinalProject.Models
 
         private decimal GetProductPrice(PCategory productCategory, IEnumerable<Product> productList)// REDO FÖR TESTING
         {
-            return productList.FirstOrDefault(p => p.Category == nameof(productCategory)).Price;
+            return productList.FirstOrDefault(p => p.Category == Convert.ToInt32(productCategory)).Price;
         }
 
         private string GetProductName(PCategory productCategory, IEnumerable<Product> productList)// REDO FÖR TESTING
         {
-            return productList.FirstOrDefault(p => p.Category == nameof(productCategory)).Name;
+            return productList.FirstOrDefault(p => p.Category == Convert.ToInt32(productCategory)).Name;
         }
 
         public void SaveAmountOfWork(AmountOfWorkVM work, int cid) // REDO FÖR TESTING (kanske bör göra extra metod)
         {
-            var orderId = context.Customer.FirstOrDefault(c => c.Cid == cid).Order.Oid;
-            var orderToWork = context.Customer.FirstOrDefault(c => c.Cid == cid).Order.OrderToWork;
+            var orderId = context.Customer.FirstOrDefault(c => c.CustomerId == cid).Order.OrderId;
+            var orderToWork = context.Customer.FirstOrDefault(c => c.CustomerId == cid).Order.OrderToWork;
 
             orderToWork.Add(new OrderToWork
             {
-                Oid = orderId,
-                Wid = Convert.ToInt32(WorkType.Demolition),
+                OrderId = orderId,
+                WorkId = Convert.ToInt32(WorkType.Demolition),
                 AmountOfHours = work.DemolitionHours,
                 HourlyRate = work.HourlyRateDemolition
             });
 
             orderToWork.Add(new OrderToWork
             {
-                Oid = orderId,
-                Wid = Convert.ToInt32(WorkType.Drain),
+                OrderId = orderId,
+                WorkId = Convert.ToInt32(WorkType.Drain),
                 AmountOfHours = work.DrainHours,
                 HourlyRate = work.HourlyRateDrain,
             });
 
             orderToWork.Add(new OrderToWork
             {
-                Oid = orderId,
-                Wid = Convert.ToInt32(WorkType.Ventilation),
+                OrderId = orderId,
+                WorkId = Convert.ToInt32(WorkType.Ventilation),
                 AmountOfHours = work.VentilationHours,
                 HourlyRate = work.HourlyRateVentilation,
             });
 
             orderToWork.Add(new OrderToWork
             {
-                Oid = orderId,
-                Wid = Convert.ToInt32(WorkType.Tile),
+                OrderId = orderId,
+                WorkId = Convert.ToInt32(WorkType.Tile),
                 AmountOfHours = work.TileHours,
                 HourlyRate = work.HourlyRateTile,
             });
 
             orderToWork.Add(new OrderToWork
             {
-                Oid = orderId,
-                Wid = Convert.ToInt32(WorkType.Electricity),
+                OrderId = orderId,
+                WorkId = Convert.ToInt32(WorkType.Electricity),
                 AmountOfHours = work.ElectricityHours,
                 HourlyRate = work.HourlyRateElectricity,
             });
 
             orderToWork.Add(new OrderToWork
             {
-                Oid = orderId,
-                Wid = Convert.ToInt32(WorkType.Mounting),
+                OrderId = orderId,
+                WorkId = Convert.ToInt32(WorkType.Mounting),
                 AmountOfHours = work.MountingHours,
                 HourlyRate = work.HourlyRateMounting,
             });
@@ -263,21 +263,22 @@ namespace AcademyFinalProject.Models
                 City = c.CustomerInfo.City,
                 Email = c.CustomerInfo.Email,
                 Phone = c.CustomerInfo.Phone,
-                ProjectType = c.ProjectInfoSelection.SelectedProjectType,
-                PropertyType = c.ProjectInfoSelection.SelectedPropertyType,
-                SquareMeter = c.ProjectInfoSelection.SquareMeter,
-                RequestedStartDate = c.ProjectInfoSelection.RequestedStartDate,
-                CustomerMessage = c.CustomerInfo.TextBox,
+
 
                 //Skapa Ordern i Kunden
                 Order = new Order
                 {
                     OrderReceived = DateTime.Now,
                     IsComplete = false,
+                    ProjectType = c.ProjectInfoSelection.SelectedProjectType,
+                    PropertyType = c.ProjectInfoSelection.SelectedPropertyType,
+                    SquareMeter = c.ProjectInfoSelection.SquareMeter,
+                    RequestedStartDate = c.ProjectInfoSelection.RequestedStartDate,
+                    CustomerMessage = c.CustomerInfo.TextBox,
                 }
             };
 
-            //temp.Order.Cid = temp.Cid; // Ge Order CID värdet av kundens CID (nödvändigt?)
+            //temp.Order.CustomerId = temp.CustomerId; // Ge Order CID värdet av kundens CID (nödvändigt?)
 
 
             //context.Order.Add(temp.Order); // Lägg till Ordern till Tabellen (nödvändigt?)
@@ -285,9 +286,9 @@ namespace AcademyFinalProject.Models
             // Lägg till produkterna kopplade till ordern
             temp.Order.OrderToProduct.Add(new OrderToProduct
             {
-                //Oid = temp.Order.Oid,
-                Pid = Convert.ToInt32(c.ProductSelection.SelectedToilet),
-                Price = context.Product.FirstOrDefault(p => p.Pid == Convert.ToInt32(c.ProductSelection.SelectedToilet)).Price
+                //OrderId = temp.Order.OrderId,
+                ProductId = Convert.ToInt32(c.ProductSelection.SelectedToilet),
+                Price = context.Product.FirstOrDefault(p => p.ProductId == Convert.ToInt32(c.ProductSelection.SelectedToilet)).Price
             });
 
 
@@ -332,7 +333,7 @@ namespace AcademyFinalProject.Models
 
         private decimal GetHrlyRate(WorkType workType, Work[] wList) // REDO FÖR TESTING
         {
-            return wList.FirstOrDefault(w => w.Type == nameof(workType)).StandardHourlyRate;
+            return wList.FirstOrDefault(w => w.WorkType == Convert.ToInt32(workType)).StandardHourlyRate;
         }
 
         public FinalOfferVM GetFinalOffer(int id)

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace AcademyFinalProject.Models.ViewModels
 {
+    [Bind(Prefix = nameof(CustomerRequestOfferWrapperVM.ProjectInfoSelection)) ]
     public class ProjectInfoSelectionVM
     {
         public SelectListItem[] ProjectTypeItems { get; set; }
@@ -23,8 +25,9 @@ namespace AcademyFinalProject.Models.ViewModels
         [Required(ErrorMessage = "Välj ett alternativ")]
         public string SelectedPropertyType { get; set; }
 
-        [Display(Name = "Önskad byggstart")]
+        [Display(Name = "Öns. byggstart")]
         [Required(ErrorMessage = "Ange önskad byggstart")]
-        public DateTime RequestedStartDate { get; set; } // TODO: Check how to make calender selection
+        [DataType(DataType.Date)]
+        public Nullable<DateTime> RequestedStartDate { get; set; } // TODO: Check how to make calender selection
     }
 }

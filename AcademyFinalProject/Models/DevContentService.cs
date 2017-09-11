@@ -6,8 +6,10 @@ using AcademyFinalProject.Models.ViewModels;
 
 namespace AcademyFinalProject.Models
 {
+
     public class DevContentService : IContentService
     {
+
         public CustomerInfoVM GetCustomerInfo()
         {
             return new CustomerInfoVM() { FirstName = "Diar", LastName = "Marqus" };

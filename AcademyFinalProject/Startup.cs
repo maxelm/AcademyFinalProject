@@ -38,7 +38,7 @@ namespace AcademyFinalProject
                 app.UseDeveloperExceptionPage();
             }
 
-
+            app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
 
         }

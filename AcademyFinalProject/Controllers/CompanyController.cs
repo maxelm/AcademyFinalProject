@@ -26,21 +26,26 @@ namespace AcademyFinalProject.Controllers
         }
 
         [HttpGet]
+        public IActionResult Inquiries()
+        {
+            return View(contentService.GetOfferInquiries());
+        }
+
+        [HttpGet]
         public IActionResult CreateOffer(int id)
         {
             return View(contentService.GetOfferRequestByCID(id));
         }
           
         [HttpPost]
-        public IActionResult CreateOffer(CreateOfferWrapperVM createOfferWrapperVM, int id)
+        public IActionResult CreateOffer(CreateOfferWrapperVM model, int id)
         {
             if (!ModelState.IsValid)
             {
-                return View(createOfferWrapperVM);
+                return View(model);
             }
 
-            //Om den går igenom så lägger vi till Arbetskostnader för ordern i
-            //databasen och ändrar iscompleted till true.
+            contentService.SaveAmountOfWork(model.AmountOfWorkVM, id);
 
             return RedirectToAction(nameof(FinalOffer), new { id = id });
         }

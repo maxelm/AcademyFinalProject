@@ -2,99 +2,155 @@
 
 <link rel="stylesheet" href="~/css/Style.css" />
 <h1> Här ska företaget skapa offerten... </h1>
-<div id="row1">
-    <div div id="column1">
-        <div id="CustomerInfo">
-            <fieldset style="background-color: #eeeeee">
-                <legend style="font-size:20px; font-weight: bold">Kundinformation</legend><br />
-                <table id="KundinfoTabell">
-                    <tr>
-                        <td style="font-weight:bold"><label asp-for="ShowCustomerInfoVM.FirstName"></label></td>
-                        <td>@Model.ShowCustomerInfoVM.FirstName</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight:bold"><label asp-for="ShowCustomerInfoVM.LastName"></label></td>
-                        <td>@Model.ShowCustomerInfoVM.LastName</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight:bold"><label asp-for="ShowCustomerInfoVM.Phone"></label></td>
-                        <td>@Model.ShowCustomerInfoVM.Phone</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight:bold"><label asp-for="ShowCustomerInfoVM.Street"></label></td>
-                        <td>@Model.ShowCustomerInfoVM.Street</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight:bold"><label asp-for="ShowCustomerInfoVM.Phone"></label></td>
-                        <td>
-                            @Model.ShowCustomerInfoVM.City
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight:bold"><label asp-for="ShowCustomerInfoVM.Zip"></label></td>
-                        <td>@Model.ShowCustomerInfoVM.Zip</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight:bold"><label asp-for="ShowCustomerInfoVM.Email"></label></td>
-                        <td>@Model.ShowCustomerInfoVM.Email</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight:bold"><label asp-for="ShowCustomerInfoVM.TextBox"></label></td>
-                        <td>@Model.ShowCustomerInfoVM.TextBox</td>
-                    </tr>
-                </table>
-            </fieldset>
+<form asp-controller="Company" asp-action="CreateOffer" asp-route-id="@Model.ShowCustomerInfoVM.CID">
+    <div id="row1">
+        <div div id="column1">
+            <div id="CustomerInfo">
+                <fieldset style="background-color: #eeeeee">
+                    <legend style="font-size:20px; font-weight: bold">Kundinformation</legend><br />
+                    <table id="KundinfoTabell">
+                        <tr>
+                            <td style="font-weight:bold"><label asp-for="ShowCustomerInfoVM.FirstName"></label></td>
+                            <td>@Model.ShowCustomerInfoVM.FirstName</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold"><label asp-for="ShowCustomerInfoVM.LastName"></label></td>
+                            <td>@Model.ShowCustomerInfoVM.LastName</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold"><label asp-for="ShowCustomerInfoVM.Phone"></label></td>
+                            <td>@Model.ShowCustomerInfoVM.Phone</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold"><label asp-for="ShowCustomerInfoVM.Street"></label></td>
+                            <td>@Model.ShowCustomerInfoVM.Street</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold"><label asp-for="ShowCustomerInfoVM.Phone"></label></td>
+                            <td>
+                                @Model.ShowCustomerInfoVM.City
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold"><label asp-for="ShowCustomerInfoVM.Zip"></label></td>
+                            <td>@Model.ShowCustomerInfoVM.Zip</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold"><label asp-for="ShowCustomerInfoVM.Email"></label></td>
+                            <td>@Model.ShowCustomerInfoVM.Email</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold"><label asp-for="ShowCustomerInfoVM.TextBox"></label></td>
+                            @if (@Model.ShowCustomerInfoVM.TextBox != null)
+                            {
+                                <td>@Model.ShowCustomerInfoVM.TextBox</td>
+                            }
+                            else
+                            {
+                                <td>--</td>
+                            }
+                        </tr>
+                    </table>
+                </fieldset>
+            </div>
         </div>
-    </div>
-    <div id="column2">
-        <div id="MaterialInfo">
-            <fieldset style="background-color: #eeeeee">
-                <legend style="font-size:20px; font-weight: bold">Material</legend><br />
-                <table>
-                    <tr>
-                        <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Cabinet"></label></td>
-                        <td>@Model.SelectedProductsVM.Cabinet</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Clinker"></label></td>
-                        <td>@Model.SelectedProductsVM.Clinker</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Faucet"></label></td>
-                        <td>@Model.SelectedProductsVM.Faucet</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Lightning"></label></td>
-                        <td>@Model.SelectedProductsVM.Lightning</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Shower"></label></td>
-                        <td>@Model.SelectedProductsVM.Shower</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Sink"></label></td>
-                        <td>@Model.SelectedProductsVM.Sink</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Tile"></label></td>
-                        <td>@Model.SelectedProductsVM.Tile</td>
-                    </tr>
-                    <tr>
-                        <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Toilet"></label></td>
-                        <td>@Model.SelectedProductsVM.Toilet</td>
-                    </tr>
-                </table>
-            </fieldset>
+        <div id="column2">
+            <div id="MaterialInfo">
+                <fieldset style="background-color: #eeeeee">
+                    <legend style="font-size:20px; font-weight: bold">Material</legend><br />
+                    <table>
+                        <tr>
+                            <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Cabinet"></label></td>
+                            @if (@Model.SelectedProductsVM.Cabinet != null)
+                            {
+                                <td>@Model.SelectedProductsVM.Cabinet</td>
+                            }
+                            else
+                            {
+                                <td>Ej vald</td>
+                            }
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Clinker"></label></td>
+                            @if (@Model.SelectedProductsVM.Clinker != null)
+                            {
+                                <td>@Model.SelectedProductsVM.Clinker</td>
+                            }
+                            else
+                            {
+                                <td>Ej vald</td>
+                            }
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Faucet"></label></td>
+                            @if (@Model.SelectedProductsVM.Faucet != null)
+                            {
+                                <td>@Model.SelectedProductsVM.Faucet</td>
+                            }
+                            else
+                            {
+                                <td>Ej vald</td>
+                            }
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Lightning"></label></td>
+                            <td>@Model.SelectedProductsVM.Lightning</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Shower"></label></td>
+                            @if (@Model.SelectedProductsVM.Shower != null)
+                            {
+                                <td>@Model.SelectedProductsVM.Shower</td>
+                            }
+                            else
+                            {
+                                <td>Ej vald</td>
+                            }
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Sink"></label></td>
+                            @if (@Model.SelectedProductsVM.Sink != null)
+                            {
+                                <td>@Model.SelectedProductsVM.Sink</td>
+                            }
+                            else
+                            {
+                                <td>Ej vald</td>
+                            }
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Tile"></label></td>
+                            @if (@Model.SelectedProductsVM.Tile != null)
+                            {
+                                <td>@Model.SelectedProductsVM.Tile</td>
+                            }
+                            else
+                            {
+                                <td>Ej vald</td>
+                            }
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold"><label asp-for="SelectedProductsVM.Toilet"></label></td>
+                            @if (@Model.SelectedProductsVM.Toilet != null)
+                            {
+                                <td>@Model.SelectedProductsVM.Toilet</td>
+                            }
+                            else
+                            {
+                                <td>Ej vald</td>
+                            }
+                        </tr>
+                    </table>
+                </fieldset>
+            </div>
         </div>
-    </div>
-    <div id="column3">
-        <div id="ArbetsKostnader">
-            <fieldset style="background-color: #eeeeee">
-                <legend style="font-size:20px; font-weight: bold">Arbetskostnader</legend><br />
-                <form asp-controller="Company" asp-action="CreateOffer" asp-route-id="@Model.ShowCustomerInfoVM.CID">
+        <div id="column3">
+            <div id="ArbetsKostnader">
+                <fieldset style="background-color: #eeeeee">
+                    <legend style="font-size:20px; font-weight: bold">Arbetskostnader</legend><br />
                     <table id="ArbetskostnadTabell">
                         <thead>
-                            <tr >
+                            <tr>
                                 <th>Antal tim</th>
                                 <th>Tim deb.</th>
                             </tr>
@@ -145,9 +201,9 @@
                         </tbody>
                     </table>
                     <p><label asp-for="AmountOfWorkVM.TotalAmountOfHours"></label></p><br />
-                            <input type="submit" value="Skapa Offert!" />
-                </form>
-            </fieldset>
+                    <input type="submit" value="Skapa Offert!" />
+                </fieldset>
+            </div>
         </div>
     </div>
-</div>
+</form>

@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:49992/Home/CustomerRequestOffer",
+      "applicationUrl": "http://localhost:49992/company/inquiries",
       "sslPort": 0
     }
   },

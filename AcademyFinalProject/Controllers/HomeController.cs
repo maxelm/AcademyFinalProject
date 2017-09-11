@@ -45,12 +45,6 @@ namespace AcademyFinalProject.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
-        [HttpGet]
-        public IActionResult Inquiries()
-        {
-            return View(contentService.GetOfferInquiries());
-        }
     }
 }
 

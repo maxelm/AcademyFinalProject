@@ -12,14 +12,14 @@ namespace AcademyFinalProject.Models
 
     enum PCategory //TODO: gör om databas till värden och tilldela.
     {
-        Shower = 0,
-        Toilet = 1,
-        Sink = 2,
-        Cabinet = 3,
-        Faucet = 4,
-        Lighting = 5,
-        Tile = 6,
-        Clinker = 7,
+        Shower = 1,
+        Toilet = 2,
+        Sink = 3,
+        Cabinet = 4,
+        Faucet = 5,
+        Lighting = 6,
+        Tile = 7,
+        Clinker = 8,
     }
 
     enum WorkType

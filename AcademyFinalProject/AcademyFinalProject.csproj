@@ -5,7 +5,7 @@
     <UserSecretsId>db97dc06-a624-472d-be2f-a673745da6f5</UserSecretsId>
   </PropertyGroup>
 
-  <ItemGroup> //TODO: Check if needed and merge CSS file.
+  <ItemGroup>
     <None Include="wwwroot\FinalOfferStyle.css" />
     <None Include="wwwroot\InquiriesTableScript.js" />
   </ItemGroup>

@@ -181,5 +181,7 @@ namespace AcademyFinalProject.Models
                 SquareMeter = 50
             };
         }
+
+
     }
 }

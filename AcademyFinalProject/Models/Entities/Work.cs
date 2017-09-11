@@ -10,8 +10,9 @@ namespace AcademyFinalProject.Models.Entities
             OrderToWork = new HashSet<OrderToWork>();
         }
 
-        public int Wid { get; set; }
-        public string Type { get; set; }
+        public int WorkId { get; set; }
+        public int WorkType { get; set; }
+        public string Description { get; set; }
         public decimal StandardHourlyRate { get; set; }
 
         public ICollection<OrderToWork> OrderToWork { get; set; }

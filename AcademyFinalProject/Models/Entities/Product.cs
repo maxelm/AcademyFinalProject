@@ -10,8 +10,8 @@ namespace AcademyFinalProject.Models.Entities
             OrderToProduct = new HashSet<OrderToProduct>();
         }
 
-        public int Pid { get; set; }
-        public string Category { get; set; }
+        public int ProductId { get; set; }
+        public int Category { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal Price { get; set; }

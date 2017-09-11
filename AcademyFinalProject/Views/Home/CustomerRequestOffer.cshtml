@@ -2,7 +2,7 @@
 
 
 <div class="container">
-    <form asp-controller="Home" asp-action="">
+    <form asp-controller="Home" asp-action="CustomerRequestOffer">
         <div asp-validation-summary="All" class="validationsummary"></div>
 
         <!-- Personuppgifter fieldset -->
@@ -55,9 +55,9 @@
                 </tr>
 
                 <tr>
-                    <td><label asp-for="CustomerInfo.PhoneNumber"></label></td>
-                    <td><input asp-for="CustomerInfo.PhoneNumber" class="input_field" /><br />
-                        <span asp-validation-for="CustomerInfo.PhoneNumber" class="span_validation"></span></td>
+                    <td><label asp-for="CustomerInfo.Phone"></label></td>
+                    <td><input asp-for="CustomerInfo.Phone" class="input_field" /><br />
+                        <span asp-validation-for="CustomerInfo.Phone" class="span_validation"></span></td>
                     <td></td>
                 </tr>
             </table>

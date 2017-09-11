@@ -26,8 +26,8 @@ namespace AcademyFinalProject
 
             services.AddDbContext<AcademyDbContext>(o => o.UseSqlServer(connString));  //TODO: Add server retry + Ask if contextPOOL makes a difference
             services.AddMvc();
-            services.AddScoped<IContentService, DevContentService>(); //using dev
-            //services.AddScoped<IContentService, ReleaseContentService>(); //using Release
+            //services.AddScoped<IContentService, DevContentService>(); //using dev
+            services.AddScoped<IContentService, ReleaseContentService>(); //using Release
 
         }
 

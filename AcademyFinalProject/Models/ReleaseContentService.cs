@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace AcademyFinalProject.Models
 {
 
-    enum PCategory //TODO: gör om databas till värden och tilldela.
+    enum PCategory
     {
         Shower = 1,
         Toilet = 2,
@@ -127,9 +127,14 @@ namespace AcademyFinalProject.Models
             };
         }
 
-        private SelectListItem[] SetSelectItem(PCategory productCategory) // REDO FÖR TESTING
+        private SelectListItem[] SetSelectItem(PCategory productCategory) // REDO FÖR TESTING TODO: Add currrency.
         {
-            return context.Product.Where(p => p.Category == Convert.ToInt32(productCategory)).Select(p => new SelectListItem { Text = p.Name, Value = $"{p.ProductId.ToString()}_{p.Price}" }).ToArray();
+            var x = context.Product.Where(p => p.Category == Convert.ToInt32(productCategory)).Select(p => new SelectListItem { Text = $"{p.Name}\t({p.Price.ToString()} SEK)", Value = $"{p.ProductId.ToString()}_{p.Price}" }).ToArray();
+            var y = new SelectListItem[x.Length + 1];
+            y[x.Length] = new SelectListItem { Text = "--Välj produkt--", Value = "0" };
+            Array.Copy(x, y, x.Length);
+
+            return y;
         }
 
         public SelectedProductsVM GetSelectedProductsByCID(int cid) // REDO FÖR TESTING
@@ -162,7 +167,7 @@ namespace AcademyFinalProject.Models
                 {
                     IEnumerable<Product> pList = context.Customer.FirstOrDefault(c => c.CustomerId == cid).Order.OrderToProduct.Select(i => i.Product);
 
-                    return new SelectedProductsVM
+                    return new SelectedProductsVM // NULL CHECKA
                     {
                         Shower = GetProductName(PCategory.Shower, pList),
                         ShowerPrice = GetProductPrice(PCategory.Shower, pList),
@@ -251,9 +256,8 @@ namespace AcademyFinalProject.Models
             });
         }
 
-        public void SaveContact(CustomerRequestOfferWrapperVM c) // WIP 
-        {
-            // Skapa Kunden
+        public void SaveContact(CustomerRequestOfferWrapperVM c)
+        { 
             Customer temp = new Customer
             {
                 FirstName = c.CustomerInfo.FirstName,
@@ -264,8 +268,6 @@ namespace AcademyFinalProject.Models
                 Email = c.CustomerInfo.Email,
                 Phone = c.CustomerInfo.Phone,
 
-
-                //Skapa Ordern i Kunden
                 Order = new Order
                 {
                     OrderReceived = DateTime.Now,
@@ -278,32 +280,29 @@ namespace AcademyFinalProject.Models
                 }
             };
 
-            //temp.Order.CustomerId = temp.CustomerId; // Ge Order CID värdet av kundens CID (nödvändigt?)
+            AddSelectedProductToOrder(c.ProductSelection.SelectedShower, temp);
+            AddSelectedProductToOrder(c.ProductSelection.SelectedToilet, temp);
+            AddSelectedProductToOrder(c.ProductSelection.SelectedSink, temp);
+            AddSelectedProductToOrder(c.ProductSelection.SelectedCabinet, temp);
+            AddSelectedProductToOrder(c.ProductSelection.SelectedFaucet, temp);
+            AddSelectedProductToOrder(c.ProductSelection.SelectedLighting, temp);
+            AddSelectedProductToOrder(c.ProductSelection.SelectedTile, temp);
+            AddSelectedProductToOrder(c.ProductSelection.SelectedClinker, temp);
 
+            context.Customer.Add(temp);
+            context.SaveChanges(); //todo: async?
+        }
 
-            //context.Order.Add(temp.Order); // Lägg till Ordern till Tabellen (nödvändigt?)
-
-            // Lägg till produkterna kopplade till ordern
-            temp.Order.OrderToProduct.Add(new OrderToProduct
+        private void AddSelectedProductToOrder(string product, Customer temp)
+        {
+            if (!(product == "0"))
             {
-                //OrderId = temp.Order.OrderId,
-                ProductId = Convert.ToInt32(c.ProductSelection.SelectedToilet),
-                Price = context.Product.FirstOrDefault(p => p.ProductId == Convert.ToInt32(c.ProductSelection.SelectedToilet)).Price
-            });
+                var productValue = product.Split("_");
+                var productId = Convert.ToInt32(productValue[0]);
+                var price = Convert.ToDecimal(productValue[1]);
 
-
-
-            context.Customer.Add(temp); // Lägg till kunden till tabellen
-            context.SaveChangesAsync(); // TODO: Consider async and implications.
-
-
-            /*frågor:
-             * 1. När sparas ID och kan jag komma åt det innan jag sparat?
-             * 2. Kommer Order som är 1:1 automatiskt lägga till CID?
-             * 3. Samma fråga gällande Order2Product
-             * 4. Order / Order2Product förmodar jag läggs inte till i tabellen automatiskt??
-             * 5. SelectedListItems - Vad för object kan det vara? komplexa? msåte ha ProductID.
-             */
+                temp.Order.OrderToProduct.Add(new OrderToProduct { ProductId = productId, Price = price });
+            }
         }
 
         public CreateOfferWrapperVM GetOfferRequestByCID(int cid) // REDO FÖR TESTING

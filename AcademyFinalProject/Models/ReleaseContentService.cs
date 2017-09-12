@@ -298,7 +298,172 @@ namespace AcademyFinalProject.Models
 
         public FinalOfferVM GetFinalOffer(int id)
         {
-            throw new NotImplementedException();
+            var cust = context.Customer
+                .Include(c => c.Order)
+                .Include(c => c.Order.OrderToProduct)
+                .Include(c => c.Order.OrderToWork)
+                .FirstOrDefault(c => c.CustomerId == id);
+
+            var selectedProducts = context.Customer
+                .Where(c => c.CustomerId == id)
+                .SelectMany(c => c.Order.OrderToProduct.Select(otp => otp.Product))
+                .ToArray();
+
+            var selectedWork = context.Work.Select(w => w).ToArray();
+
+            var x = new FinalOfferVM
+            {
+                #region Customer Information
+
+                FirstName = cust.FirstName,
+                LastName = cust.LastName,
+                Email = cust.Email,
+                Phone = cust.Phone,
+                Street = cust.Street,
+                Zip = cust.Zip,
+                City = cust.City,
+
+                #endregion
+
+                #region Project Specific Information
+
+                TextBox = cust.Order.CustomerMessage,
+                SelectedProjectType = cust.Order.ProjectType,
+                SelectedPropertyType = cust.Order.PropertyType,
+                SquareMeter = cust.Order.SquareMeter,
+
+                #endregion
+
+                #region Product Information
+
+
+                Shower = GetProductName(PCategory.Shower, selectedProducts),
+                ShowerPrice = GetFinalProductPrice(cust, selectedProducts, PCategory.Shower),
+
+                Toilet = GetProductName(PCategory.Toilet, selectedProducts),
+                ToiletPrice = GetFinalProductPrice(cust, selectedProducts, PCategory.Toilet),
+
+                Sink = GetProductName(PCategory.Sink, selectedProducts),
+                SinkPrice = GetFinalProductPrice(cust, selectedProducts, PCategory.Sink),
+
+                Cabinet = GetProductName(PCategory.Cabinet, selectedProducts),
+                CabinetPrice = GetFinalProductPrice(cust, selectedProducts, PCategory.Cabinet),
+
+                Faucet = GetProductName(PCategory.Faucet, selectedProducts),
+                FaucetPrice = GetFinalProductPrice(cust, selectedProducts, PCategory.Faucet),
+
+                Lightning = GetProductName(PCategory.Lighting, selectedProducts),
+                LightningPrice = GetFinalProductPrice(cust, selectedProducts, PCategory.Lighting),
+
+                Tile = GetProductName(PCategory.Tile, selectedProducts),
+                TilePrice = GetFinalProductPrice(cust, selectedProducts, PCategory.Tile),
+
+                Clinker = GetProductName(PCategory.Clinker, selectedProducts),
+                ClinkerPrice = GetFinalProductPrice(cust, selectedProducts, PCategory.Clinker),
+
+                #endregion
+
+                #region Work Information
+
+                DemolitionHours = GetFinalAmountOfHours(WorkType.Demolition, cust, selectedWork),
+                HourlyRateDemolition = GetFinalHourlyRate(WorkType.Demolition, cust, selectedWork),
+
+                DrainHours = GetFinalAmountOfHours(WorkType.Drain, cust, selectedWork),
+                HourlyRateDrain = GetFinalHourlyRate(WorkType.Drain, cust, selectedWork),
+
+                VentilationHours = GetFinalAmountOfHours(WorkType.Ventilation, cust, selectedWork),
+                HourlyRateVentilation = GetFinalHourlyRate(WorkType.Ventilation, cust, selectedWork),
+
+                TileHours = GetFinalAmountOfHours(WorkType.Tile, cust, selectedWork),
+                HourlyRateTile = GetFinalHourlyRate(WorkType.Tile, cust, selectedWork),
+
+                ElectricityHours = GetFinalAmountOfHours(WorkType.Electricity, cust, selectedWork),
+                HourlyRateElectricity = GetFinalHourlyRate(WorkType.Electricity, cust, selectedWork),
+
+                MountingHours = GetFinalAmountOfHours(WorkType.Mounting, cust, selectedWork),
+                HourlyRateMounting = GetFinalHourlyRate(WorkType.Mounting, cust, selectedWork),
+
+                #endregion
+            };
+
+            #region Total Calculations
+
+            x.TotalWorkCost = CalculateFinalTotalWorkCost(x);
+            x.TotalProductCost = CalculateFinalTotalProductCost(x);
+            x.TotalAmountOfHours = CalculateFinalTotalAmountOfHours(x);
+            x.ROTDiscount = CalculateFinalRotDiscount(x.TotalWorkCost, 1);
+
+            #endregion
+
+            return x;
+        }
+
+        private decimal CalculateFinalRotDiscount(decimal totalWorkCost, int eligableRotPersons) // TODO: add propfor ROTgiltiga
+        {
+            var rotDiscount = 0.3;
+            decimal maxDiscountPerPerson = 50000;
+
+            var discount = totalWorkCost * (decimal)rotDiscount;
+
+            if (discount > (eligableRotPersons * maxDiscountPerPerson))
+            {
+                discount = (eligableRotPersons * maxDiscountPerPerson);
+            }
+
+            return discount;
+        }
+
+        private int CalculateFinalTotalAmountOfHours(FinalOfferVM x)
+        {
+            return
+                (x.DemolitionHours) +
+                (x.DrainHours) +
+                (x.VentilationHours) +
+                (x.TileHours) +
+                (x.ElectricityHours) +
+                (x.MountingHours);
+        }
+
+        private decimal CalculateFinalTotalProductCost(FinalOfferVM x)
+        {
+            return
+                (x.ShowerPrice) +
+                (x.ToiletPrice) +
+                (x.SinkPrice) +
+                (x.CabinetPrice) +
+                (x.FaucetPrice) +
+                (x.LightningPrice) +
+                (x.TilePrice * x.SquareMeter) +
+                (x.ClinkerPrice * x.ClinkerPrice);
+        }
+
+        private decimal CalculateFinalTotalWorkCost(FinalOfferVM x)
+        {
+            return
+                (x.DemolitionHours * x.HourlyRateDemolition) +
+                (x.DrainHours * x.HourlyRateDrain) +
+                (x.VentilationHours * x.HourlyRateVentilation) +
+                (x.TileHours * x.HourlyRateTile) +
+                (x.ElectricityHours * x.HourlyRateElectricity) +
+                (x.MountingHours * x.HourlyRateMounting);
+        }
+
+        private decimal GetFinalHourlyRate(WorkType workType, Customer c, Work[] workList)
+        {
+            return c.Order.OrderToWork
+                .FirstOrDefault(i => i.WorkId == workList.FirstOrDefault(w => w.WorkType == (int)workType).WorkId).HourlyRate;
+        }
+
+        private int GetFinalAmountOfHours(WorkType workType, Customer c, Work[] workList)
+        {
+            return c.Order.OrderToWork
+                .FirstOrDefault(i => i.WorkId == workList.FirstOrDefault(w => w.WorkType == (int)workType).WorkId).AmountOfHours;
+        }
+
+        private static decimal GetFinalProductPrice(Customer c, Product[] selectedProducts, PCategory pCategory)
+        {
+            return c.Order.OrderToProduct
+                .FirstOrDefault(item => item.ProductId == selectedProducts.FirstOrDefault(p => p.Category == (int)pCategory).ProductId).Price;
         }
     }
 }

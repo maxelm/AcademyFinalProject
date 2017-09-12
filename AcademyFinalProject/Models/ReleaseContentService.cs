@@ -170,16 +170,19 @@ namespace AcademyFinalProject.Models
 
         private decimal GetProductPrice(PCategory productCategory, Product[] productList)
         {
+            decimal price;
             Product product = productList.FirstOrDefault(p => p.Category == Convert.ToInt32(productCategory));
 
             if (product != null)
             {
-                return product.Price;
+                price = product.Price;
             }
             else
             {
-                return 0;
+                price = 0;
             }
+
+            return price;
         }
 
         private string GetProductName(PCategory productCategory, Product[] productList)
@@ -434,7 +437,7 @@ namespace AcademyFinalProject.Models
                 (x.FaucetPrice) +
                 (x.LightningPrice) +
                 (x.TilePrice * x.SquareMeter) +
-                (x.ClinkerPrice * x.ClinkerPrice);
+                (x.ClinkerPrice * x.SquareMeter);
         }
 
         private decimal CalculateFinalTotalWorkCost(FinalOfferVM x)
@@ -462,8 +465,23 @@ namespace AcademyFinalProject.Models
 
         private static decimal GetFinalProductPrice(Customer c, Product[] selectedProducts, PCategory pCategory)
         {
-            return c.Order.OrderToProduct
-                .FirstOrDefault(item => item.ProductId == selectedProducts.FirstOrDefault(p => p.Category == (int)pCategory).ProductId).Price;
+            decimal price;
+            var selectedProduct = selectedProducts.FirstOrDefault(p => p.Category == (int)pCategory);
+
+            if (selectedProduct != null)
+            {
+                int productId = selectedProduct.ProductId;
+                var orderToProduct = c.Order.OrderToProduct
+                    .Single(item => item.ProductId == productId);
+
+                price = orderToProduct.Price;
+            }
+            else
+            {
+                price = 0;
+            }
+
+            return price;
         }
     }
 }

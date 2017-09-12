@@ -64,15 +64,39 @@
                 </tr>
             </thead>
             <tbody>
+                @if (Model.Cabinet != null)
+                {
                 <tr><td>@Model.Cabinet</td><td>@Model.CabinetPrice</td></tr>
+                }
+                @if (Model.Clinker != null)
+                {
                 <tr><td>@Model.Clinker</td><td>@Model.ClinkerPrice</td></tr>
+                }
+                @if (Model.Lightning != null)
+                {
                 <tr><td>@Model.Lightning</td><td>@Model.LightningPrice</td></tr>
+                }
+                @if (Model.Shower != null)
+                {
                 <tr><td>@Model.Shower</td><td>@Model.ShowerPrice</td></tr>
+                }
+                @if (Model.Sink != null)
+                {
                 <tr><td>@Model.Sink</td><td>@Model.SinkPrice</td></tr>
+                }
+                @if (Model.Tile != null)
+                {
                 <tr><td>@Model.Tile</td><td>@Model.TilePrice</td></tr>
+                }
+                @if (Model.Toilet != null)
+                {
                 <tr><td>@Model.Toilet</td><td>@Model.ToiletPrice</td></tr>
+                }
+                @if (Model.Faucet != null)
+                {
                 <tr><td>@Model.Faucet</td><td>@Model.FaucetPrice</td></tr>
-                <tr style="font-weight:bold;"><td>Totala arbetskostnader</td><td>@Model.TotalProductCost</td></tr>
+                }
+                <tr style="font-weight:bold;"><td>Totala produktkostnader</td><td>@Model.TotalProductCost</td></tr>
             </tbody>
         </table>
     </div><br />
@@ -89,40 +113,68 @@
                 </tr>
             </thead>
             <tbody>
+                @if (Model.DemolitionHours != 0)
+                {
                 <tr>
                     <td><label asp-for="DemolitionHours"></label></td>
                     <td>@Model.DemolitionHours</td>
                     <td>@Model.HourlyRateDemolition</td>
                 </tr>
+                }
+                @if (Model.VentilationHours != 0)
+                {
                 <tr>
                     <td><label asp-for="VentilationHours"></label></td>
                     <td>@Model.VentilationHours</td>
-                    <td>@Model.VentilationHours</td>
+                    <td>@Model.HourlyRateVentilation</td>
                 </tr>
+                }
+                @if (Model.ElectricityHours != 0)
+                {
                 <tr>
                     <td><label asp-for="ElectricityHours"></label></td>
                     <td>@Model.ElectricityHours</td>
                     <td>@Model.HourlyRateElectricity</td>
                 </tr>
+                }
+                @if (Model.TileHours != 0)
+                {
                 <tr>
                     <td><label asp-for="TileHours"></label></td>
                     <td>@Model.TileHours</td>
                     <td>@Model.HourlyRateTile</td>
                 </tr>
+                }
+                @if (Model.DrainHours != 0)
+                {
                 <tr>
                     <td><label asp-for="DrainHours"></label></td>
                     <td>@Model.DrainHours</td>
                     <td>@Model.HourlyRateDrain</td>
                 </tr>
+                }
+                @if (Model.MountingHours != 0)
+                {
                 <tr>
                     <td><label asp-for="MountingHours"></label></td>
                     <td>@Model.MountingHours</td>
                     <td>@Model.HourlyRateMounting</td>
                 </tr>
-                <tr style="font-weight:bold;"><td>Antal Timmar</td><td>@Model.TotalAmountOfHours</td></tr>
-                <tr style="font-weight:bold;"><td>Totala Arbetskostnader</td><td>@Model.TotalWorkCost</td></tr>
+                }
+                <tr style="border:hidden; border-top:1px solid black;">
+                    <td></td>
+                    <td><b><label asp-for="TotalAmountOfHours"></label></b></td>
+                    <td><b>@Model.TotalAmountOfHours</b></td>
+                </tr>
+                <tr style="border:hidden;">
+                    <td></td>
+                    <td><b><label asp-for="TotalWorkCost"></label></b></td>
+                    <td><b>@Model.TotalWorkCost</b></td>
+                </tr>
             </tbody>
         </table>
+    <br />
+
     </div><br />
     <hr id="SmallHr" /><br />
 
@@ -132,13 +184,15 @@
         <table id="Resekostnader">
             <thead>
                 <tr>
-                    <th>Antal mil:</th>
-                    <th>Kr/mil</th>
+                    <th>Resekostnad</th>
+                    <th>Pris</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td>20</td><td>30</td></tr>
-                <tr style="font-weight:bold;"><td>Total summa</td><td>600 kr</td></tr>
+                <tr>
+                    <td><label asp-for="TravelCost"></label></td>
+                    <td>@Model.TravelCost</td>
+                </tr>
             </tbody>
         </table>
     </div><br />
@@ -151,18 +205,33 @@
             <thead>
                 <tr>
                     <th>Antalet personer som är berättigade för ROT</th>
-                    <th>Pris efter ROT</th>
+                    <th>ROT-Avdrag</th>
                 </tr>
             </thead>
             <tbody>
-                <tr><td>1</td><td>Arbetskosntader minus rot</td></tr>
+                <tr>
+                    <td><label asp-for="ViableROTCandidates"></label></td>
+                    <td>@Model.ROTDiscount</td>
+                </tr>
             </tbody>
         </table>
     </div><br />
     <hr id="SmallHr" /><br />
 
-    <p style="font-weight:bold; text-align:center; ">Totala summan här: </p>
-
+    <div>
+        <h3>Totalt</h3>
+        <table id="Resekostnader">
+            <thead>
+                <tr>
+                    <th> </th>
+                    <th>Summa</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><b>Total summa</b></td><td><b>@Model.TotalPrice</b></td></tr>
+                <tr><td><b>ROT-Avdrag</b></td><td style="color:red"><b>-@Model.ROTDiscount</b></td></tr>
+                <tr><td><b>Totalt efter ROT-Avdrag</b></td><td><b>@Model.TotalPriceAfterROT</b></td></tr>
+            </tbody>
+        </table>
+    </div><br />
 </fieldset>
-<link rel="stylesheet" href="~/css/FinalOfferStyle.css">
-

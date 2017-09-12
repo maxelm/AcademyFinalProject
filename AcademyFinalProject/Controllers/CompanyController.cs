@@ -45,7 +45,7 @@ namespace AcademyFinalProject.Controllers
                 return View(model);
             }
 
-            contentService.SaveAmountOfWork(model.AmountOfWorkVM, id);
+            //contentService.SaveAmountOfWork(model.AmountOfWorkVM, id);
 
             return RedirectToAction(nameof(FinalOffer), new { id = id });
         }

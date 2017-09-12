@@ -7,12 +7,24 @@
 .container {
     position: relative;
     height: 600px;
-    margin: 0 auto
+    margin: 0 auto;
+    padding-top:20px;
 }
 
 .div_buttons {
     text-align:right;
-    margin-right:7px;
+    padding-top:40px;
+}
+
+legend {
+    font-weight:bold;
+    font-size:18px;
+    color:#114a11;
+}
+
+textarea {
+    width: 200px;
+    height: 50px;
 }
 
 .span_validation {
@@ -22,21 +34,64 @@
 }
 
 .input_field {
-    width: 200px;
-    height: 20px;
+    width: 230px;
+    height: 38px;
+    border-radius: 4px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    display: inline-block;
+    box-sizing: border-box;
+    padding:6px;
+}
+
+.input_work {
+    width: 100px;
+    height: 30px;
+    border-radius: 4px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 6px;
 }
 
 fieldset {
     width: 350px;
-    height: 350px;
-    padding: 30;
-    line-height: 30px;
+    height: 100%;
+    padding-bottom:30;
     margin: 0;
     display: inline-block;
 }
 
+.error {
+    border: 2px solid red;
+}
+
+.valid {
+    border: 2px solid limegreen;
+}
+
+.label_text {
+    font-weight:bold;
+}
+
 .CustReqOffer_table {
     width: 100%;
+}
+
+.CreateOffer_table {
+    width: 100%;
+}
+
+textarea {
+    width: 250px;
+    height: 100px;
+    border-radius: 4px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 6px;
 }
 
 /*send & reset button on startpage*/
@@ -143,40 +198,3 @@ h3 {
     text-align: center;
     font-weight: bold;
 }
-
-/* Nikola - Create Offer*/
-
-#row1 {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-#column1 {
-    display: flex;
-    flex-direction: column;
-}
-
-#column2 {
-    display: flex;
-    flex-direction: column;
-}
-
-#column3 {
-    display: flex;
-    flex-direction: column;
-}
-
-
-h1 {
-    text-align: center;
-}
-
-table {
-    width: 100%;
-}
-
-#ArbetskostnadTabell td {
-    font-weight: bold;
-}
-/* END */

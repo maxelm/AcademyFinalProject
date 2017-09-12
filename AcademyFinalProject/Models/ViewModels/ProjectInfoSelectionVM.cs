@@ -10,8 +10,8 @@ namespace AcademyFinalProject.Models.ViewModels
 {
     public enum ProjectType
     {
-        BadrumsRenovering = 0,
-        EndastKakling = 1,
+        Badrumsrenovering = 0,
+        Kakling = 1,
     }
 
     public enum PropertyType
@@ -33,6 +33,7 @@ namespace AcademyFinalProject.Models.ViewModels
 
         [Display(Name = "Kvm")] // TODO: mer än 0
         [Required(ErrorMessage = "Ange antal kvm")]
+        [Range (1,int.MaxValue, ErrorMessage = "Felaktig inmatning")]
         public int SquareMeter { get; set; }
 
         public SelectListItem[] PropertyTypeItems { get; set; }

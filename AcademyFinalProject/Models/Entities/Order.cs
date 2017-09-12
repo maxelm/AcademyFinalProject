@@ -20,7 +20,7 @@ namespace AcademyFinalProject.Models.Entities
         public string PropertyType { get; set; }
         public DateTime RequestedStartDate { get; set; }
         public string CustomerMessage { get; set; }
-        public int? ViableRotcandidates { get; set; }
+        public int ViableRotcandidates { get; set; }
 
         public Customer Customer { get; set; }
         public ICollection<OrderToProduct> OrderToProduct { get; set; }

@@ -43,6 +43,6 @@ namespace AcademyFinalProject.Models.ViewModels
         [Display(Name = "Öns. byggstart")]
         [Required(ErrorMessage = "Ange önskad byggstart")]
         [DataType(DataType.Date)]
-        public DateTime RequestedStartDate { get; set; } // TODO: Check how to make calender selection
+        public DateTime RequestedStartDate { get; set; }
     }
 }

@@ -48,5 +48,7 @@ namespace AcademyFinalProject.Models.ViewModels
         public string Clinker { get; set; }
         public decimal ClinkerPrice { get; set; }
 
+        [Display(Name = "Total kostnad")]
+        public decimal TotalProductCost { get; set; }
     }
 }

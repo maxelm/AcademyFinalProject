@@ -55,7 +55,6 @@ namespace AcademyFinalProject.Models
                 Phone = cust.Phone,
                 TextBox = cust.Order.CustomerMessage
             }).SingleOrDefault();
-
         }
 
         public CustomerRequestOfferWrapperVM GetFirstView() // REDO FÖR TESTING
@@ -146,7 +145,6 @@ namespace AcademyFinalProject.Models
 
             var viewModel = new SelectedProductsVM
             {
-
                 Shower = GetProductName(PCategory.Shower, selectedProducts),
                 ShowerPrice = GetProductPrice(PCategory.Shower, selectedProducts),
                 Toilet = GetProductName(PCategory.Toilet, selectedProducts),
@@ -165,7 +163,26 @@ namespace AcademyFinalProject.Models
                 ClinkerPrice = GetProductPrice(PCategory.Clinker, selectedProducts),
             };
 
+            viewModel.TotalProductCost = CalculateCustomerTotalProductCost(viewModel, cid);
+
             return viewModel;
+        }
+
+        private decimal CalculateCustomerTotalProductCost(SelectedProductsVM productList, int cid) // TODO: Måste provas.
+        {
+            var squareMeters = context.Customer
+            .Where(c => c.CustomerId == cid)
+            .Select(c => c.Order.SquareMeter).Single();
+
+            return
+                (productList.ShowerPrice) +
+                (productList.ToiletPrice) +
+                (productList.SinkPrice) +
+                (productList.CabinetPrice) +
+                (productList.FaucetPrice) +
+                (productList.LightningPrice) +
+                (productList.TilePrice * squareMeters) +
+                (productList.ClinkerPrice * squareMeters);
         }
 
         private decimal GetProductPrice(PCategory productCategory, Product[] productList)
@@ -241,6 +258,7 @@ namespace AcademyFinalProject.Models
                     SquareMeter = c.ProjectInfoSelection.SquareMeter,
                     RequestedStartDate = c.ProjectInfoSelection.RequestedStartDate,
                     CustomerMessage = c.CustomerInfo.TextBox,
+                    ViableRotcandidates = c.CustomerInfo.ViableROTCandidates,
                 }
             };
 
@@ -274,9 +292,22 @@ namespace AcademyFinalProject.Models
             return new CreateOfferWrapperVM
             {
                 ShowCustomerInfoVM = GetCustomerInfoByCID(cid),
+                ShowOrderInfoVM = GetOrderInfoByCID(cid),
                 SelectedProductsVM = GetSelectedProductsByCID(cid),
                 AmountOfWorkVM = GetAmountOfWorkVM(),
             };
+        }
+
+        private ShowOrderInfoVM GetOrderInfoByCID(int cid)
+        {
+            return context.Customer.Where(c => c.CustomerId == cid).Select(cust => new ShowOrderInfoVM
+            {
+                ProjectType = cust.Order.ProjectType,
+                PropertyType = cust.Order.PropertyType,
+                SquareMeter = cust.Order.SquareMeter,
+                ViableROTCandidates = cust.Order.ViableRotcandidates,
+                RequestedStartDate = cust.Order.RequestedStartDate,
+            }).SingleOrDefault();
         }
 
         private AmountOfWorkVM GetAmountOfWorkVM() // REDO FÖR TESTING

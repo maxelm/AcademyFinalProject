@@ -41,5 +41,8 @@ namespace AcademyFinalProject.Models.ViewModels
         
         [Display(Name = "Övriga Kommentarer")]
         public string TextBox { get; set; }
+
+        [Display(Name = "ROT berättigade")]
+        public int ViableROTCandidates { get; set; }
     }
 }

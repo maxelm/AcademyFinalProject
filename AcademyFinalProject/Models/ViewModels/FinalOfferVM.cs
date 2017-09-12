@@ -43,7 +43,7 @@ namespace AcademyFinalProject.Models.ViewModels
 
         [Display(Name = "Dusch")]
         public string Shower { get; set; }
-        public decimal ShowerPrice { get; set; }
+        public decimal ShowerPrice { get; set; } 
 
         [Display(Name = "Toalett")]
         public string Toilet { get; set; }
@@ -100,12 +100,23 @@ namespace AcademyFinalProject.Models.ViewModels
         public int MountingHours { get; set; }
         public decimal HourlyRateMounting { get; set; }
 
-        [Display(Name = "Total Hours")]
+        [Display(Name = "Totalt antal timmar")]
         public int TotalAmountOfHours { get; set; }
-        [Display(Name = "Total Cost")]
+        [Display(Name = "Summa arbetskostnader")]
         public decimal TotalWorkCost { get; set; }
 
-        public decimal ROTDiscount { get; set; }
+        [Display(Name = "Resekostnad")]
+        public decimal TravelCost { get; set; }
 
+        [Display(Name = "Totalt pris")]
+        public decimal TotalPrice { get; set; }
+
+        [Display(Name = "Totalt pris")]
+        public decimal TotalPriceAfterROT { get; set; }
+
+        [Display(Name = "Antal ROT-Berättigade")]
+        public int ViableROTCandidates { get; set; }
+
+        public decimal ROTDiscount { get; set; }
     }
 }

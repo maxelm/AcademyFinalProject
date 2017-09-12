@@ -19,15 +19,15 @@ namespace AcademyFinalProject
         public void ConfigureServices(IServiceCollection services)
         {
             // Local SQL server
-            var connString = @"Data Source=ACADEMY-7115W44;Initial Catalog=AcademyFinalProjectDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            var connString = @"Data Source=ACADEMY-7115TVC;Initial Catalog=AcademyFinalProjectDB;Integrated Security=True;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
             //services.AddDbContext<AcademyDbContext>(o => o.UseSqlServer(connString));
 
 
             services.AddDbContext<AcademyDbContext>(o => o.UseSqlServer(connString));  //TODO: Add server retry + Ask if contextPOOL makes a difference
             services.AddMvc();
-            //services.AddScoped<IContentService, DevContentService>(); //using dev
-            services.AddScoped<IContentService, ReleaseContentService>(); //using Release
+            services.AddScoped<IContentService, DevContentService>(); //using dev
+            //services.AddScoped<IContentService, ReleaseContentService>(); //using Release
 
         }
 

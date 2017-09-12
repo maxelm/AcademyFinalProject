@@ -46,9 +46,13 @@ namespace AcademyFinalProject.Models.ViewModels
         [Required(ErrorMessage = "Skriv in tim deb.")]
         public decimal HourlyRateMounting { get; set; }
 
-        [Display(Name = "Total Hours")]
+        [Display(Name = "Totalt antal tim")]
         public int TotalAmountOfHours { get; set; }
-        [Display(Name = "Total Cost")]
+
+        [Display(Name = "Total arbetskostn.")]
         public decimal TotalWorkCost { get; set; }
+
+        [Display(Name = "Resekostnad")]
+        public decimal TravelCost { get; set; }
     }
 }

@@ -198,9 +198,22 @@
                                 <td><input asp-for="AmountOfWorkVM.HourlyRateVentilation" /></td>
                                 <td><span asp-validation-for="AmountOfWorkVM.HourlyRateVentilation"></span></td>
                             </tr>
+                            <tr>
+                                <td><label asp-for="AmountOfWorkVM.TravelCost"></label></td>
+                                <td><input asp-for="AmountOfWorkVM.TravelCost" /></td>
+                            </tr>
+                            <tr>
+                                <td><label asp-for="AmountOfWorkVM.TotalAmountOfHours"></label></td>
+                                <td><input asp-for="AmountOfWorkVM.TotalAmountOfHours" disabled /></td>
+                            </tr>
+                            <tr>
+                                <td><label asp-for="AmountOfWorkVM.TotalWorkCost"></label></td>
+                                <td><input asp-for="AmountOfWorkVM.TotalWorkCost" disabled /></td>
+                            </tr>
+
+
                         </tbody>
                     </table>
-                    <p><label asp-for="AmountOfWorkVM.TotalAmountOfHours"></label></p><br />
                     <input type="submit" value="Skapa Offert!" />
                 </fieldset>
             </div>

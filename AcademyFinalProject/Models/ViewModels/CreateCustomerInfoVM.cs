@@ -19,12 +19,13 @@ namespace AcademyFinalProject.Models.ViewModels
         public string LastName { get; set; }
 
         [Required(ErrorMessage = "Ange din E-mail")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage ="Felaktig E-mail")]
         [Display(Name = "E-mail")]
         public string Email { get; set; }
         
         [Required(ErrorMessage = "Ange ditt telefonnummer")]
         [Display(Name = "Telefon")]
+        [Range (0,int.MaxValue, ErrorMessage ="Tel får endast innehålla siffror")]
         public string Phone { get; set; }
         
         [Required(ErrorMessage = "Ange din gatuadress")]
@@ -32,14 +33,15 @@ namespace AcademyFinalProject.Models.ViewModels
         public string Street { get; set; }
         
         [Required(ErrorMessage = "Ange din postkod")]
-        [Display(Name = "Postkod")]
+        [Display(Name = "Postnr")]
+        [Range(0, int.MaxValue, ErrorMessage = "Postnr får endast innehålla siffror")]
         public string Zip { get; set; }
         
         [Required(ErrorMessage = "Ange din stad")]
         [Display(Name = "Stad")]
         public string City { get; set; }
         
-        [Display(Name = "Övriga Kommentarer")]
+        [Display(Name = "Övrigt")]
         public string TextBox { get; set; }
 
         [Display(Name = "ROT berättigade")]

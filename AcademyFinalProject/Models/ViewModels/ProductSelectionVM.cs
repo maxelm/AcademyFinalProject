@@ -51,7 +51,7 @@ namespace AcademyFinalProject.Models.ViewModels
         [Required(ErrorMessage = "Välj ett alternativ")]
         public string SelectedClinker { get; set; }
 
-        [Display(Name = "Total summa")]
+        [Display(Name = "Summa")]
         public int Sum { get; set; }
     }
 }

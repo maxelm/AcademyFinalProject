@@ -80,8 +80,8 @@ namespace AcademyFinalProject.Models
         {
             return new SelectListItem[]
             {
-                new SelectListItem { Text = nameof(ProjectType.BadrumsRenovering), Value = nameof(ProjectType.BadrumsRenovering) },
-                new SelectListItem { Text = nameof(ProjectType.EndastKakling), Value = nameof(ProjectType.EndastKakling) },
+                new SelectListItem { Text = nameof(ProjectType.Badrumsrenovering), Value = nameof(ProjectType.Badrumsrenovering) },
+                new SelectListItem { Text = nameof(ProjectType.Kakling), Value = nameof(ProjectType.Kakling) },
             };
         }
 
@@ -130,7 +130,7 @@ namespace AcademyFinalProject.Models
         {
             var x = context.Product.Where(p => p.Category == Convert.ToInt32(productCategory)).Select(p => new SelectListItem { Text = $"{p.Name}\t({p.Price.ToString()} SEK)", Value = $"{p.ProductId.ToString()}_{p.Price}" }).ToArray();
             var y = new SelectListItem[x.Length + 1];
-            y[x.Length] = new SelectListItem { Text = "--Välj produkt--", Value = "0" };
+            y[x.Length] = new SelectListItem { Text = "-- Välj produkt --", Value = "0", Selected = true };
             Array.Copy(x, y, x.Length);
 
             return y;

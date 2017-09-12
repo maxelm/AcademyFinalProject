@@ -1,16 +1,16 @@
 ﻿@model CustomerRequestOfferWrapperVM
 
-
+<link rel="stylesheet" href="~/bootstrap/css/bootstrap.css" />
 <div class="container">
     <form asp-controller="Home" asp-action="CustomerRequestOffer">
-        <div asp-validation-summary="All" class="validationsummary"></div>
+        @*<div asp-validation-summary="All" class="validationsummary"></div>*@
 
         <!-- Personuppgifter fieldset -->
         <fieldset>
             <legend>Personuppgifter:</legend>
             <table class="CustReqOffer_table">
                 <tr>
-                    <td><label asp-for="CustomerInfo.FirstName"></label></td>
+                    <td><label asp-for="CustomerInfo.FirstName" class="label_text"></label></td>
                     <td><input asp-for="CustomerInfo.FirstName" class="input_field" /></td>
                     <td></td>
                 </tr>
@@ -20,61 +20,90 @@
                 </tr>
 
                 <tr>
-                    <td><label asp-for="CustomerInfo.LastName"></label></td>
-                    <td><input asp-for="CustomerInfo.LastName" class="input_field" /><br />
-                        <span asp-validation-for="CustomerInfo.LastName" class="span_validation"></span></td>
+                    <td><label asp-for="CustomerInfo.LastName" class="label_text"></label></td>
+                    <td><input asp-for="CustomerInfo.LastName" class="input_field" /></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td><label asp-for="CustomerInfo.Street"></label></td>
-                    <td><input asp-for="CustomerInfo.Street" class="input_field" /><br />
-                        <span asp-validation-for="CustomerInfo.Street" class="span_validation"></span></td>
                     <td></td>
+                    <td><span asp-validation-for="CustomerInfo.LastName" class="span_validation"></span></td>
                 </tr>
 
                 <tr>
-                    <td><label asp-for="CustomerInfo.Zip"></label></td>
-                    <td><input asp-for="CustomerInfo.Zip" class="input_field" /><br />
-                        <span asp-validation-for="CustomerInfo.Zip" class="span_validation"></span></td>
+                    <td><label asp-for="CustomerInfo.Street" class="label_text"></label></td>
+                    <td><input asp-for="CustomerInfo.Street" class="input_field" /></td>
                     <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><span asp-validation-for="CustomerInfo.Street" class="span_validation"></span></td>
                 </tr>
 
                 <tr>
-                    <td><label asp-for="CustomerInfo.City"></label></td>
-                    <td><input asp-for="CustomerInfo.City" class="input_field" /><br />
-                        <span asp-validation-for="CustomerInfo.City" class="span_validation"></span></td>
+                    <td><label asp-for="CustomerInfo.Zip" class="label_text"></label></td>
+                    <td><input asp-for="CustomerInfo.Zip" class="input_field" /></td>
                     <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><span asp-validation-for="CustomerInfo.Zip" class="span_validation"></span></td>
                 </tr>
 
                 <tr>
-                    <td><label asp-for="CustomerInfo.Email"></label></td>
-                    <td><input asp-for="CustomerInfo.Email" class="input_field" /><br />
-                        <span asp-validation-for="CustomerInfo.Email" class="span_validation"></span>
+                    <td><label asp-for="CustomerInfo.City" class="label_text"></label></td>
+                    <td><input asp-for="CustomerInfo.City" class="input_field" /></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><span asp-validation-for="CustomerInfo.City" class="span_validation"></span></td>
+                </tr>
+
+                <tr>
+                    <td><label asp-for="CustomerInfo.Email" class="label_text"></label></td>
+                    <td><input asp-for="CustomerInfo.Email" class="input_field" /></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><span asp-validation-for="CustomerInfo.Email" class="span_validation"></span></td>
+                </tr>
+
+                <tr>
+                    <td><label asp-for="CustomerInfo.Phone" class="label_text"></label></td>
+                    <td><input asp-for="CustomerInfo.Phone" class="input_field" /></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><span asp-validation-for="CustomerInfo.Phone" class="span_validation"></span></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="CustomerInfo.TextBox" class="label_text"></label></td>
+                    <td>
+                        <textarea asp-for="CustomerInfo.TextBox"></textarea><br />
                     </td>
                     <td></td>
                 </tr>
-
                 <tr>
-                    <td><label asp-for="CustomerInfo.Phone"></label></td>
-                    <td><input asp-for="CustomerInfo.Phone" class="input_field" /><br />
-                        <span asp-validation-for="CustomerInfo.Phone" class="span_validation"></span></td>
-                    <td></td>
+                    <td><b>Antal ROT berättigade i hushållet</b></td>
+                    <td><input asp-for="CustomerInfo.ViableROTCandidates" class="input_field" /></td>
                 </tr>
             </table>
         </fieldset>
-        &nbsp;
+        &emsp;&emsp;
         <!-- Uppdragsuppgifter fieldset -->
         <fieldset>
             <legend>Uppdragsuppgifter:</legend>
             <table class="CustReqOffer_table">
                 <tr>
-                    <td><label asp-for="ProjectInfoSelection.SelectedProjectType"></label></td>
+                    <td><label asp-for="ProjectInfoSelection.SelectedProjectType" class="label_text"></label></td>
                     <td><select asp-for="ProjectInfoSelection.SelectedProjectType" asp-items="Model.ProjectInfoSelection.ProjectTypeItems" class="input_field"></select></td>
                     <td><span asp-validation-for="ProjectInfoSelection.SelectedProjectType" class="span_validation"></span></td>
                 </tr>
 
                 <tr>
-                    <td><label asp-for="ProjectInfoSelection.SquareMeter"></label></td>
+                    <td><label asp-for="ProjectInfoSelection.SquareMeter" class="label_text"></label></td>
                     <td>
                         <input asp-for="ProjectInfoSelection.SquareMeter" class="input_field" /><br />
                         <span asp-validation-for="ProjectInfoSelection.SquareMeter" class="span_validation"></span>
@@ -82,82 +111,85 @@
                     <td></td>
                 </tr>
                 <tr>
-                    <td><label asp-for="ProjectInfoSelection.SelectedPropertyType"></label></td>
+                    <td><label asp-for="ProjectInfoSelection.SelectedPropertyType" class="label_text"></label></td>
                     <td><select asp-for="ProjectInfoSelection.SelectedPropertyType" asp-items="Model.ProjectInfoSelection.PropertyTypeItems" class="input_field"></select></td>
                     <td><span asp-validation-for="ProjectInfoSelection.SelectedPropertyType" class="span_validation"></span></td>
                 </tr>
 
                 <tr>
-                    <td><label asp-for="ProjectInfoSelection.RequestedStartDate"></label></td>
+                    <td><label asp-for="ProjectInfoSelection.RequestedStartDate" class="label_text"></label></td>
                     <td><input asp-for="ProjectInfoSelection.RequestedStartDate" class="input_field" /><br />
                         <span asp-validation-for="ProjectInfoSelection.RequestedStartDate" class="span_validation"></span></td>
                     <td></td>
                 </tr>
             </table>
         </fieldset>
-        &nbsp;
-
+        &emsp;&emsp;
         <!-- Material uppgifter fieldset -->
         <fieldset>
-            <legend>Material:</legend>
+            <legend>Material: (ej obligatorisk)</legend>
             <table class="CustReqOffer_table">
                 <tr>
-                    <td><label asp-for="ProductSelection.SelectedShower"></label></td>
+                    <td><label asp-for="ProductSelection.SelectedShower" class="label_text"></label></td>
                     <td><select asp-for="ProductSelection.SelectedShower" asp-items="Model.ProductSelection.ShowerItems" class="input_field"></select></td>
                     <td><span asp-validation-for="ProductSelection.SelectedShower" class="span_validation"></span></td>
                 </tr>
 
                 <tr>
-                    <td><label asp-for="ProductSelection.SelectedToilet"></label></td>
+                    <td><label asp-for="ProductSelection.SelectedToilet" class="label_text"></label></td>
                     <td><select asp-for="ProductSelection.SelectedToilet" asp-items="Model.ProductSelection.ToiletItems" class="input_field"></select></td>
                     <td><span asp-validation-for="ProductSelection.SelectedToilet" class="span_validation"></span></td>
                 </tr>
                 <tr>
-                    <td><label asp-for="ProductSelection.SelectedSink"></label></td>
+                    <td><label asp-for="ProductSelection.SelectedSink" class="label_text"></label></td>
                     <td><select asp-for="ProductSelection.SelectedSink" asp-items="Model.ProductSelection.SinkItems" class="input_field"></select></td>
                     <td><span asp-validation-for="ProductSelection.SelectedSink" class="span_validation"></span></td>
                 </tr>
 
                 <tr>
-                    <td><label asp-for="ProductSelection.SelectedCabinet"></label></td>
+                    <td><label asp-for="ProductSelection.SelectedCabinet" class="label_text"></label></td>
                     <td><select asp-for="ProductSelection.SelectedCabinet" asp-items="Model.ProductSelection.CabinetItems" class="input_field"></select></td>
                     <td><span asp-validation-for="ProductSelection.SelectedCabinet" class="span_validation"></span></td>
                 </tr>
 
                 <tr>
-                    <td><label asp-for="ProductSelection.SelectedFaucet"></label></td>
+                    <td><label asp-for="ProductSelection.SelectedFaucet" class="label_text"></label></td>
                     <td><select asp-for="ProductSelection.SelectedFaucet" asp-items="Model.ProductSelection.FaucetItems" class="input_field"></select></td>
                     <td><span asp-validation-for="ProductSelection.SelectedFaucet" class="span_validation"></span></td>
                 </tr>
 
                 <tr>
-                    <td><label asp-for="ProductSelection.SelectedLighting"></label></td>
+                    <td><label asp-for="ProductSelection.SelectedLighting" class="label_text"></label></td>
                     <td><select asp-for="ProductSelection.SelectedLighting" asp-items="Model.ProductSelection.LightingItems" class="input_field"></select></td>
                     <td><span asp-validation-for="ProductSelection.SelectedLighting" class="span_validation"></span></td>
                 </tr>
 
                 <tr>
-                    <td><label asp-for="ProductSelection.SelectedTile"></label></td>
+                    <td><label asp-for="ProductSelection.SelectedTile" class="label_text"></label></td>
                     <td><select asp-for="ProductSelection.SelectedTile" asp-items="Model.ProductSelection.TileItems" class="input_field"></select></td>
                     <td><span asp-validation-for="ProductSelection.SelectedTile" class="span_validation"></span></td>
                 </tr>
 
                 <tr>
-                    <td><label asp-for="ProductSelection.SelectedClinker"></label></td>
+                    <td><label asp-for="ProductSelection.SelectedClinker" class="label_text"></label></td>
                     <td><select asp-for="ProductSelection.SelectedClinker" asp-items="Model.ProductSelection.ClinkerItems" class="input_field"></select></td>
                     <td><span asp-validation-for="ProductSelection.SelectedClinker" class="span_validation"></span></td>
                 </tr>
+                <tr>
+                    <td><label asp-for="ProductSelection.Sum" class="label_text"></label></td>
+                    <td>@*summan*@</td>
+                </tr>
             </table>
         </fieldset>
-        <div class="div_buttons"><p><button type="submit" style="vertical-align:middle" class="button"><span>Skicka in</span></button></p></div>
+        <div class="div_buttons"><p><button type="submit" style="vertical-align:middle;" class="button"><span>Skicka in</span></button></p></div>
     </form>
 </div>
 
 @section Scripts
-    {
+{
     <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.0.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="~/bootstrap/js/bootstrap.min.js"></script>
     <script src="~/js/Script.js"></script>
 }

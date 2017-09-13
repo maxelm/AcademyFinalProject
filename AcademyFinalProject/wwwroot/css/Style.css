@@ -94,6 +94,21 @@ fieldset {
     width: 100%;
 }
 
+.input-symbol-sek {
+    position: relative;
+}
+
+    .input-symbol-sek input {
+        padding-right: 15px;
+    }
+
+    .input-symbol-sek:after {
+        position: absolute;
+        top: 0;
+        content: "SEK";
+        right: 5px;
+    }
+
 textarea {
     width: 250px;
     height: 100px;

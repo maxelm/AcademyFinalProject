@@ -4,76 +4,196 @@
 
 <div class="container">
     <form asp-controller="Company" asp-action="UpdateOffer" asp-route-id="@Model.UpdateCustomerInfoVM.CID">
+        <!-- Personuppgifter fieldset -->
         <fieldset>
-            <legend>Kundinformation</legend>
-            <table class="CreateOffer_table">
+            <legend>Personuppgifter:</legend>
+            <table class="CustReqOffer_table">
                 <tr>
                     <td><label asp-for="UpdateCustomerInfoVM.FirstName" class="label_text"></label></td>
-                    <td>@Model.UpdateCustomerInfoVM.FirstName</td>
+                    <td><input asp-for="UpdateCustomerInfoVM.FirstName" class="input_field" /></td>
+                    <td></td>
                 </tr>
+                <tr>
+                    <td></td>
+                    <td><span asp-validation-for="UpdateCustomerInfoVM.FirstName" class="span_validation"></span></td>
+                </tr>
+
                 <tr>
                     <td><label asp-for="UpdateCustomerInfoVM.LastName" class="label_text"></label></td>
-                    <td>@Model.UpdateCustomerInfoVM.LastName</td>
+                    <td><input asp-for="UpdateCustomerInfoVM.LastName" class="input_field" /></td>
+                    <td></td>
                 </tr>
                 <tr>
-                    <td><label asp-for="UpdateCustomerInfoVM.Phone" class="label_text"></label></td>
-                    <td>@Model.UpdateCustomerInfoVM.Phone</td>
+                    <td></td>
+                    <td><span asp-validation-for="UpdateCustomerInfoVM.LastName" class="span_validation"></span></td>
                 </tr>
+
                 <tr>
                     <td><label asp-for="UpdateCustomerInfoVM.Street" class="label_text"></label></td>
-                    <td>@Model.UpdateCustomerInfoVM.Street</td>
+                    <td><input asp-for="UpdateCustomerInfoVM.Street" class="input_field" /></td>
+                    <td></td>
                 </tr>
                 <tr>
-                    <td><label asp-for="UpdateCustomerInfoVM.Phone" class="label_text"></label></td>
-                    <td>
-                        @Model.UpdateCustomerInfoVM.City
-                    </td>
+                    <td></td>
+                    <td><span asp-validation-for="UpdateCustomerInfoVM.Street" class="span_validation"></span></td>
                 </tr>
+
                 <tr>
                     <td><label asp-for="UpdateCustomerInfoVM.Zip" class="label_text"></label></td>
-                    <td>@Model.UpdateCustomerInfoVM.Zip</td>
+                    <td><input asp-for="UpdateCustomerInfoVM.Zip" class="input_field" /></td>
+                    <td></td>
                 </tr>
                 <tr>
+                    <td></td>
+                    <td><span asp-validation-for="UpdateCustomerInfoVM.Zip" class="span_validation"></span></td>
+                </tr>
+
+                <tr>
+                    <td><label asp-for="UpdateCustomerInfoVM.City" class="label_text"></label></td>
+                    <td><input asp-for="UpdateCustomerInfoVM.City" class="input_field" /></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><span asp-validation-for="UpdateCustomerInfoVM.City" class="span_validation"></span></td>
+                </tr>
+
+                <tr>
                     <td><label asp-for="UpdateCustomerInfoVM.Email" class="label_text"></label></td>
-                    <td>@Model.UpdateCustomerInfoVM.Email</td>
+                    <td><input asp-for="UpdateCustomerInfoVM.Email" class="input_field" /></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><span asp-validation-for="UpdateCustomerInfoVM.Email" class="span_validation"></span></td>
+                </tr>
+
+                <tr>
+                    <td><label asp-for="UpdateCustomerInfoVM.Phone" class="label_text"></label></td>
+                    <td><input asp-for="UpdateCustomerInfoVM.Phone" class="input_field" /></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><span asp-validation-for="UpdateCustomerInfoVM.Phone" class="span_validation"></span></td>
                 </tr>
                 <tr>
                     <td><label asp-for="UpdateCustomerInfoVM.TextBox" class="label_text"></label></td>
-                    @if (@Model.UpdateCustomerInfoVM.TextBox != null)
-                    {
-                        <td>@Model.UpdateCustomerInfoVM.TextBox</td>
-                    }
-                    else
-                    {
-                        <td>--</td>
-                    }
-                </tr>
-                <tr style="border-bottom: 1.6px solid #e5e5e5;">
-                    <td><br /><span style="font-size: 21px; color: #333; font-weight:bold;">Uppdragsinfo:</span></td>
+                    <td>
+                        <textarea asp-for="UpdateCustomerInfoVM.TextBox"></textarea><br />
+                    </td>
                     <td></td>
+                </tr>
+                <tr>
+                    <td><b>Antal ROT berättigade i hushållet</b></td>
+                    <td><input asp-for="UpdateOrderInfoVM.ViableROTCandidates" class="input_field" /></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><span asp-validation-for="UpdateOrderInfoVM.ViableROTCandidates" class="span_validation"></span></td>
+                </tr>
+            </table>
+        </fieldset>
+        &emsp;&emsp;
+        <!-- Uppdragsuppgifter fieldset -->
+        <fieldset>
+            <legend>Uppdragsuppgifter:</legend>
+            <table class="CustReqOffer_table">
+                <tr>
+                    <td><label asp-for="UpdateOrderInfoVM.ProjectType" class="label_text"></label></td>
+                    <td><select asp-for="UpdateOrderInfoVM.ProjectType" asp-items="Model.UpdateOrderInfoVM.ProjectTypeItems" class="input_field"></select></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><span asp-validation-for="UpdateOrderInfoVM.ProjectType" class="span_validation"></span></td>
+                </tr>
+
+                <tr>
+                    <td><label asp-for="UpdateOrderInfoVM.SquareMeter" class="label_text"></label></td>
+                    <td>
+                        <input asp-for="UpdateOrderInfoVM.SquareMeter" class="input_field" /><br />
+                        <span asp-validation-for="UpdateOrderInfoVM.SquareMeter" class="span_validation"></span>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="UpdateOrderInfoVM.PropertyType" class="label_text"></label></td>
+                    <td><select asp-for="UpdateOrderInfoVM.PropertyType" asp-items="Model.UpdateOrderInfoVM.PropertyTypeItems" class="input_field"></select></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><span asp-validation-for="UpdateOrderInfoVM.PropertyType" class="span_validation"></span></td>
+                </tr>
+
+                <tr>
+                    <td><label asp-for="UpdateOrderInfoVM.RequestedStartDate" class="label_text"></label></td>
+                    <td>
+                        <input asp-for="UpdateOrderInfoVM.RequestedStartDate" class="input_field" /><br />
+                        <span asp-validation-for="UpdateOrderInfoVM.RequestedStartDate" class="span_validation"></span>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </fieldset>
+        &emsp;&emsp;
+        <!-- Material uppgifter fieldset -->
+        <fieldset>
+            <legend>Material: (ej obligatorisk)</legend>
+            <table class="CustReqOffer_table">
+                <tr>
+                    <td><label asp-for="UpdateSelectedProductsVM.Shower" class="label_text"></label></td>
+                    <td><select asp-for="UpdateSelectedProductsVM.Shower" asp-items="Model.UpdateSelectedProductsVM.ShowerItems" class="input_field"></select></td>
+                    <td><span asp-validation-for="UpdateSelectedProductsVM.Shower" class="span_validation"></span></td>
+                </tr>
+
+                <tr>
+                    <td><label asp-for="UpdateSelectedProductsVM.Toilet" class="label_text"></label></td>
+                    <td><select asp-for="UpdateSelectedProductsVM.Toilet" asp-items="Model.UpdateSelectedProductsVM.ToiletItems" class="input_field"></select></td>
+                    <td><span asp-validation-for="UpdateSelectedProductsVM.Toilet" class="span_validation"></span></td>
+                </tr>
+                <tr>
+                    <td><label asp-for="UpdateSelectedProductsVM.Sink" class="label_text"></label></td>
+                    <td><select asp-for="UpdateSelectedProductsVM.Sink" asp-items="Model.UpdateSelectedProductsVM.SinkItems" class="input_field"></select></td>
+                    <td><span asp-validation-for="UpdateSelectedProductsVM.Sink" class="span_validation"></span></td>
+                </tr>
+
+                <tr>
+                    <td><label asp-for="UpdateSelectedProductsVM.Cabinet" class="label_text"></label></td>
+                    <td><select asp-for="UpdateSelectedProductsVM.Cabinet" asp-items="Model.UpdateSelectedProductsVM.CabinetItems" class="input_field"></select></td>
+                    <td><span asp-validation-for="UpdateSelectedProductsVM.Cabinet" class="span_validation"></span></td>
+                </tr>
+
+                <tr>
+                    <td><label asp-for="UpdateSelectedProductsVM.Faucet" class="label_text"></label></td>
+                    <td><select asp-for="UpdateSelectedProductsVM.Faucet" asp-items="Model.UpdateSelectedProductsVM.FaucetItems" class="input_field"></select></td>
+                    <td><span asp-validation-for="UpdateSelectedProductsVM.Faucet" class="span_validation"></span></td>
+                </tr>
+
+                <tr>
+                    <td><label asp-for="UpdateSelectedProductsVM.Lightning" class="label_text"></label></td>
+                    <td><select asp-for="UpdateSelectedProductsVM.Lightning" asp-items="Model.UpdateSelectedProductsVM.LightingItems" class="input_field"></select></td>
+                    <td><span asp-validation-for="UpdateSelectedProductsVM.Lightning" class="span_validation"></span></td>
+                </tr>
+
+                <tr>
+                    <td><label asp-for="UpdateSelectedProductsVM.Tile" class="label_text"></label></td>
+                    <td><select asp-for="UpdateSelectedProductsVM.Tile" asp-items="Model.UpdateSelectedProductsVM.TileItems" class="input_field"></select></td>
+                    <td><span asp-validation-for="UpdateSelectedProductsVM.Tile" class="span_validation"></span></td>
+                </tr>
+
+                <tr>
+                    <td><label asp-for="UpdateSelectedProductsVM.Clinker" class="label_text"></label></td>
+                    <td><select asp-for="UpdateSelectedProductsVM.Clinker" asp-items="Model.UpdateSelectedProductsVM.ClinkerItems" class="input_field"></select></td>
+                    <td><span asp-validation-for="UpdateSelectedProductsVM.Clinker" class="span_validation"></span></td>
                 </tr>
                 <tr>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td><label asp-for="UpdateOrderInfoVM.ProjectType" class="label_text"></label></td>
-                    <td>@Model.UpdateOrderInfoVM.ProjectType</td>
-                </tr>
-                <tr>
-                    <td><label asp-for="UpdateOrderInfoVM.SquareMeter" class="label_text"></label></td>
-                    <td>@Model.UpdateOrderInfoVM.SquareMeter</td>
-                </tr>
-                <tr>
-                    <td><label asp-for="UpdateOrderInfoVM.PropertyType" class="label_text"></label></td>
-                    <td>@Model.UpdateOrderInfoVM.PropertyType</td>
-                </tr>
-                <tr>
-                    <td><label asp-for="UpdateOrderInfoVM.RequestedStartDate" class="label_text"></label></td>
-                    <td>@Model.UpdateOrderInfoVM.RequestedStartDate</td>
-                </tr>
-                <tr>
-                    <td><label asp-for="UpdateOrderInfoVM.ViableROTCandidates" class="label_text"></label></td>
-                    <td>@Model.UpdateOrderInfoVM.ViableROTCandidates</td>
+                    <td><label asp-for="UpdateSelectedProductsVM.Sum" class="label_text"></label></td>
+                    <td></td>
                 </tr>
             </table>
         </fieldset>

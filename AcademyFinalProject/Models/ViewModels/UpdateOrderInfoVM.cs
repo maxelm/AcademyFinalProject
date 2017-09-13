@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,12 +11,14 @@ namespace AcademyFinalProject.Models.ViewModels
     [Bind(Prefix = nameof(UpdateOfferWrapperVM.UpdateOrderInfoVM))]
     public class UpdateOrderInfoVM
     {
+        public SelectListItem[] ProjectTypeItems { get; set; }
         [Display(Name = "Uppdragstyp")]
         public string ProjectType { get; set; }
 
         [Display(Name = "Kvm")]
         public int SquareMeter { get; set; }
 
+        public SelectListItem[] PropertyTypeItems { get; set; }
         [Display(Name = "Fastighet")]
         public string PropertyType { get; set; }
 

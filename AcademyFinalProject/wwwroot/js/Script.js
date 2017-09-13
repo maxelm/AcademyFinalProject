@@ -6,7 +6,7 @@ function goBack() {
 
 $(document).ready(function () {
     $(".sumHours").val("0");
-    $(".key").val("");
+    $(".key");
 
     function calc() {
         var $numHours1 = Number($(".numHours1").val());
@@ -24,7 +24,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $(".sumCost").val("0");
-    $(".key").val("");
+    $(".key");
 
     function calc() {
         var $numHours1 = Number($(".numHours1").val());

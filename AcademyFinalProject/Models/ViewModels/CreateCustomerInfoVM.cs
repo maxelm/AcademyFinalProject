@@ -34,7 +34,8 @@ namespace AcademyFinalProject.Models.ViewModels
         
         [Required(ErrorMessage = "Ange din postkod")]
         [Display(Name = "Postnr")]
-        [Range(0, 5, ErrorMessage = "Postnr får endast innehålla 5 siffror")]
+        [MaxLength(5, ErrorMessage = "Postnr får endast innehålla 5 siffror")]
+        [Range(0,int.MaxValue, ErrorMessage = "Postnr får endast innehålla 5 siffror")]
         public string Zip { get; set; }
         
         [Required(ErrorMessage = "Ange din stad")]

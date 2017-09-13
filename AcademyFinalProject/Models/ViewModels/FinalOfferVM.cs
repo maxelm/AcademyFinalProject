@@ -117,6 +117,10 @@ namespace AcademyFinalProject.Models.ViewModels
         [Display(Name = "Antal ROT-Berättigade")]
         public int ViableROTCandidates { get; set; }
 
+        [Display(Name = "Öns. byggstart")]
+        [DataType(DataType.Date)]
+        public DateTime RequestedStartDate { get; set; }
+
         public decimal ROTDiscount { get; set; }
     }
 }

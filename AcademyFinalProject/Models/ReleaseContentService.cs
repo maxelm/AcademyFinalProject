@@ -365,7 +365,9 @@ namespace AcademyFinalProject.Models
                 SelectedProjectType = cust.Order.ProjectType,
                 SelectedPropertyType = cust.Order.PropertyType,
                 SquareMeter = cust.Order.SquareMeter,
-
+                ViableROTCandidates = cust.Order.ViableRotcandidates,
+                RequestedStartDate = cust.Order.RequestedStartDate,
+                
                 #endregion
 
                 #region Product Information
@@ -416,7 +418,7 @@ namespace AcademyFinalProject.Models
 
                 MountingHours = GetFinalAmountOfHours(WorkType.Mounting, cust, selectedWork),
                 HourlyRateMounting = GetFinalHourlyRate(WorkType.Mounting, cust, selectedWork),
-
+                
                 #endregion
             };
 
@@ -425,7 +427,9 @@ namespace AcademyFinalProject.Models
             x.TotalWorkCost = CalculateFinalTotalWorkCost(x);
             x.TotalProductCost = CalculateFinalTotalProductCost(x);
             x.TotalAmountOfHours = CalculateFinalTotalAmountOfHours(x);
-            x.ROTDiscount = CalculateFinalRotDiscount(x.TotalWorkCost, 1);
+            x.ROTDiscount = CalculateFinalRotDiscount(x.TotalWorkCost, x.ViableROTCandidates);
+            x.TotalPrice = x.TotalWorkCost + x.TotalProductCost;
+            x.TotalPriceAfterROT = x.TotalPrice - x.ROTDiscount;
 
             #endregion
 

@@ -30,7 +30,7 @@
                     <tr><td>@Model.SelectedProjectType</tr>
                     <tr><td>@Model.SquareMeter kvm</td></tr>
                     <tr><td>@Model.SelectedPropertyType</td></tr>
-                    <tr><td>@Model.SelectedPropertyType</td></tr>
+                    <tr><td><label asp-for="RequestedStartDate"></label> @Model.RequestedStartDate</td></tr>
                 </tbody>
             </table>
         </fieldset>
@@ -210,7 +210,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><label asp-for="ViableROTCandidates"></label></td>
+                    <td>@Model.ViableROTCandidates</td>
                     <td>@Model.ROTDiscount</td>
                 </tr>
             </tbody>

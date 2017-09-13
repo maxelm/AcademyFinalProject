@@ -5,7 +5,7 @@
 <div class="ListOfInquiries" style="margin:0 auto; background-color:#eeeeee">
     <div class="NewInquiries">
         <h1>Nya förfrågningar</h1>
-        <table border="0" id="NewInquiriesTable" style="width:80%;" >
+        <table border="0" id="NewInquiriesTable" style="width:80%;">
             <thead>
                 <tr>
                     <th>Namn</th>
@@ -18,16 +18,20 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr style="text-align: center;">
-                        @if (item.IsComplete == false)
-                        {
-                            <td><a asp-controller="Company" asp-action="CreateOffer" asp-route-id="@item.CID">@item.FirstName @item.LastName</a></td>
-                            <td>@item.ProjectType</td>
-                            <td>@item.SquareMeter</td>
-                            <td>@item.RequestedStartDate</td>
-                            <td>@item.OrderReceived</td>
-                        }
-                    </tr>
+                        <tr style="text-align: center;">
+                            @if (item.IsComplete == false)
+                            {
+                                <td>
+                                    <a asp-controller="Company" asp-action="CreateOffer" asp-route-id="@item.CID">
+                                        @item.FirstName @item.LastName
+                                    </a>
+                                </td>
+                                <td>@item.ProjectType</td>
+                                <td>@item.SquareMeter</td>
+                                <td>@item.RequestedStartDate</td>
+                                <td>@item.OrderReceived</td>
+                            }
+                        </tr>
                 }
             </tbody>
         </table>
@@ -51,11 +55,14 @@
                     <tr style="text-align: center;">
                         @if (item.IsComplete == true)
                         {
-                            <td><a asp-controller="Company" asp-action="CreateOffer" asp-route-id="@item.CID">@item.FirstName @item.LastName</a></td>
-                            <td>@item.ProjectType</td>
-                            <td>@item.SquareMeter</td>
-                            <td>@item.RequestedStartDate</td>
-                            <td>@item.OrderReceived</td>
+                            <td>
+                                <a asp-controller="Company" asp-action="FinalOffer" asp-route-id="@item.CID">@item.FirstName @item.LastName
+                                </a>
+                            </td>
+                                    <td>@item.ProjectType</td>
+                                    <td>@item.SquareMeter</td>
+                                    <td>@item.RequestedStartDate</td>
+                                    <td>@item.OrderReceived</td>
                         }
                     </tr>
                 }

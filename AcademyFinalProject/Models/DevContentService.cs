@@ -182,6 +182,14 @@ namespace AcademyFinalProject.Models
             };
         }
 
+        public void DeleteCustomer(int id)
+        {
+            throw new NotImplementedException();
+        }
 
+        public UpdateOfferWrapperVM UpdateOffer(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -525,6 +525,55 @@ namespace AcademyFinalProject.Models
 
             return price;
         }
+
+        public void DeleteCustomer(int customerID)
+        {
+            var customer = context.Customer.First(c => c.CustomerId == customerID);
+            var order = context.Customer.Where(c => c.CustomerId == customerID).Select(c => c.Order).Single();
+            var OID = order.OrderId;
+
+            var orderToProductItems = context.OrderToProduct.Where(i => i.OrderId == OID).Select(i => i).ToArray();
+            context.OrderToProduct.RemoveRange(orderToProductItems);
+
+            var orderToWorkItems = context.OrderToWork.Where(i => i.OrderId == OID).Select(i => i).ToArray();
+            context.OrderToWork.RemoveRange(orderToWorkItems);
+
+            context.Order.Remove(order);
+            context.Customer.Remove(customer);
+
+            context.SaveChanges();
+        }
+
+        public UpdateOfferWrapperVM UpdateOffer(int id)
+        {
+            return new UpdateOfferWrapperVM
+            {
+                UpdateCustomerInfoVM = GetCustomerInfoUpdate(id),
+                UpdateOrderInfoVM = GetOrderInfoUpdate(id),
+                UpdateSelectedProductsVM = GetSelectedProductsUpdate(id),
+                UpdateAmountOfWorkVM = GetAmountOfWorkUpdate(id),
+            };
+        }
+
+        private UpdateSelectedProductsVM GetSelectedProductsUpdate(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        private UpdateAmountOfWorkVM GetAmountOfWorkUpdate(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        private UpdateOrderInfoVM GetOrderInfoUpdate(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        private UpdateCustomerInfoVM GetCustomerInfoUpdate(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

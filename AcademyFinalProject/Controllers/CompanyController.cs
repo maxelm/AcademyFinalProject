@@ -55,5 +55,19 @@ namespace AcademyFinalProject.Controllers
         {
            return View(contentService.GetFinalOffer(id));
         }
+
+        [HttpGet]
+        public IActionResult DeleteCustomer(int id)
+        {
+            contentService.DeleteCustomer(id);
+
+            return RedirectToAction(nameof(Inquiries));
+        }
+
+        [HttpGet]
+        public IActionResult UpdateOffer(int id)
+        {
+            return View(contentService.UpdateOffer(id));
+        }
     }
 }

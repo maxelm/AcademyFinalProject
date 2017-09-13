@@ -1,4 +1,5 @@
 ﻿@model FinalOfferVM
+@using System.Globalization;
 
 <fieldset id="BigFieldset">
     <legend id="BigFieldsetLegend">Offert</legend>
@@ -126,7 +127,7 @@
                     <tr>
                         <td><label asp-for="VentilationHours"></label></td>
                         <td>@Model.VentilationHours</td>
-                        <td>@Model.HourlyRateVentilation</td>
+                        <td>@Model.HourlyRateVentilation.ToString("C", CultureInfo.CreateSpecificCulture("sv-SE"))</td>
                     </tr>
                 }
                 @if (Model.ElectricityHours != 0)

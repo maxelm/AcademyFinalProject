@@ -25,5 +25,11 @@ namespace AcademyFinalProject.Models.ViewModels
 
         [Display(Name = "ROT berättigade")]
         public int ViableROTCandidates { get; set; }
+
+        [Display(Name = "Resekostnad")]
+        public decimal TravelCost { get; set; }
+
+        [Display(Name = "Rabatt")]
+        public decimal WorkDiscount { get; set; }
     }
 }

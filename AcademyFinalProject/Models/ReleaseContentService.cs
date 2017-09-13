@@ -567,12 +567,31 @@ namespace AcademyFinalProject.Models
 
         private UpdateOrderInfoVM GetOrderInfoUpdate(int id)
         {
-            throw new NotImplementedException();
+            return context.Customer.Where(c => c.CustomerId == id).Select(cust => new UpdateOrderInfoVM
+            {
+                ProjectType = cust.Order.ProjectType,
+                PropertyType = cust.Order.PropertyType,
+                SquareMeter = cust.Order.SquareMeter,
+                ViableROTCandidates = cust.Order.ViableRotcandidates,
+                RequestedStartDate = cust.Order.RequestedStartDate,
+                
+            }).SingleOrDefault();
         }
 
         private UpdateCustomerInfoVM GetCustomerInfoUpdate(int id)
         {
-            throw new NotImplementedException();
+            return context.Customer.Where(c => c.CustomerId == id).Select(cust => new UpdateCustomerInfoVM
+            {
+                CID = id,
+                FirstName = cust.FirstName,
+                LastName = cust.LastName,
+                Street = cust.Street,
+                Zip = cust.Zip,
+                City = cust.City,
+                Email = cust.Email,
+                Phone = cust.Phone,
+                TextBox = cust.Order.CustomerMessage
+            }).SingleOrDefault();
         }
     }
 }

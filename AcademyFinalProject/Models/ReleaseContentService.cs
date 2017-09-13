@@ -80,6 +80,7 @@ namespace AcademyFinalProject.Models
         {
             return new SelectListItem[]
             {
+                new SelectListItem { Text = "-- Välj uppdragstyp --", Value = "" },
                 new SelectListItem { Text = nameof(ProjectType.Badrumsrenovering), Value = nameof(ProjectType.Badrumsrenovering) },
                 new SelectListItem { Text = nameof(ProjectType.Kakling), Value = nameof(ProjectType.Kakling) },
             };
@@ -89,6 +90,7 @@ namespace AcademyFinalProject.Models
         {
             return new SelectListItem[]
             {
+                new SelectListItem { Text = "-- Välj fastighet --", Value = "" },
                 new SelectListItem { Text = nameof(PropertyType.Radhus), Value = nameof(PropertyType.Radhus) },
                 new SelectListItem { Text = nameof(PropertyType.Villa), Value = nameof(PropertyType.Villa) },
                 new SelectListItem { Text = nameof(PropertyType.BRF), Value = nameof(PropertyType.BRF) },
@@ -372,7 +374,7 @@ namespace AcademyFinalProject.Models
                 RequestedStartDate = cust.Order.RequestedStartDate,
                 TravelCost = cust.Order.TravelCost,
                 WorkDiscount = cust.Order.WorkDiscount,
-                
+
                 #endregion
 
                 #region Product Information
@@ -423,7 +425,7 @@ namespace AcademyFinalProject.Models
 
                 MountingHours = GetFinalAmountOfHours(WorkType.Mounting, cust, selectedWork),
                 HourlyRateMounting = GetFinalHourlyRate(WorkType.Mounting, cust, selectedWork),
-                
+
                 #endregion
             };
 

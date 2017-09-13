@@ -19,7 +19,6 @@ namespace AcademyFinalProject.Controllers
             this.contentService = contentService;
         }
 
-        // GET: /<controller>/
         public IActionResult Index()
         {
             return View();

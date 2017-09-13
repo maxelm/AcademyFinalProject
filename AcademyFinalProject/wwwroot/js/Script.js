@@ -1,4 +1,4 @@
-﻿$('input[type=date]').val('');
+﻿//$('input[type=date]').val('');
 
 function goBack() {
     window.history.back();

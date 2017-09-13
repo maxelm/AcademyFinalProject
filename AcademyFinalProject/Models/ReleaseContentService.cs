@@ -86,11 +86,31 @@ namespace AcademyFinalProject.Models
             };
         }
 
-        private SelectListItem[] GetPropertyTypeItems() // REDO FÖR TESTING (se över användningen av Enum)
+        private SelectListItem[] GetProjectTypeItemsUpdate() // REDO FÖR TESTING (se över användningen av Enum)
+        {
+            return new SelectListItem[]
+            {
+                new SelectListItem { Text = nameof(ProjectType.Badrumsrenovering), Value = nameof(ProjectType.Badrumsrenovering) },
+                new SelectListItem { Text = nameof(ProjectType.Kakling), Value = nameof(ProjectType.Kakling) },
+            };
+        }
+
+        private SelectListItem[] GetPropertyTypeItems()
         {
             return new SelectListItem[]
             {
                 new SelectListItem { Text = "-- Välj fastighet --", Value = "" },
+                new SelectListItem { Text = nameof(PropertyType.Radhus), Value = nameof(PropertyType.Radhus) },
+                new SelectListItem { Text = nameof(PropertyType.Villa), Value = nameof(PropertyType.Villa) },
+                new SelectListItem { Text = nameof(PropertyType.BRF), Value = nameof(PropertyType.BRF) },
+                new SelectListItem { Text = nameof(PropertyType.Lägenhet), Value = nameof(PropertyType.Radhus) },
+            };
+        }
+
+        private SelectListItem[] GetPropertyTypeItemsUpdate()
+        {
+            return new SelectListItem[]
+            {
                 new SelectListItem { Text = nameof(PropertyType.Radhus), Value = nameof(PropertyType.Radhus) },
                 new SelectListItem { Text = nameof(PropertyType.Villa), Value = nameof(PropertyType.Villa) },
                 new SelectListItem { Text = nameof(PropertyType.BRF), Value = nameof(PropertyType.BRF) },
@@ -610,24 +630,33 @@ namespace AcademyFinalProject.Models
             var viewModel = new UpdateSelectedProductsVM
             {
                 Shower = GetProductName(PCategory.Shower, selectedProducts),
-                ShowerPrice = GetProductPrice(PCategory.Shower, selectedProducts),
+                ShowerItems = SetSelectItem(PCategory.Shower),
+                //ShowerPrice = GetProductPrice(PCategory.Shower, selectedProducts),
                 Toilet = GetProductName(PCategory.Toilet, selectedProducts),
-                ToiletPrice = GetProductPrice(PCategory.Toilet, selectedProducts),
+                ToiletItems = SetSelectItem(PCategory.Toilet),
+                //ToiletPrice = GetProductPrice(PCategory.Toilet, selectedProducts),
                 Sink = GetProductName(PCategory.Sink, selectedProducts),
-                SinkPrice = GetProductPrice(PCategory.Sink, selectedProducts),
+                SinkItems = SetSelectItem(PCategory.Sink),
+                //SinkPrice = GetProductPrice(PCategory.Sink, selectedProducts),
                 Cabinet = GetProductName(PCategory.Cabinet, selectedProducts),
-                CabinetPrice = GetProductPrice(PCategory.Cabinet, selectedProducts),
+                CabinetItems = SetSelectItem(PCategory.Cabinet),
+                //CabinetPrice = GetProductPrice(PCategory.Cabinet, selectedProducts),
                 Faucet = GetProductName(PCategory.Faucet, selectedProducts),
-                FaucetPrice = GetProductPrice(PCategory.Faucet, selectedProducts),
+                FaucetItems = SetSelectItem(PCategory.Faucet),
+                //FaucetPrice = GetProductPrice(PCategory.Faucet, selectedProducts),
                 Lightning = GetProductName(PCategory.Lighting, selectedProducts),
-                LightningPrice = GetProductPrice(PCategory.Lighting, selectedProducts),
+                LightingItems = SetSelectItem(PCategory.Lighting),
+                //LightningPrice = GetProductPrice(PCategory.Lighting, selectedProducts),
                 Tile = GetProductName(PCategory.Tile, selectedProducts),
-                TilePrice = GetProductPrice(PCategory.Tile, selectedProducts),
+                TileItems = SetSelectItem(PCategory.Tile),
+                //TilePrice = GetProductPrice(PCategory.Tile, selectedProducts),
                 Clinker = GetProductName(PCategory.Clinker, selectedProducts),
-                ClinkerPrice = GetProductPrice(PCategory.Clinker, selectedProducts),
+                ClinkerItems = SetSelectItem(PCategory.Clinker),
+                //ClinkerPrice = GetProductPrice(PCategory.Clinker, selectedProducts),
+                
             };
 
-            viewModel.TotalProductCost = CalculateCustomerTotalProductCost(viewModel, id);
+            //viewModel.TotalProductCost = CalculateCustomerTotalProductCost(viewModel, id);
 
             return viewModel;
         }
@@ -687,6 +716,9 @@ namespace AcademyFinalProject.Models
                 RequestedStartDate = cust.Order.RequestedStartDate,
                 TravelCost = cust.Order.TravelCost,
                 WorkDiscount = cust.Order.WorkDiscount,
+                ProjectTypeItems = GetProjectTypeItemsUpdate(),
+                PropertyTypeItems = GetPropertyTypeItemsUpdate(),
+                
             }).SingleOrDefault();
         }
 

@@ -74,7 +74,7 @@ namespace AcademyFinalProject.Models.ViewModels
         public decimal ClinkerPrice { get; set; }
 
         [Display(Name = "Total summa")]
-        public int TotalProductCost { get; set; }
+        public decimal TotalProductCost { get; set; }
 
         [Display(Name = "Rivning")]
         public int DemolitionHours { get; set; }

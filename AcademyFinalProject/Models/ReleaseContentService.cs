@@ -432,7 +432,7 @@ namespace AcademyFinalProject.Models
             return x;
         }
 
-        private decimal CalculateFinalRotDiscount(decimal totalWorkCost, int eligableRotPersons) // TODO: add propfor ROTgiltiga
+        private decimal CalculateFinalRotDiscount(decimal totalWorkCost, int eligableRotPersons)
         {
             var rotDiscount = 0.3;
             decimal maxDiscountPerPerson = 50000;

@@ -89,6 +89,10 @@
                     <td><b>Antal ROT berättigade i hushållet</b></td>
                     <td><input asp-for="CustomerInfo.ViableROTCandidates" class="input_field" /></td>
                 </tr>
+                <tr>
+                    <td></td>
+                    <td><span asp-validation-for="CustomerInfo.ViableROTCandidates" class="span_validation"></span></td>
+                </tr>
             </table>
         </fieldset>
         &emsp;&emsp;

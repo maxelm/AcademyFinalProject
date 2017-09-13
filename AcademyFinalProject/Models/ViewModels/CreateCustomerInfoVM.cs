@@ -25,7 +25,7 @@ namespace AcademyFinalProject.Models.ViewModels
         
         [Required(ErrorMessage = "Ange ditt telefonnummer")]
         [Display(Name = "Telefon")]
-        [Range (0,int.MaxValue, ErrorMessage ="Tel får endast innehålla siffror")]
+        [Range (0,9999999999999999, ErrorMessage ="Tel får endast innehålla siffror")]
         public string Phone { get; set; }
         
         [Required(ErrorMessage = "Ange din gatuadress")]
@@ -34,7 +34,7 @@ namespace AcademyFinalProject.Models.ViewModels
         
         [Required(ErrorMessage = "Ange din postkod")]
         [Display(Name = "Postnr")]
-        [Range(0, int.MaxValue, ErrorMessage = "Postnr får endast innehålla siffror")]
+        [Range(0, 5, ErrorMessage = "Postnr får endast innehålla 5 siffror")]
         public string Zip { get; set; }
         
         [Required(ErrorMessage = "Ange din stad")]
@@ -45,6 +45,7 @@ namespace AcademyFinalProject.Models.ViewModels
         public string TextBox { get; set; }
 
         [Display(Name = "ROT berättigade")]
+        [Range(0, 5, ErrorMessage ="Felaktig antal personer")]
         public int ViableROTCandidates { get; set; }
     }
 }

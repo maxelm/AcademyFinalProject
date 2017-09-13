@@ -48,6 +48,33 @@
                         <td>--</td>
                     }
                 </tr>
+                <tr style="border-bottom: 1.6px solid #e5e5e5;">
+                    <td><br /><span style="font-size: 21px; color: #333; font-weight:bold;">Uppdragsinfo:</span></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><label asp-for="ShowOrderInfoVM.ProjectType" class="label_text"></label></td>
+                    <td>@Model.ShowOrderInfoVM.ProjectType</td>
+                </tr>
+                <tr>
+                    <td><label asp-for="ShowOrderInfoVM.SquareMeter" class="label_text"></label></td>
+                    <td>@Model.ShowOrderInfoVM.SquareMeter</td>
+                </tr>
+                <tr>
+                    <td><label asp-for="ShowOrderInfoVM.PropertyType" class="label_text"></label></td>
+                    <td>@Model.ShowOrderInfoVM.PropertyType</td>
+                </tr>
+                <tr>
+                    <td><label asp-for="ShowOrderInfoVM.RequestedStartDate" class="label_text"></label></td>
+                    <td>@Model.ShowOrderInfoVM.RequestedStartDate</td>
+                </tr>
+                <tr>
+                    <td><label asp-for="ShowOrderInfoVM.ViableROTCandidates" class="label_text"></label></td>
+                    <td>@Model.ShowOrderInfoVM.ViableROTCandidates</td>
+                </tr>
             </table>
         </fieldset>
         &emsp;
@@ -142,6 +169,13 @@
                         <td>Ej vald</td>
                     }
                 </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td><label asp-for="SelectedProductsVM.TotalProductCost" class="label_text"></label></td>
+                    <td>@Model.SelectedProductsVM.TotalProductCost SEK</td>
+                </tr>
             </table>
         </fieldset>
         &emsp;
@@ -155,50 +189,38 @@
                     </tr>
                     <tr>
                         <td><label asp-for="AmountOfWorkVM.DemolitionHours" class="label_text"></label></td>
-                        <td><input asp-for="AmountOfWorkVM.DemolitionHours" class="input_work" /></td>
-                        @*<td><span asp-validation-for="AmountOfWorkVM.DemolitionHours"></span></td>*@
-                        <td><input asp-for="AmountOfWorkVM.HourlyRateDemolition" class="input_work" step="any" /></td>
-                        @*<td><span asp-validation-for="AmountOfWorkVM.HourlyRateDemolition"></span></td>*@
+                        <td><input asp-for="AmountOfWorkVM.DemolitionHours" class="numHours1 key input_work" /></td>
+                        <td><input asp-for="AmountOfWorkVM.HourlyRateDemolition" class="numDeb1 key input_work" step="any" /></td>
                     </tr>
                     <tr>
                         <td><label asp-for="AmountOfWorkVM.DrainHours" class="label_text"></label></td>
-                        <td><input asp-for="AmountOfWorkVM.DrainHours" class="input_work" /></td>
-                        @*<td><span asp-validation-for="AmountOfWorkVM.DrainHours"></span></td>*@
-                        <td><input asp-for="AmountOfWorkVM.HourlyRateDrain" class="input_work" /></td>
-                        @*<td><span asp-validation-for="AmountOfWorkVM.HourlyRateDrain"></span></td>*@
+                        <td><input asp-for="AmountOfWorkVM.DrainHours" class="numHours2 key input_work" /></td>
+                        <td><input asp-for="AmountOfWorkVM.HourlyRateDrain" class="numDeb2 key input_work" /></td>
                     </tr>
                     <tr>
                         <td><label asp-for="AmountOfWorkVM.MountingHours" class="label_text"></label></td>
-                        <td><input asp-for="AmountOfWorkVM.MountingHours" class="input_work" /></td>
-                        @*<td><span asp-validation-for="AmountOfWorkVM.MountingHours"></span></td>*@
-                        <td><input asp-for="AmountOfWorkVM.HourlyRateMounting" class="input_work" /></td>
-                        @*<td><span asp-validation-for="AmountOfWorkVM.HourlyRateMounting"></span></td>*@
+                        <td><input asp-for="AmountOfWorkVM.MountingHours" class="numHours3 key input_work" /></td>
+                        <td><input asp-for="AmountOfWorkVM.HourlyRateMounting" class="numDeb3 key input_work" /></td>
                     </tr>
                     <tr>
                         <td><label asp-for="AmountOfWorkVM.TileHours" class="label_text"></label></td>
-                        <td><input asp-for="AmountOfWorkVM.TileHours" class="input_work" /></td>
-                        @*<td><span asp-validation-for="AmountOfWorkVM.TileHours"></span></td>*@
-                        <td><input asp-for="AmountOfWorkVM.HourlyRateTile" class="input_work" /></td>
-                        @*<td><span asp-validation-for="AmountOfWorkVM.HourlyRateTile"></span></td>*@
+                        <td><input asp-for="AmountOfWorkVM.TileHours" class="numHours4 key input_work" /></td>
+                        <td><input asp-for="AmountOfWorkVM.HourlyRateTile" class="numDeb4 key input_work" /></td>
                     </tr>
                     <tr>
                         <td><label asp-for="AmountOfWorkVM.ElectricityHours" class="label_text"></label></td>
-                        <td><input asp-for="AmountOfWorkVM.ElectricityHours" class="input_work" /></td>
-                        @*<td><span asp-validation-for="AmountOfWorkVM.ElectricityHours"></span></td>*@
-                        <td><input asp-for="AmountOfWorkVM.HourlyRateElectricity" class="input_work" /></td>
-                        @*<td><span asp-validation-for="AmountOfWorkVM.HourlyRateElectricity"></span></td>*@
+                        <td><input asp-for="AmountOfWorkVM.ElectricityHours" class="numHours5 key input_work" /></td>
+                        <td><input asp-for="AmountOfWorkVM.HourlyRateElectricity" class="numDeb5 key input_work" /></td>
                     </tr>
                     <tr>
                         <td><label asp-for="AmountOfWorkVM.VentilationHours" class="label_text"></label></td>
-                        <td><input asp-for="AmountOfWorkVM.VentilationHours" class="input_work" /></td>
-                        @*<td><span asp-validation-for="AmountOfWorkVM.VentilationHours"></span></td>*@
-                        <td><input asp-for="AmountOfWorkVM.HourlyRateVentilation" class="input_work" /></td>
-                        @*<td><span asp-validation-for="AmountOfWorkVM.HourlyRateVentilation"></span></td>*@
+                        <td><input asp-for="AmountOfWorkVM.VentilationHours" class="numHours6 key input_work" /></td>
+                        <td><input asp-for="AmountOfWorkVM.HourlyRateVentilation" class="numDeb6 key input_work" /></td>
                     </tr>
                 <tr>
                     <td><b>Totalt:</b></td>
-                    <td><input asp-for="AmountOfWorkVM.TotalAmountOfHours" class="input_work" disabled /></td>
-                    <td><input asp-for="AmountOfWorkVM.TotalWorkCost" class="input_work" disabled /></td>
+                    <td><input type="text" class="sumHours input_readOnly" readonly /></td>
+                    <td><input type="text" class="sumCost input_readOnly" readonly /></td>
                 </tr>
                 <tr>
                     <td><label asp-for="AmountOfWorkVM.TravelCost" class="label_text"></label></td>
@@ -206,7 +228,7 @@
                 </tr>
             </table>
         </fieldset>
-        <div class="div_buttons"><p><button type="submit" style="vertical-align:middle; width:230px;" class="button"><span>Skapa offert!</span></button></p></div>
+        <div class="div_buttons"><p><button onclick="goBack()" style="vertical-align:middle; width:230px;" class="button_back"><span>Tillbaka</span></button> <button type="submit" style="vertical-align:middle; width:230px;" class="button"><span>Skapa offert!</span></button></p></div>
     </form>
 </div>
 

@@ -103,6 +103,10 @@
                 <tr>
                     <td><label asp-for="ProjectInfoSelection.SelectedProjectType" class="label_text"></label></td>
                     <td><select asp-for="ProjectInfoSelection.SelectedProjectType" asp-items="Model.ProjectInfoSelection.ProjectTypeItems" class="input_field"></select></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
                     <td><span asp-validation-for="ProjectInfoSelection.SelectedProjectType" class="span_validation"></span></td>
                 </tr>
 
@@ -117,6 +121,10 @@
                 <tr>
                     <td><label asp-for="ProjectInfoSelection.SelectedPropertyType" class="label_text"></label></td>
                     <td><select asp-for="ProjectInfoSelection.SelectedPropertyType" asp-items="Model.ProjectInfoSelection.PropertyTypeItems" class="input_field"></select></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
                     <td><span asp-validation-for="ProjectInfoSelection.SelectedPropertyType" class="span_validation"></span></td>
                 </tr>
 
@@ -180,8 +188,11 @@
                     <td><span asp-validation-for="ProductSelection.SelectedClinker" class="span_validation"></span></td>
                 </tr>
                 <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
                     <td><label asp-for="ProductSelection.Sum" class="label_text"></label></td>
-                    <td>@*summan*@</td>
+                    <td></td>
                 </tr>
             </table>
         </fieldset>

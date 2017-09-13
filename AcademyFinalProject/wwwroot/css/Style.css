@@ -55,10 +55,21 @@ textarea {
     padding: 6px;
 }
 
+.input_readOnly {
+    width: 100px;
+    height: 30px;
+    margin: 8px 0;
+    border-bottom: 2px solid black;
+    border-left:hidden;
+    border-right:hidden;
+    border-top:hidden;
+    padding: 6px;
+}
+
 fieldset {
     width: 350px;
     height: 100%;
-    padding-bottom:30;
+    padding-bottom:30px;
     margin: 0;
     display: inline-block;
 }
@@ -131,6 +142,48 @@ textarea {
     }
 
         .button:hover span:after {
+            opacity: 1;
+            right: 0;
+        }
+/* END */
+
+/*back button*/
+.button_back {
+    display: inline-block;
+    border-radius: 4px;
+    background-color:#808080;
+    border: none;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+    .button_back span {
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        transition: 0.5s;
+    }
+
+        .button_back span:after {
+            content: '\00ab';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            left: -110px;
+            transition: 0.5s;
+        }
+
+    .button_back:hover span {
+        padding-left: 25px;
+    }
+
+        .button_back:hover span:after {
             opacity: 1;
             right: 0;
         }

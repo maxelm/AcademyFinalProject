@@ -29,7 +29,7 @@ namespace AcademyFinalProject
             //services.AddScoped<IContentService, DevContentService>(); //using dev
             services.AddScoped<IContentService, ReleaseContentService>(); //using Release
 
-            var cultureInfo = new CultureInfo("en-US");
+            var cultureInfo = new CultureInfo("en-GB");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
 

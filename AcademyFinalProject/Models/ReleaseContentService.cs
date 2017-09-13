@@ -218,7 +218,8 @@ namespace AcademyFinalProject.Models
 
         public void SaveAmountOfWork(AmountOfWorkVM work, int cid) // REDO FÖR TESTING (kanske bör göra extra metod)
         {
-            var orderId = context.Customer.Where(c => c.CustomerId == cid).Select(c => c.Order.OrderId).SingleOrDefault();
+            var order = context.Customer.Where(c => c.CustomerId == cid).Select(c => c.Order).SingleOrDefault();
+            var orderId = order.OrderId;
 
             context.OrderToWork.Add(new OrderToWork { OrderId = orderId, WorkId = (int)WorkType.Demolition, HourlyRate = work.HourlyRateDemolition, AmountOfHours = work.DemolitionHours });
 
@@ -232,7 +233,9 @@ namespace AcademyFinalProject.Models
 
             context.OrderToWork.Add(new OrderToWork { OrderId = orderId, WorkId = (int)WorkType.Mounting, HourlyRate = work.HourlyRateMounting, AmountOfHours = work.MountingHours });
 
-            context.Order.SingleOrDefault(o => o.OrderId == orderId).IsComplete = true;
+            order.TravelCost = work.TravelCost;
+            order.WorkDiscount = work.WorkDiscount;
+            order.IsComplete = true;
 
             context.SaveChanges();
         }
@@ -367,6 +370,8 @@ namespace AcademyFinalProject.Models
                 SquareMeter = cust.Order.SquareMeter,
                 ViableROTCandidates = cust.Order.ViableRotcandidates,
                 RequestedStartDate = cust.Order.RequestedStartDate,
+                TravelCost = cust.Order.TravelCost,
+                WorkDiscount = cust.Order.WorkDiscount,
                 
                 #endregion
 
@@ -428,8 +433,8 @@ namespace AcademyFinalProject.Models
             x.TotalProductCost = CalculateFinalTotalProductCost(x);
             x.TotalAmountOfHours = CalculateFinalTotalAmountOfHours(x);
             x.ROTDiscount = CalculateFinalRotDiscount(x.TotalWorkCost, x.ViableROTCandidates);
-            x.TotalPrice = x.TotalWorkCost + x.TotalProductCost;
-            x.TotalPriceAfterROT = x.TotalPrice - x.ROTDiscount;
+            x.TotalPrice = x.TotalWorkCost + x.TotalProductCost + x.TravelCost;
+            x.TotalPriceAfterDiscount = x.TotalPrice - x.ROTDiscount - x.WorkDiscount;
 
             #endregion
 

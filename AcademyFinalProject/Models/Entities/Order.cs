@@ -21,6 +21,8 @@ namespace AcademyFinalProject.Models.Entities
         public DateTime RequestedStartDate { get; set; }
         public string CustomerMessage { get; set; }
         public int ViableRotcandidates { get; set; }
+        public decimal WorkDiscount { get; set; }
+        public decimal TravelCost { get; set; }
 
         public Customer Customer { get; set; }
         public ICollection<OrderToProduct> OrderToProduct { get; set; }

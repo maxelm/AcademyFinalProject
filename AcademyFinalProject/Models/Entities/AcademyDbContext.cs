@@ -59,7 +59,11 @@ namespace AcademyFinalProject.Models.Entities
 
                 entity.Property(e => e.RequestedStartDate).HasColumnType("date");
 
+                entity.Property(e => e.TravelCost).HasColumnType("money");
+
                 entity.Property(e => e.ViableRotcandidates).HasColumnName("ViableROTCandidates");
+
+                entity.Property(e => e.WorkDiscount).HasColumnType("money");
 
                 entity.HasOne(d => d.Customer)
                     .WithOne(p => p.Order)

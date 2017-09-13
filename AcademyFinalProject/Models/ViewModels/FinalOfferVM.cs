@@ -112,7 +112,7 @@ namespace AcademyFinalProject.Models.ViewModels
         public decimal TotalPrice { get; set; }
 
         [Display(Name = "Totalt pris")]
-        public decimal TotalPriceAfterROT { get; set; }
+        public decimal TotalPriceAfterDiscount { get; set; }
 
         [Display(Name = "Antal ROT-Berättigade")]
         public int ViableROTCandidates { get; set; }
@@ -121,6 +121,10 @@ namespace AcademyFinalProject.Models.ViewModels
         [DataType(DataType.Date)]
         public DateTime RequestedStartDate { get; set; }
 
+        [Display(Name = "Rot Avdrag")]
         public decimal ROTDiscount { get; set; }
+
+        [Display(Name = "Rabatt")]
+        public decimal WorkDiscount { get; set; }
     }
 }

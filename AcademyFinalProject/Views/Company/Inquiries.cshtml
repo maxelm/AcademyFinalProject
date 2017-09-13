@@ -27,8 +27,8 @@
                             <td>@item.ProjectType</td>
                                 <td>@item.SquareMeter</td>
                                 <td>@item.RequestedStartDate</td>
-                                <td data-dateformat="MM-DD-YYYY" data-value="@item.OrderReceived">@item.OrderReceived</td>
-                                <td><a asp-controller="Company" asp-action="DeleteCustomer" asp-route-id="@item.CID">DELETE</a></td>
+                                <td>@item.OrderReceived</td>
+                                <td align="center"><a asp-controller="Company" asp-action="DeleteCustomer" asp-route-id="@item.CID"><img src="~/img/delete-icon.png" width="20" alt="Radera" title="Radera" /></a></td>
                     }
                  </tr>
             }
@@ -61,8 +61,8 @@
                             <td>@item.SquareMeter</td>
                             <td>@item.RequestedStartDate</td>
                             <td data-dateformat="MM-DD-YYYY" data-value="@item.OrderReceived">@item.OrderReceived</td>
-                            <td><a asp-controller="Company" asp-action="DeleteCustomer" asp-route-id="@item.CID">DELETE</a></td>
-                            <td><a asp-controller="Company" asp-action="UpdateOffer" asp-route-id="@item.CID">UPDATE</a></td>
+                            <td align="center"><a asp-controller="Company" asp-action="DeleteCustomer" asp-route-id="@item.CID"><img src="~/img/delete-icon.png" width="20" alt="Radera" title="Radera" /></a></td>
+                            <td align="center"><a asp-controller="Company" asp-action="UpdateOffer" asp-route-id="@item.CID"><img src="~/img/edit-icon.png" width="20" alt="Uppdatera" title="Uppdatera" /></a></td>
                     }
                 </tr>
             }

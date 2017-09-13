@@ -41,7 +41,7 @@ namespace AcademyFinalProject.Controllers
                 return View(customer);
             }
 
-            contentService.SaveContact(customer);
+            contentService.SaveCustomer(customer);
 
             return RedirectToAction(nameof(Index));
         }

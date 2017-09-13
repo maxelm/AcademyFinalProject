@@ -68,5 +68,18 @@ namespace AcademyFinalProject.Controllers
         {
             return View(contentService.UpdateOffer(id));
         }
+
+        [HttpPost]
+        public IActionResult UpdateOffer(UpdateOfferWrapperVM model, int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            contentService.SaveOfferUpdate(model, id);
+
+            return RedirectToAction(nameof(Inquiries));
+        }
     }
 }

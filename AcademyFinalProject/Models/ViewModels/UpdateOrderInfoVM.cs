@@ -22,6 +22,10 @@ namespace AcademyFinalProject.Models.ViewModels
         [Display(Name = "Fastighet")]
         public string PropertyType { get; set; }
 
+        [Display(Name = "Offerförfrågan togs emot")]
+        [DataType(DataType.Date)]
+        public DateTime OrderReceived { get; set; }
+
         [Display(Name = "Öns. byggstart")]
         [DataType(DataType.Date)]
         public DateTime RequestedStartDate { get; set; }

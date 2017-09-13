@@ -8,7 +8,7 @@ namespace AcademyFinalProject.Models
 {
     public interface IContentService
     {
-        void SaveContact(CustomerRequestOfferWrapperVM c);
+        void SaveCustomer(CustomerRequestOfferWrapperVM c);
         ListInquiryVM[] GetOfferInquiries();
         ShowCustomerInfoVM GetCustomerInfoByCID(int id);
         SelectedProductsVM GetSelectedProductsByCID(int cid);
@@ -19,5 +19,6 @@ namespace AcademyFinalProject.Models
         FinalOfferVM GetFinalOffer(int id);
         void DeleteCustomer(int id);
         UpdateOfferWrapperVM UpdateOffer(int id);
+        void SaveOfferUpdate(UpdateOfferWrapperVM model, int id);
     }
 }

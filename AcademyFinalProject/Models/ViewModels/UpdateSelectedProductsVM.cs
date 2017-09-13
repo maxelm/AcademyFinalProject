@@ -38,7 +38,7 @@ namespace AcademyFinalProject.Models.ViewModels
 
         public SelectListItem[] LightingItems { get; set; }
         [Display(Name = "Belysning")]
-        public string Lightning { get; set; }
+        public string Lighting { get; set; }
         public decimal LightningPrice { get; set; }
 
         public SelectListItem[] TileItems { get; set; }

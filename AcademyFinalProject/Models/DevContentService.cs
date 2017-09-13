@@ -112,7 +112,7 @@ namespace AcademyFinalProject.Models
             throw new NotImplementedException();
         }
 
-        public void SaveContact(CustomerRequestOfferWrapperVM c)
+        public void SaveCustomer(CustomerRequestOfferWrapperVM c)
         {
             throw new NotImplementedException();
         }
@@ -188,6 +188,16 @@ namespace AcademyFinalProject.Models
         }
 
         public UpdateOfferWrapperVM UpdateOffer(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveOfferUpdate(UpdateOfferWrapperVM model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveOfferUpdate(UpdateOfferWrapperVM model, int id)
         {
             throw new NotImplementedException();
         }

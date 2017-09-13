@@ -187,6 +187,23 @@ namespace AcademyFinalProject.Models
                 (productList.ClinkerPrice * squareMeters);
         }
 
+        private decimal CalculateCustomerTotalProductCost(UpdateSelectedProductsVM productList, int cid) // TODO: Måste provas.
+        {
+            var squareMeters = context.Customer
+            .Where(c => c.CustomerId == cid)
+            .Select(c => c.Order.SquareMeter).Single();
+
+            return
+                (productList.ShowerPrice) +
+                (productList.ToiletPrice) +
+                (productList.SinkPrice) +
+                (productList.CabinetPrice) +
+                (productList.FaucetPrice) +
+                (productList.LightningPrice) +
+                (productList.TilePrice * squareMeters) +
+                (productList.ClinkerPrice * squareMeters);
+        }
+
         private decimal GetProductPrice(PCategory productCategory, Product[] productList)
         {
             decimal price;
@@ -409,22 +426,22 @@ namespace AcademyFinalProject.Models
                 #region Work Information
 
                 DemolitionHours = GetFinalAmountOfHours(WorkType.Demolition, cust, selectedWork),
-                HourlyRateDemolition = GetFinalHourlyRate(WorkType.Demolition, cust, selectedWork),
+                HourlyRateDemolition = GetHourlyRate(WorkType.Demolition, cust, selectedWork),
 
                 DrainHours = GetFinalAmountOfHours(WorkType.Drain, cust, selectedWork),
-                HourlyRateDrain = GetFinalHourlyRate(WorkType.Drain, cust, selectedWork),
+                HourlyRateDrain = GetHourlyRate(WorkType.Drain, cust, selectedWork),
 
                 VentilationHours = GetFinalAmountOfHours(WorkType.Ventilation, cust, selectedWork),
-                HourlyRateVentilation = GetFinalHourlyRate(WorkType.Ventilation, cust, selectedWork),
+                HourlyRateVentilation = GetHourlyRate(WorkType.Ventilation, cust, selectedWork),
 
                 TileHours = GetFinalAmountOfHours(WorkType.Tile, cust, selectedWork),
-                HourlyRateTile = GetFinalHourlyRate(WorkType.Tile, cust, selectedWork),
+                HourlyRateTile = GetHourlyRate(WorkType.Tile, cust, selectedWork),
 
                 ElectricityHours = GetFinalAmountOfHours(WorkType.Electricity, cust, selectedWork),
-                HourlyRateElectricity = GetFinalHourlyRate(WorkType.Electricity, cust, selectedWork),
+                HourlyRateElectricity = GetHourlyRate(WorkType.Electricity, cust, selectedWork),
 
                 MountingHours = GetFinalAmountOfHours(WorkType.Mounting, cust, selectedWork),
-                HourlyRateMounting = GetFinalHourlyRate(WorkType.Mounting, cust, selectedWork),
+                HourlyRateMounting = GetHourlyRate(WorkType.Mounting, cust, selectedWork),
 
                 #endregion
             };
@@ -469,6 +486,17 @@ namespace AcademyFinalProject.Models
                 (x.MountingHours);
         }
 
+        private int CalculateFinalTotalAmountOfHours(UpdateAmountOfWorkVM x)
+        {
+            return
+                (x.DemolitionHours) +
+                (x.DrainHours) +
+                (x.VentilationHours) +
+                (x.TileHours) +
+                (x.ElectricityHours) +
+                (x.MountingHours);
+        }
+
         private decimal CalculateFinalTotalProductCost(FinalOfferVM x)
         {
             return
@@ -493,9 +521,26 @@ namespace AcademyFinalProject.Models
                 (x.MountingHours * x.HourlyRateMounting);
         }
 
-        private decimal GetFinalHourlyRate(WorkType workType, Customer c, Work[] workList)
+        private decimal CalculateFinalTotalWorkCost(UpdateAmountOfWorkVM x)
+        {
+            return
+                (x.DemolitionHours * x.HourlyRateDemolition) +
+                (x.DrainHours * x.HourlyRateDrain) +
+                (x.VentilationHours * x.HourlyRateVentilation) +
+                (x.TileHours * x.HourlyRateTile) +
+                (x.ElectricityHours * x.HourlyRateElectricity) +
+                (x.MountingHours * x.HourlyRateMounting);
+        }
+
+        private decimal GetHourlyRate(WorkType workType, Customer c, Work[] workList)
         {
             return c.Order.OrderToWork
+                .FirstOrDefault(i => i.WorkId == workList.FirstOrDefault(w => w.WorkType == (int)workType).WorkId).HourlyRate;
+        }
+
+        private decimal GetHourlyRate(WorkType workType, OrderToWork[] orderToWork, Work[] workList)
+        {
+            return orderToWork
                 .FirstOrDefault(i => i.WorkId == workList.FirstOrDefault(w => w.WorkType == (int)workType).WorkId).HourlyRate;
         }
 
@@ -557,12 +602,78 @@ namespace AcademyFinalProject.Models
 
         private UpdateSelectedProductsVM GetSelectedProductsUpdate(int id)
         {
-            throw new NotImplementedException();
+            var selectedProducts = context.Customer
+                .Where(c => c.CustomerId == id)
+                .SelectMany(c => c.Order.OrderToProduct.Select(otp => otp.Product))
+                .ToArray();
+
+            var viewModel = new UpdateSelectedProductsVM
+            {
+                Shower = GetProductName(PCategory.Shower, selectedProducts),
+                ShowerPrice = GetProductPrice(PCategory.Shower, selectedProducts),
+                Toilet = GetProductName(PCategory.Toilet, selectedProducts),
+                ToiletPrice = GetProductPrice(PCategory.Toilet, selectedProducts),
+                Sink = GetProductName(PCategory.Sink, selectedProducts),
+                SinkPrice = GetProductPrice(PCategory.Sink, selectedProducts),
+                Cabinet = GetProductName(PCategory.Cabinet, selectedProducts),
+                CabinetPrice = GetProductPrice(PCategory.Cabinet, selectedProducts),
+                Faucet = GetProductName(PCategory.Faucet, selectedProducts),
+                FaucetPrice = GetProductPrice(PCategory.Faucet, selectedProducts),
+                Lightning = GetProductName(PCategory.Lighting, selectedProducts),
+                LightningPrice = GetProductPrice(PCategory.Lighting, selectedProducts),
+                Tile = GetProductName(PCategory.Tile, selectedProducts),
+                TilePrice = GetProductPrice(PCategory.Tile, selectedProducts),
+                Clinker = GetProductName(PCategory.Clinker, selectedProducts),
+                ClinkerPrice = GetProductPrice(PCategory.Clinker, selectedProducts),
+            };
+
+            viewModel.TotalProductCost = CalculateCustomerTotalProductCost(viewModel, id);
+
+            return viewModel;
         }
 
         private UpdateAmountOfWorkVM GetAmountOfWorkUpdate(int id)
         {
-            throw new NotImplementedException();
+            var y = context.Customer.Where(c => c.CustomerId == id).SelectMany(c => c.Order.OrderToWork.Where(i => i.OrderId == c.Order.OrderId)).ToArray();
+
+            var z = context.Customer.Where(c => c.CustomerId == id).Select(c => c.Order).Single();
+
+            var workList = context.Work.Select(w => w).ToArray();
+
+            var x = context.Customer.Where(c => c.CustomerId == id).Select(c => new UpdateAmountOfWorkVM
+            {
+                DemolitionHours = GetAmountOfHours(WorkType.Demolition, y, workList),
+                HourlyRateDemolition = GetHourlyRate(WorkType.Demolition, y, workList),
+
+                DrainHours = GetAmountOfHours(WorkType.Drain, y, workList),
+                HourlyRateDrain = GetHourlyRate(WorkType.Drain, y, workList),
+
+                VentilationHours = GetAmountOfHours(WorkType.Ventilation, y, workList),
+                HourlyRateVentilation = GetHourlyRate(WorkType.Ventilation, y, workList),
+
+                TileHours = GetAmountOfHours(WorkType.Tile, y, workList),
+                HourlyRateTile = GetHourlyRate(WorkType.Tile, y, workList),
+
+                ElectricityHours = GetAmountOfHours(WorkType.Electricity, y, workList),
+                HourlyRateElectricity = GetHourlyRate(WorkType.Electricity, y, workList),
+
+                MountingHours = GetAmountOfHours(WorkType.Mounting, y, workList),
+                HourlyRateMounting = GetHourlyRate(WorkType.Mounting, y, workList),
+            
+                TravelCost = z.TravelCost,
+                WorkDiscount = z.WorkDiscount,
+
+            }).Single();
+
+            x.TotalAmountOfHours = CalculateFinalTotalAmountOfHours(x);
+            x.TotalWorkCost = CalculateFinalTotalWorkCost(x);
+
+            return x;
+        }
+
+        private int GetAmountOfHours(WorkType workType, OrderToWork[] y, Work[] workList)
+        {
+            return y.First(i => i.WorkId == workList.FirstOrDefault(w => w.WorkType == (int)workType).WorkId).AmountOfHours;
         }
 
         private UpdateOrderInfoVM GetOrderInfoUpdate(int id)
@@ -574,23 +685,24 @@ namespace AcademyFinalProject.Models
                 SquareMeter = cust.Order.SquareMeter,
                 ViableROTCandidates = cust.Order.ViableRotcandidates,
                 RequestedStartDate = cust.Order.RequestedStartDate,
-                
+                TravelCost = cust.Order.TravelCost,
+                WorkDiscount = cust.Order.WorkDiscount,
             }).SingleOrDefault();
         }
 
         private UpdateCustomerInfoVM GetCustomerInfoUpdate(int id)
         {
-            return context.Customer.Where(c => c.CustomerId == id).Select(cust => new UpdateCustomerInfoVM
+            return context.Customer.Where(c => c.CustomerId == id).Select(c => new UpdateCustomerInfoVM
             {
                 CID = id,
-                FirstName = cust.FirstName,
-                LastName = cust.LastName,
-                Street = cust.Street,
-                Zip = cust.Zip,
-                City = cust.City,
-                Email = cust.Email,
-                Phone = cust.Phone,
-                TextBox = cust.Order.CustomerMessage
+                FirstName = c.FirstName,
+                LastName = c.LastName,
+                Street = c.Street,
+                Zip = c.Zip,
+                City = c.City,
+                Email = c.Email,
+                Phone = c.Phone,
+                TextBox = c.Order.CustomerMessage
             }).SingleOrDefault();
         }
     }

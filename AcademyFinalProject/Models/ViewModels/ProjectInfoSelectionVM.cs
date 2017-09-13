@@ -31,7 +31,7 @@ namespace AcademyFinalProject.Models.ViewModels
         [Required(ErrorMessage = "Välj ett alternativ")]
         public string SelectedProjectType { get; set; }
 
-        [Display(Name = "Kvm")] // TODO: mer än 0
+        [Display(Name = "Kvm")]
         [Required(ErrorMessage = "Ange antal kvm")]
         [Range (1,int.MaxValue, ErrorMessage = "Felaktig inmatning")]
         public int SquareMeter { get; set; }

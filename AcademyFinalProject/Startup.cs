@@ -30,7 +30,6 @@ namespace AcademyFinalProject
             var cultureInfo = new CultureInfo("en-GB");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

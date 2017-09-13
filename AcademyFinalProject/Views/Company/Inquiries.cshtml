@@ -27,7 +27,8 @@
                             <td>@item.ProjectType</td>
                                 <td>@item.SquareMeter</td>
                                 <td>@item.RequestedStartDate</td>
-                                <td data-dateformat="MM-DD-YYYY" data-value="@item.OrderReceived">@item.OrderReceived</td> 
+                                <td data-dateformat="MM-DD-YYYY" data-value="@item.OrderReceived">@item.OrderReceived</td>
+                                <td><a asp-controller="Company" asp-action="DeleteCustomer" asp-route-id="@item.CID">DELETE</a></td>
                     }
                  </tr>
             }
@@ -60,6 +61,8 @@
                             <td>@item.SquareMeter</td>
                             <td>@item.RequestedStartDate</td>
                             <td data-dateformat="MM-DD-YYYY" data-value="@item.OrderReceived">@item.OrderReceived</td>
+                            <td><a asp-controller="Company" asp-action="DeleteCustomer" asp-route-id="@item.CID">DELETE</a></td>
+                            <td><a asp-controller="Company" asp-action="UpdateOffer" asp-route-id="@item.CID">UPDATE</a></td>
                     }
                 </tr>
             }

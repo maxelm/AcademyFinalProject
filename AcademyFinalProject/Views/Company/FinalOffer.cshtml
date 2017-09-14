@@ -1,6 +1,6 @@
 ﻿@model FinalOfferVM
 @using System.Globalization;
-
+<link rel="stylesheet" href="~/bootstrap/css/bootstrap.css" />
 <fieldset id="BigFieldset">
     <legend id="BigFieldsetLegend">Offert</legend>
     <div>
@@ -31,7 +31,7 @@
                     <tr><td>@Model.SelectedProjectType</tr>
                     <tr><td>@Model.SquareMeter kvm</td></tr>
                     <tr><td>@Model.SelectedPropertyType</td></tr>
-                    <tr><td><label asp-for="RequestedStartDate"></label> @Model.RequestedStartDate</td></tr>
+                    <tr><td><label asp-for="RequestedStartDate"></label>: @Model.RequestedStartDate.ToShortDateString()</td></tr>
                 </tbody>
             </table>
         </fieldset>
@@ -54,9 +54,8 @@
         <hr id="BigHr" /><br />
     </div>
 
-
     <div>
-        <h3>MaterialKostnader</h3>
+        <h3>Materialkostnader</h3>
         <table id="Artiklar">
             <thead>
                 <tr>
@@ -127,7 +126,7 @@
                     <tr>
                         <td><label asp-for="VentilationHours"></label></td>
                         <td>@Model.VentilationHours</td>
-                        <td>@Model.HourlyRateVentilation.ToString("C", CultureInfo.CreateSpecificCulture("sv-SE"))</td>
+                        <td>@Model.HourlyRateVentilation.ToString("C")</td>
                     </tr>
                 }
                 @if (Model.ElectricityHours != 0)

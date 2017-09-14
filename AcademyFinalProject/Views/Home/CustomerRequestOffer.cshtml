@@ -1,10 +1,19 @@
 ﻿@model CustomerRequestOfferWrapperVM
 
 <link rel="stylesheet" href="~/bootstrap/css/bootstrap.css" />
+
+<style type="text/css">
+    .error {
+        border: 2px solid red;
+    }
+
+    .valid {
+        border: 2px solid limegreen;
+    }
+</style>
+
 <div class="container">
     <form asp-controller="Home" asp-action="CustomerRequestOffer">
-        @*<div asp-validation-summary="All" class="validationsummary"></div>*@
-
         <!-- Personuppgifter fieldset -->
         <fieldset>
             <legend>Personuppgifter:</legend>

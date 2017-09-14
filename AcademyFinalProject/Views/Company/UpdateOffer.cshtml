@@ -1,7 +1,15 @@
 ﻿@model UpdateOfferWrapperVM
 
 <link rel="stylesheet" href="~/bootstrap/css/bootstrap.css" />
+<style type="text/css">
+    .error {
+        border: 2px solid red;
+    }
 
+    .valid {
+        border: 2px solid limegreen;
+    }
+</style>
 <div class="container">
     <form asp-controller="Company" asp-action="UpdateOffer" asp-route-id="@Model.UpdateCustomerInfoVM.CID">
         <!-- Personuppgifter fieldset -->

@@ -123,7 +123,14 @@
                         <td></td>
                         <td><span asp-validation-for="UpdateOrderInfoVM.PropertyType" class="span_validation"></span></td>
                     </tr>
-
+                    <tr>
+                        <td><label asp-for="UpdateOrderInfoVM.OrderReceived" class="label_text"></label></td>
+                        <td>
+                            <input asp-for="UpdateOrderInfoVM.OrderReceived" class="input_field" /><br />
+                            <span asp-validation-for="UpdateOrderInfoVM.OrderReceived" class="span_validation"></span>
+                        </td>
+                        <td></td>
+                    </tr>
                     <tr>
                         <td><label asp-for="UpdateOrderInfoVM.RequestedStartDate" class="label_text"></label></td>
                         <td>
@@ -171,9 +178,9 @@
                     </tr>
 
                     <tr>
-                        <td><label asp-for="UpdateSelectedProductsVM.Lightning" class="label_text"></label></td>
-                        <td><select asp-for="UpdateSelectedProductsVM.Lightning" asp-items="Model.UpdateSelectedProductsVM.LightingItems" class="input_field"></select></td>
-                        <td><span asp-validation-for="UpdateSelectedProductsVM.Lightning" class="span_validation"></span></td>
+                        <td><label asp-for="UpdateSelectedProductsVM.Lighting" class="label_text"></label></td>
+                        <td><select asp-for="UpdateSelectedProductsVM.Lighting" asp-items="Model.UpdateSelectedProductsVM.LightingItems" class="input_field"></select></td>
+                        <td><span asp-validation-for="UpdateSelectedProductsVM.Lighting" class="span_validation"></span></td>
                     </tr>
 
                     <tr>

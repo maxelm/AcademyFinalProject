@@ -548,6 +548,13 @@ namespace AcademyFinalProject.Models
             x.TotalPrice = x.TotalWorkCost + x.TotalProductCost + x.TravelCost;
             x.TotalPriceAfterDiscount = x.TotalPrice - x.ROTDiscount - x.WorkDiscount;
 
+            x.DemlitionTotal = x.DemolitionHours * x.HourlyRateDemolition;
+            x.VentilationTotal = x.VentilationHours * x.HourlyRateVentilation;
+            x.ElectricityTotal = x.ElectricityHours * x.HourlyRateElectricity;
+            x.TileTotal = x.TileHours * x.HourlyRateTile;
+            x.DrainTotal = x.DrainHours * x.HourlyRateDrain;
+            x.MountingTotal = x.MountingHours * x.HourlyRateMounting;
+
             #endregion
 
             return x;

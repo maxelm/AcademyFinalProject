@@ -3,7 +3,6 @@
 <link rel="stylesheet" href="~/bootstrap/css/bootstrap.css" />
 <br />
 <div id="wrapper">
-
     <div class="aboutleft">
         <h4 class="offer_h4">Uppdragsgivare</h4>
         @Model.FirstName @Model.LastName<br />
@@ -11,10 +10,9 @@
         @Model.Zip @Model.City<br />
         @Model.Phone
     </div>
-
     <div class="vline">
         <h4 class="offer_h4">Uppdragsinfo</h4>
-        <table width="230">
+        <table width="250">
             <tr>
                 <td><b>Uppdragstyp:</b></td>
                 <td>@Model.SelectedProjectType</td>
@@ -33,7 +31,6 @@
             </tr>
         </table>
     </div>
-
     <div class="aboutright">
         <h4 class="offer_h4">Företaget</h4>
         JM Vattenservice AB<br />
@@ -46,8 +43,8 @@
         <h4 class="offer_h4">Material</h4>
         <table class="table">
             <tr>
-                <th>Artiklar:</th>
-                <th>Pris:</th>
+                <th width="80%">Artiklar:</th>
+                <th width="20%">Pris:</th>
             </tr>
             @if (Model.Cabinet != null)
             {
@@ -90,9 +87,10 @@
         <h4 class="offer_h4">Arbete</h4>
         <table class="table">
             <tr>
-                <th>Arbete</th>
-                <th>Antal tim</th>
-                <th>Tim deb</th>
+                <th width="50%">Arbete</th>
+                <th width="15%">Antal tim</th>
+                <th width="15%">Tim deb</th>
+                <th width="20%">Summa</th>
             </tr>
             @if (Model.DemolitionHours != 0)
             {
@@ -100,6 +98,7 @@
                     <td><label asp-for="DemolitionHours"></label></td>
                     <td>@Model.DemolitionHours</td>
                     <td>@Model.HourlyRateDemolition.ToString("C")</td>
+                    <td>@Model.DemlitionTotal.ToString("C")</td>
                 </tr>
             }
             @if (Model.VentilationHours != 0)
@@ -108,6 +107,7 @@
                     <td><label asp-for="VentilationHours"></label></td>
                     <td>@Model.VentilationHours</td>
                     <td>@Model.HourlyRateVentilation.ToString("C")</td>
+                    <td>@Model.VentilationTotal.ToString("C")</td>
                 </tr>
             }
             @if (Model.ElectricityHours != 0)
@@ -116,6 +116,7 @@
                     <td><label asp-for="ElectricityHours"></label></td>
                     <td>@Model.ElectricityHours</td>
                     <td>@Model.HourlyRateElectricity.ToString("C")</td>
+                    <td>@Model.ElectricityTotal.ToString("C")</td>
                 </tr>
             }
             @if (Model.TileHours != 0)
@@ -124,6 +125,7 @@
                     <td><label asp-for="TileHours"></label></td>
                     <td>@Model.TileHours</td>
                     <td>@Model.HourlyRateTile.ToString("C")</td>
+                    <td>@Model.TileTotal.ToString("C")</td>
                 </tr>
             }
             @if (Model.DrainHours != 0)
@@ -132,6 +134,7 @@
                     <td><label asp-for="DrainHours"></label></td>
                     <td>@Model.DrainHours</td>
                     <td>@Model.HourlyRateDrain.ToString("C")</td>
+                    <td>@Model.DrainTotal.ToString("C")</td>
                 </tr>
             }
             @if (Model.MountingHours != 0)
@@ -140,11 +143,13 @@
                     <td><label asp-for="MountingHours"></label></td>
                     <td>@Model.MountingHours</td>
                     <td>@Model.HourlyRateMounting.ToString("C")</td>
+                    <td>@Model.MountingTotal.ToString("C")</td>
                 </tr>
             }
             <tr style="border:hidden; border-top:1px solid black; color:#a30000;">
                 <td><b><label asp-for="TotalWorkCost"></label></b></td>
                 <td><b>@Model.TotalAmountOfHours tim</b></td>
+                <td></td>
                 <td><b>@Model.TotalWorkCost.ToString("C")</b></td>
             </tr>
 
@@ -156,8 +161,8 @@
         <h4 class="offer_h4">Resekostnad</h4>
         <table class="table">
             <tr>
-                <td><label asp-for="TravelCost"></label></td>
-                <td>@Model.TravelCost.ToString("C")</td>
+                <td width="80%"><label asp-for="TravelCost"></label></td>
+                <td width="20%"><b>@Model.TravelCost.ToString("C")</b></td>
             </tr>
         </table>
     </div>
@@ -168,8 +173,8 @@
             <h4 class="offer_h4">Rotavdrag</h4>
             <table class="table">
                 <tr>
-                    <td><label asp-for="ROTDiscount"></label>&nbsp;&nbsp;</td>
-                    <td>@Model.ROTDiscount.ToString("C")</td>
+                    <td width="80%"><label asp-for="ROTDiscount"></label>&nbsp;&nbsp;</td>
+                    <td width="20%"><b>@Model.ROTDiscount.ToString("C")</b></td>
                 </tr>
             </table>
         </div>
@@ -179,8 +184,8 @@
         <h4 class="offer_h4">Totalt</h4>
         <table class="table">
             <tr>
-                <td><b>Summa</b></td>
-                <td><b>@Model.TotalPrice.ToString("C")</b></td>
+                <td width="80%"><b>Summa</b></td>
+                <td width="20%"><b>@Model.TotalPrice.ToString("C")</b></td>
             </tr>
             @if (@Model.ROTDiscount != 0)
             {

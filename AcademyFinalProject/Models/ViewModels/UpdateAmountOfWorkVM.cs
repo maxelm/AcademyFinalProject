@@ -15,6 +15,7 @@ namespace AcademyFinalProject.Models.ViewModels
         [Range(0, int.MaxValue, ErrorMessage = "Antal timmar får inte vara ett negativt nummer")]
         public int DemolitionHours { get; set; }
         [Required(ErrorMessage = "Skriv in tim deb.")]
+        [DisplayFormat(DataFormatString = "{0:0}", ApplyFormatInEditMode = true)]
         [Range(0, int.MaxValue, ErrorMessage = "Tim debitering får inte vara ett negativt nummer")]
         public decimal HourlyRateDemolition { get; set; }
 
@@ -23,6 +24,7 @@ namespace AcademyFinalProject.Models.ViewModels
         [Range(0, int.MaxValue, ErrorMessage = "Antal timmar får inte vara ett negativt nummer")]
         public int DrainHours { get; set; }
         [Required(ErrorMessage = "Skriv in tim deb.")]
+        [DisplayFormat(DataFormatString = "{0:0}", ApplyFormatInEditMode = true)]
         [Range(0, int.MaxValue, ErrorMessage = "Tim debitering får inte vara ett negativt nummer")]
         public decimal HourlyRateDrain { get; set; }
 
@@ -31,6 +33,7 @@ namespace AcademyFinalProject.Models.ViewModels
         [Range(0, int.MaxValue, ErrorMessage = "Antal timmar får inte vara ett negativt nummer")]
         public int VentilationHours { get; set; }
         [Required(ErrorMessage = "Skriv in tim deb.")]
+        [DisplayFormat(DataFormatString = "{0:0}", ApplyFormatInEditMode = true)]
         [Range(0, int.MaxValue, ErrorMessage = "Tim debitering får inte vara ett negativt nummer")]
         public decimal HourlyRateVentilation { get; set; }
 
@@ -39,6 +42,7 @@ namespace AcademyFinalProject.Models.ViewModels
         [Range(0, int.MaxValue, ErrorMessage = "Antal timmar får inte vara ett negativt nummer")]
         public int TileHours { get; set; }
         [Required(ErrorMessage = "Skriv in tim deb.")]
+        [DisplayFormat(DataFormatString = "{0:0}", ApplyFormatInEditMode = true)]
         [Range(0, int.MaxValue, ErrorMessage = "Tim debitering får inte vara ett negativt nummer")]
         public decimal HourlyRateTile { get; set; }
 
@@ -47,6 +51,7 @@ namespace AcademyFinalProject.Models.ViewModels
         [Range(0, int.MaxValue, ErrorMessage = "Antal timmar får inte vara ett negativt nummer")]
         public int ElectricityHours { get; set; }
         [Required(ErrorMessage = "Skriv in tim deb.")]
+        [DisplayFormat(DataFormatString = "{0:0}", ApplyFormatInEditMode = true)]
         [Range(0, int.MaxValue, ErrorMessage = "Tim debitering får inte vara ett negativt nummer")]
         public decimal HourlyRateElectricity { get; set; }
 
@@ -55,6 +60,7 @@ namespace AcademyFinalProject.Models.ViewModels
         [Range(0, int.MaxValue, ErrorMessage = "Antal timmar får inte vara ett negativt nummer")]
         public int MountingHours { get; set; }
         [Required(ErrorMessage = "Skriv in tim deb.")]
+        [DisplayFormat(DataFormatString = "{0:0}", ApplyFormatInEditMode = true)]
         [Range(0, int.MaxValue, ErrorMessage = "Tim debitering får inte vara ett negativt nummer")]
         public decimal HourlyRateMounting { get; set; }
 
@@ -66,11 +72,13 @@ namespace AcademyFinalProject.Models.ViewModels
 
         [Display(Name = "Resekostnad")]
         [Required(ErrorMessage = "Skriv in resekostnad")]
+        [DisplayFormat(DataFormatString = "{0:0}", ApplyFormatInEditMode = true)]
         [Range(0, int.MaxValue, ErrorMessage = "Resekostnaden får inte vara ett negativ nummer")]
         public decimal TravelCost { get; set; }
 
         [Display(Name = "Rabatt")]
         [Required(ErrorMessage = "Skriv in rabbatt")]
+        [DisplayFormat(DataFormatString = "{0:0}", ApplyFormatInEditMode = true)]
         [Range(0, int.MaxValue, ErrorMessage = "Rabatten får inte vara ett negativ nummer")]
         public decimal WorkDiscount { get; set; }
     }

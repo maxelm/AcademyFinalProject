@@ -27,10 +27,9 @@ namespace AcademyFinalProject
             //services.AddScoped<IContentService, DevContentService>(); //using dev
             services.AddScoped<IContentService, ReleaseContentService>(); //using Release
 
-            var cultureInfo = new CultureInfo("en-GB");
+            var cultureInfo = new CultureInfo("sv-SE");
             CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
             CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
-
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

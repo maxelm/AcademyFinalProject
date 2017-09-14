@@ -11,6 +11,21 @@
     padding-top:20px;
 }
 
+.hideFieldset:after {
+    content: " \25b6";
+    cursor: pointer;
+}
+
+.showFieldset:after {
+    content: " \25bc";
+    cursor: pointer;
+}
+
+.hiddenFieldset {
+    display: none;
+    cursor: pointer;
+}
+
 .div_buttons {
     text-align:right;
     padding-top:40px;
@@ -60,10 +75,30 @@ textarea {
     height: 30px;
     margin: 8px 0;
     border-bottom: 2px solid black;
-    border-left:hidden;
-    border-right:hidden;
-    border-top:hidden;
+    border-left: hidden;
+    border-right: hidden;
+    border-top: hidden;
     padding: 6px;
+}
+
+#header {
+    margin: 0;
+    height: 100px;
+    width: 100%;
+    background-color: #bfdfff;
+    top: 0;
+    padding: 10px;
+}
+
+#confirm {
+    text-align:center;
+    width:800px;
+    height:250px;
+    padding:20px;
+    background-color:#c7ffbf;
+    margin:auto;
+    position:relative;
+    border:8px dashed #527e54;
 }
 
 fieldset {
@@ -72,14 +107,6 @@ fieldset {
     padding-bottom:30px;
     margin: 0;
     display: inline-block;
-}
-
-.error {
-    border: 2px solid red;
-}
-
-.valid {
-    border: 2px solid limegreen;
 }
 
 .label_text {
@@ -93,6 +120,36 @@ fieldset {
 .CreateOffer_table {
     width: 100%;
 }
+
+.input-symbol-sek {
+    position: relative;
+}
+
+    .input-symbol-sek input {
+        padding-right: 15px;
+    }
+
+    .input-symbol-sek:after {
+        position: absolute;
+        top: 0;
+        content: "SEK";
+        right: 5px;
+    }
+
+.input-symbol-tim {
+    position: relative;
+}
+
+    .input-symbol-tim input {
+        padding-right: 15px;
+    }
+
+    .input-symbol-tim:after {
+        position: absolute;
+        top: 0;
+        content: "TIM";
+        right: 5px;
+    }
 
 textarea {
     width: 250px;
@@ -109,7 +166,7 @@ textarea {
 .button {
     display: inline-block;
     border-radius: 4px;
-    background-color: limegreen;
+    background-color: #3b7798;
     border: none;
     color: #FFFFFF;
     text-align: center;
@@ -190,6 +247,10 @@ textarea {
 /* END */
 
 /* Nikola - Final Offer */
+
+#myTable2 tr {
+    cursor:pointer;
+}
 
 #BigFieldset {
     background-color: #eeeeee;

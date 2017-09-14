@@ -19,7 +19,6 @@ namespace AcademyFinalProject.Controllers
             this.contentService = contentService;
         }
 
-        // GET: /<controller>/
         public IActionResult Index()
         {
             return View();
@@ -68,6 +67,19 @@ namespace AcademyFinalProject.Controllers
         public IActionResult UpdateOffer(int id)
         {
             return View(contentService.UpdateOffer(id));
+        }
+
+        [HttpPost]
+        public IActionResult UpdateOffer(UpdateOfferWrapperVM model, int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            contentService.SaveOfferUpdate(model, id);
+
+            return RedirectToAction(nameof(Inquiries));
         }
     }
 }

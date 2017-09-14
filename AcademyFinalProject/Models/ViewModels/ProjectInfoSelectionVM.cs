@@ -36,15 +36,23 @@ namespace AcademyFinalProject.Models.ViewModels
         [Range (1,int.MaxValue, ErrorMessage = "Felaktig inmatning")]
         public int SquareMeter { get; set; }
 
-        public SelectListItem[] PropertyTypeItems { get; set; }
         [Display(Name = "Fastighet")]
         [Required(ErrorMessage = "Välj ett alternativ")]
         public string SelectedPropertyType { get; set; }
+        public SelectListItem[] PropertyTypeItems { get; set; }
 
+        [DataType(DataType.Date)]
         [Display(Name = "Öns. byggstart")]
         [Required(ErrorMessage = "Ange önskad byggstart")]
-        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0: dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime RequestedStartDate { get; set; }
+
+        [Display(Name = "Övrigt")]
+        public string TextBox { get; set; }
+
+        [Display(Name = "ROT berättigade")]
+        [Range(0, 2, ErrorMessage = "Felaktig antal personer")]
+        public int ViableROTCandidates { get; set; }
+        public SelectListItem[] ROTCandidateItems { get; set; }
     }
 }

@@ -14,12 +14,12 @@ namespace AcademyFinalProject.Models.ViewModels
         [Display(Name = "Fastighet")]
         public string PropertyType { get; set; }
 
-        [Display(Name = "Offerförfrågan togs emot")]
         [DataType(DataType.Date)]
+        [Display(Name = "Offerförfrågan togs emot")]
         public DateTime OrderReceived { get; set; }
 
-        [Display(Name = "Öns. byggstart")]
         [DataType(DataType.Date)]
+        [Display(Name = "Öns. byggstart")]
         public DateTime RequestedStartDate { get; set; }
 
         [Display(Name = "ROT berättigade")]

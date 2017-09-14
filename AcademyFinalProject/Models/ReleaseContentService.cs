@@ -57,7 +57,7 @@ namespace AcademyFinalProject.Models
             }).SingleOrDefault();
         }
 
-        public CustomerRequestOfferWrapperVM GetFirstView() // REDO FÖR TESTING
+        public CustomerRequestOfferWrapperVM GetFirstView()
         {
             return new CustomerRequestOfferWrapperVM()
             {
@@ -67,12 +67,24 @@ namespace AcademyFinalProject.Models
             };
         }
 
-        private ProjectInfoSelectionVM GetProjectInfoLists() // REDO FÖR TESTING lägg Getproject/property metoderna i denna?
+        private ProjectInfoSelectionVM GetProjectInfoLists() // TODO:lägg Getproject/property metoderna i denna?
         {
             return new ProjectInfoSelectionVM
             {
                 ProjectTypeItems = GetProjectTypeItems(),
                 PropertyTypeItems = GetPropertyTypeItems(),
+                ROTCandidateItems = GetROTCandidateItems(),
+                ViableROTCandidates = 0,
+            };
+        }
+
+        private SelectListItem[] GetROTCandidateItems()
+        {
+            return new SelectListItem[]
+            {
+                new SelectListItem { Text = "0", Value = "0" },
+                new SelectListItem { Text = "1", Value = "1" },
+                new SelectListItem { Text = "2", Value = "2" },
             };
         }
 
@@ -313,8 +325,8 @@ namespace AcademyFinalProject.Models
                     PropertyType = c.ProjectInfoSelection.SelectedPropertyType,
                     SquareMeter = c.ProjectInfoSelection.SquareMeter,
                     RequestedStartDate = c.ProjectInfoSelection.RequestedStartDate,
-                    CustomerMessage = c.CustomerInfo.TextBox,
-                    ViableRotcandidates = c.CustomerInfo.ViableROTCandidates,
+                    CustomerMessage = c.ProjectInfoSelection.TextBox,
+                    ViableRotcandidates = c.ProjectInfoSelection.ViableROTCandidates,
                 }
             };
 
@@ -367,7 +379,7 @@ namespace AcademyFinalProject.Models
             }).SingleOrDefault();
         }
 
-        private AmountOfWorkVM GetAmountOfWorkVM() // REDO FÖR TESTING
+        private AmountOfWorkVM GetAmountOfWorkVM()
         {
             var workList = context.Work.Select(w => w).ToArray();
 
@@ -706,46 +718,73 @@ namespace AcademyFinalProject.Models
 
         private UpdateAmountOfWorkVM GetAmountOfWorkUpdate(int id)
         {
-            var y = context.Customer.Where(c => c.CustomerId == id).SelectMany(c => c.Order.OrderToWork.Where(i => i.OrderId == c.Order.OrderId)).ToArray();
 
-            var z = context.Customer.Where(c => c.CustomerId == id).Select(c => c.Order).Single();
+            var orderToWork = context.Customer.Where(c => c.CustomerId == id).SelectMany(c => c.Order.OrderToWork.Where(i => i.OrderId == c.Order.OrderId)).ToArray();
 
             var workList = context.Work.Select(w => w).ToArray();
 
-            var x = context.Customer.Where(c => c.CustomerId == id).Select(c => new UpdateAmountOfWorkVM
+            if (orderToWork.Count() > 0)
             {
-                DemolitionHours = GetAmountOfHours(WorkType.Demolition, y, workList),
-                HourlyRateDemolition = GetHourlyRate(WorkType.Demolition, y, workList),
+                var order = context.Customer.Where(c => c.CustomerId == id).Select(c => c.Order).Single();
 
-                DrainHours = GetAmountOfHours(WorkType.Drain, y, workList),
-                HourlyRateDrain = GetHourlyRate(WorkType.Drain, y, workList),
 
-                VentilationHours = GetAmountOfHours(WorkType.Ventilation, y, workList),
-                HourlyRateVentilation = GetHourlyRate(WorkType.Ventilation, y, workList),
+                var x = context.Customer.Where(c => c.CustomerId == id).Select(c => new UpdateAmountOfWorkVM
+                {
+                    DemolitionHours = GetAmountOfHours(WorkType.Demolition, orderToWork, workList),
+                    HourlyRateDemolition = GetHourlyRate(WorkType.Demolition, orderToWork, workList),
 
-                TileHours = GetAmountOfHours(WorkType.Tile, y, workList),
-                HourlyRateTile = GetHourlyRate(WorkType.Tile, y, workList),
+                    DrainHours = GetAmountOfHours(WorkType.Drain, orderToWork, workList),
+                    HourlyRateDrain = GetHourlyRate(WorkType.Drain, orderToWork, workList),
 
-                ElectricityHours = GetAmountOfHours(WorkType.Electricity, y, workList),
-                HourlyRateElectricity = GetHourlyRate(WorkType.Electricity, y, workList),
+                    VentilationHours = GetAmountOfHours(WorkType.Ventilation, orderToWork, workList),
+                    HourlyRateVentilation = GetHourlyRate(WorkType.Ventilation, orderToWork, workList),
 
-                MountingHours = GetAmountOfHours(WorkType.Mounting, y, workList),
-                HourlyRateMounting = GetHourlyRate(WorkType.Mounting, y, workList),
+                    TileHours = GetAmountOfHours(WorkType.Tile, orderToWork, workList),
+                    HourlyRateTile = GetHourlyRate(WorkType.Tile, orderToWork, workList),
 
-                TravelCost = z.TravelCost,
-                WorkDiscount = z.WorkDiscount,
+                    ElectricityHours = GetAmountOfHours(WorkType.Electricity, orderToWork, workList),
+                    HourlyRateElectricity = GetHourlyRate(WorkType.Electricity, orderToWork, workList),
 
-            }).Single();
+                    MountingHours = GetAmountOfHours(WorkType.Mounting, orderToWork, workList),
+                    HourlyRateMounting = GetHourlyRate(WorkType.Mounting, orderToWork, workList),
 
-            x.TotalAmountOfHours = CalculateFinalTotalAmountOfHours(x);
-            x.TotalWorkCost = CalculateFinalTotalWorkCost(x);
+                    TravelCost = order.TravelCost,
+                    WorkDiscount = order.WorkDiscount,
 
-            return x;
+                }).Single();
+
+                x.TotalAmountOfHours = CalculateFinalTotalAmountOfHours(x);
+                x.TotalWorkCost = CalculateFinalTotalWorkCost(x);
+
+                return x;
+            }
+            else
+            {
+                return new UpdateAmountOfWorkVM
+                {
+                    HourlyRateDemolition = GetHrlyRate(WorkType.Demolition, workList),
+                    HourlyRateDrain = GetHrlyRate(WorkType.Drain, workList),
+                    HourlyRateVentilation = GetHrlyRate(WorkType.Ventilation, workList),
+                    HourlyRateTile = GetHrlyRate(WorkType.Tile, workList),
+                    HourlyRateElectricity = GetHrlyRate(WorkType.Electricity, workList),
+                    HourlyRateMounting = GetHrlyRate(WorkType.Mounting, workList),
+                };
+            }
+
         }
 
         private int GetAmountOfHours(WorkType workType, OrderToWork[] y, Work[] workList)
         {
-            return y.First(i => i.WorkId == workList.FirstOrDefault(w => w.WorkType == (int)workType).WorkId).AmountOfHours;
+            int amountOfHours = 0;
+
+            var x = y.First(i => i.WorkId == workList.FirstOrDefault(w => w.WorkType == (int)workType).WorkId);
+
+            if (x != null)
+            {
+                amountOfHours = x.AmountOfHours;
+            }
+
+            return amountOfHours;
         }
 
         private UpdateOrderInfoVM GetOrderInfoUpdate(int id)
@@ -756,12 +795,14 @@ namespace AcademyFinalProject.Models
                 PropertyType = cust.Order.PropertyType,
                 SquareMeter = cust.Order.SquareMeter,
                 ViableROTCandidates = cust.Order.ViableRotcandidates,
+                ROTCandidateItems = GetROTCandidateItems(),
                 OrderReceived = cust.Order.OrderReceived,
                 RequestedStartDate = cust.Order.RequestedStartDate,
                 TravelCost = cust.Order.TravelCost,
                 WorkDiscount = cust.Order.WorkDiscount,
                 ProjectTypeItems = GetProjectTypeItemsUpdate(),
                 PropertyTypeItems = GetPropertyTypeItemsUpdate(),
+                TextBox = cust.Order.CustomerMessage,
 
             }).SingleOrDefault();
         }
@@ -778,12 +819,13 @@ namespace AcademyFinalProject.Models
                 City = c.City,
                 Email = c.Email,
                 Phone = c.Phone,
-                TextBox = c.Order.CustomerMessage
             }).SingleOrDefault();
         }
 
-        public void SaveOfferUpdate(UpdateOfferWrapperVM m, int id)// måste testas
+        public void SaveOfferUpdate(UpdateOfferWrapperVM m, int id)
         {
+            bool isComplete = context.Order.Where(o => o.CustomerId == id).Select(o => o.IsComplete).Single();
+
             DeleteCustomer(id, "SaveLater");
 
             Customer cust = new Customer
@@ -798,13 +840,13 @@ namespace AcademyFinalProject.Models
 
                 Order = new Order
                 {
-                    IsComplete = true,
+                    IsComplete = isComplete,
                     OrderReceived = m.UpdateOrderInfoVM.OrderReceived,
                     ProjectType = m.UpdateOrderInfoVM.ProjectType,
                     PropertyType = m.UpdateOrderInfoVM.PropertyType,
                     SquareMeter = m.UpdateOrderInfoVM.SquareMeter,
                     RequestedStartDate = m.UpdateOrderInfoVM.RequestedStartDate,
-                    CustomerMessage = m.UpdateCustomerInfoVM.TextBox,
+                    CustomerMessage = m.UpdateOrderInfoVM.TextBox,
                     ViableRotcandidates = m.UpdateOrderInfoVM.ViableROTCandidates,
                     TravelCost = m.UpdateOrderInfoVM.TravelCost,
                     WorkDiscount = m.UpdateOrderInfoVM.WorkDiscount,

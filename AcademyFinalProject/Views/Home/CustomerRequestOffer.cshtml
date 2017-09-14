@@ -79,19 +79,20 @@
                     <td><span asp-validation-for="CustomerInfo.Phone" class="span_validation"></span></td>
                 </tr>
                 <tr>
-                    <td><label asp-for="CustomerInfo.TextBox" class="label_text"></label></td>
+                    <td><label asp-for="ProjectInfoSelection.TextBox" class="label_text"></label></td>
                     <td>
-                        <textarea asp-for="CustomerInfo.TextBox"></textarea><br />
+                        <textarea asp-for="ProjectInfoSelection.TextBox"></textarea><br />
                     </td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td><b>Antal ROT berättigade i hushållet</b></td>
-                    <td><input asp-for="CustomerInfo.ViableROTCandidates" class="input_field" /></td>
+                    <td><label asp-for="ProjectInfoSelection.ViableROTCandidates" class="label_text"></label></td>
+                    <td><select asp-for="ProjectInfoSelection.ViableROTCandidates" asp-items="Model.ProjectInfoSelection.ROTCandidateItems" class="input_field"></select></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td></td>
-                    <td><span asp-validation-for="CustomerInfo.ViableROTCandidates" class="span_validation"></span></td>
+                    <td><span asp-validation-for="ProjectInfoSelection.ViableROTCandidates" class="span_validation"></span></td>
                 </tr>
             </table>
         </fieldset>
@@ -191,7 +192,7 @@
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
-                    <td><label asp-for="ProductSelection.Sum" class="label_text"></label></td>
+                    <td><label asp-for="ProductSelection.TotalProductCost" class="label_text"></label></td>
                     <td></td>
                 </tr>
             </table>

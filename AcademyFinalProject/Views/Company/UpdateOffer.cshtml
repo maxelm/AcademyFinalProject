@@ -79,15 +79,16 @@
                         <td><span asp-validation-for="UpdateCustomerInfoVM.Phone" class="span_validation"></span></td>
                     </tr>
                     <tr>
-                        <td><label asp-for="UpdateCustomerInfoVM.TextBox" class="label_text"></label></td>
+                        <td><label asp-for="UpdateOrderInfoVM.TextBox" class="label_text"></label></td>
                         <td>
-                            <textarea asp-for="UpdateCustomerInfoVM.TextBox"></textarea><br />
+                            <textarea asp-for="UpdateOrderInfoVM.TextBox"></textarea><br />
                         </td>
                         <td></td>
                     </tr>
                     <tr>
-                        <td><b>Antal ROT berättigade i hushållet</b></td>
-                        <td><input asp-for="UpdateOrderInfoVM.ViableROTCandidates" class="input_field" /></td>
+                        <td><label asp-for="UpdateOrderInfoVM.ViableROTCandidates" class="label_text"></label></td>
+                        <td><select asp-for="UpdateOrderInfoVM.ViableROTCandidates" asp-items="Model.UpdateOrderInfoVM.ROTCandidateItems" class="input_field"></select></td>
+                        <td></td>
                     </tr>
                     <tr>
                         <td></td>
@@ -126,8 +127,7 @@
                     <tr>
                         <td><label asp-for="UpdateOrderInfoVM.OrderReceived" class="label_text"></label></td>
                         <td>
-                            <input asp-for="UpdateOrderInfoVM.OrderReceived" class="input_field" /><br />
-                            <span asp-validation-for="UpdateOrderInfoVM.OrderReceived" class="span_validation"></span>
+                            <input asp-for="UpdateOrderInfoVM.OrderReceived" class="input_field" readonly/><br />
                         </td>
                         <td></td>
                     </tr>

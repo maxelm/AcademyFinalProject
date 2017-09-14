@@ -153,48 +153,48 @@
             <table class="CustReqOffer_table">
                 <tr>
                     <td><label asp-for="ProductSelection.SelectedShower" class="label_text"></label></td>
-                    <td><select asp-for="ProductSelection.SelectedShower" asp-items="Model.ProductSelection.ShowerItems" class="input_field"></select></td>
+                    <td><select asp-for="ProductSelection.SelectedShower" asp-items="Model.ProductSelection.ShowerItems" class="input_field product_Select" id="selectedShower"></select></td>
                     <td><span asp-validation-for="ProductSelection.SelectedShower" class="span_validation"></span></td>
                 </tr>
 
                 <tr>
                     <td><label asp-for="ProductSelection.SelectedToilet" class="label_text"></label></td>
-                    <td><select asp-for="ProductSelection.SelectedToilet" asp-items="Model.ProductSelection.ToiletItems" class="input_field"></select></td>
+                    <td><select asp-for="ProductSelection.SelectedToilet" asp-items="Model.ProductSelection.ToiletItems" class="input_field product_Select" id="selectedToilet"></select></td>
                     <td><span asp-validation-for="ProductSelection.SelectedToilet" class="span_validation"></span></td>
                 </tr>
                 <tr>
                     <td><label asp-for="ProductSelection.SelectedSink" class="label_text"></label></td>
-                    <td><select asp-for="ProductSelection.SelectedSink" asp-items="Model.ProductSelection.SinkItems" class="input_field"></select></td>
+                    <td><select asp-for="ProductSelection.SelectedSink" asp-items="Model.ProductSelection.SinkItems" class="input_field product_Select" id="selectedSink"></select></td>
                     <td><span asp-validation-for="ProductSelection.SelectedSink" class="span_validation"></span></td>
                 </tr>
 
                 <tr>
                     <td><label asp-for="ProductSelection.SelectedCabinet" class="label_text"></label></td>
-                    <td><select asp-for="ProductSelection.SelectedCabinet" asp-items="Model.ProductSelection.CabinetItems" class="input_field"></select></td>
+                    <td><select asp-for="ProductSelection.SelectedCabinet" asp-items="Model.ProductSelection.CabinetItems" class="input_field product_Select" id="selectedCabinet"></select></td>
                     <td><span asp-validation-for="ProductSelection.SelectedCabinet" class="span_validation"></span></td>
                 </tr>
 
                 <tr>
                     <td><label asp-for="ProductSelection.SelectedFaucet" class="label_text"></label></td>
-                    <td><select asp-for="ProductSelection.SelectedFaucet" asp-items="Model.ProductSelection.FaucetItems" class="input_field"></select></td>
+                    <td><select asp-for="ProductSelection.SelectedFaucet" asp-items="Model.ProductSelection.FaucetItems" class="input_field product_Select" id="selectedFaucet"></select></td>
                     <td><span asp-validation-for="ProductSelection.SelectedFaucet" class="span_validation"></span></td>
                 </tr>
 
                 <tr>
                     <td><label asp-for="ProductSelection.SelectedLighting" class="label_text"></label></td>
-                    <td><select asp-for="ProductSelection.SelectedLighting" asp-items="Model.ProductSelection.LightingItems" class="input_field"></select></td>
+                    <td><select asp-for="ProductSelection.SelectedLighting" asp-items="Model.ProductSelection.LightingItems" class="input_field product_Select" id="selectedLighting"></select></td>
                     <td><span asp-validation-for="ProductSelection.SelectedLighting" class="span_validation"></span></td>
                 </tr>
 
                 <tr>
                     <td><label asp-for="ProductSelection.SelectedTile" class="label_text"></label></td>
-                    <td><select asp-for="ProductSelection.SelectedTile" asp-items="Model.ProductSelection.TileItems" class="input_field"></select></td>
+                    <td><select asp-for="ProductSelection.SelectedTile" asp-items="Model.ProductSelection.TileItems" class="input_field product_Select" id="selectedTile"></select></td>
                     <td><span asp-validation-for="ProductSelection.SelectedTile" class="span_validation"></span></td>
                 </tr>
 
                 <tr>
                     <td><label asp-for="ProductSelection.SelectedClinker" class="label_text"></label></td>
-                    <td><select asp-for="ProductSelection.SelectedClinker" asp-items="Model.ProductSelection.ClinkerItems" class="input_field"></select></td>
+                    <td><select asp-for="ProductSelection.SelectedClinker" asp-items="Model.ProductSelection.ClinkerItems" class="input_field product_Select" id="selectedClinker"></select></td>
                     <td><span asp-validation-for="ProductSelection.SelectedClinker" class="span_validation"></span></td>
                 </tr>
                 <tr>
@@ -202,7 +202,7 @@
                 </tr>
                 <tr>
                     <td><label asp-for="ProductSelection.TotalProductCost" class="label_text"></label></td>
-                    <td></td>
+                    <td><input type="text" class="sumProducts input_readOnly" readonly /></td>
                 </tr>
             </table>
         </fieldset>

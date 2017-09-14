@@ -52,6 +52,6 @@ namespace AcademyFinalProject.Models.ViewModels
         public SelectListItem[] ClinkerItems { get; set; }
 
         [Display(Name = "Summa")]
-        public int TotalProductCost { get; set; }
+        public decimal TotalProductCost { get; set; }
     }
 }

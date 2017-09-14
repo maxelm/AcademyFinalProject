@@ -16,6 +16,9 @@ $(document).ready(function () {
         var $numHours6 = Number($(".numHours6").val());
         $(".sumHours").val($numHours1 + $numHours2 + $numHours3 + $numHours4 + $numHours5 + $numHours6);
     }
+
+    calc();
+
     $(".key").keyup(function () {
         calc();
     });
@@ -41,7 +44,55 @@ $(document).ready(function () {
         var $numDeb6 = Number($(".numDeb6").val());
         $(".sumCost").val($numHours1 * $numDeb1 + $numHours2 * $numDeb2 + $numHours3 * $numDeb3 + $numHours4 * $numDeb4 + $numHours5 * $numDeb5 + $numHours6 * $numDeb6);
     }
+
+    calc();
+
     $(".key").keyup(function () {
         calc();
     });
+});
+
+
+$(document).ready(function () {
+
+    function GetPrice(valueString) {
+
+        var price;
+
+        if (valueString !== "0") {
+
+            var x = valueString.split('_');
+            var y = x[1].split(',');
+            price = y[0];
+        }
+        else {
+            price = 0;
+        }
+
+        return price;
+    }
+
+    function UpdateTotalCost() {
+
+        var showerCost = Number(GetPrice($('#selectedShower').val()));
+        var toiletCost = Number(GetPrice($('#selectedToilet').val()));
+        var sinkCost = Number(GetPrice($('#selectedSink').val()));
+        var cabinetCost = Number(GetPrice($('#selectedCabinet').val()));
+        var faucetCost = Number(GetPrice($('#selectedFaucet').val()));
+        var lightingCost = Number(GetPrice($('#selectedLighting').val()));
+        var tileCost = Number(GetPrice($('#selectedTile').val()));
+        var clinkerCost = Number(GetPrice($('#selectedClinker').val()));
+
+        $('.sumProducts').val(showerCost + toiletCost + sinkCost + cabinetCost + faucetCost + lightingCost + tileCost + clinkerCost);
+    }
+    console.log($('.sumProducts'))
+
+    if ($('.sumProducts').length > 0) {
+        
+        UpdateTotalCost();
+
+        $('.product_Select').change(function () {
+            UpdateTotalCost();
+        });
+    }
 });

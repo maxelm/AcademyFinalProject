@@ -121,7 +121,7 @@ namespace AcademyFinalProject.Models.ViewModels
         [DataType(DataType.Date)]
         public DateTime RequestedStartDate { get; set; }
 
-        [Display(Name = "Rot Avdrag")]
+        [Display(Name = "ROT avdrag")]
         public decimal ROTDiscount { get; set; }
 
         [Display(Name = "Rabatt")]

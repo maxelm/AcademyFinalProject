@@ -17,7 +17,7 @@ namespace AcademyFinalProject.Models
         ProductSelectionVM GetProductLists();
         CreateOfferWrapperVM GetOfferRequestByCID(int id);
         FinalOfferVM GetFinalOffer(int id);
-        void DeleteCustomer(int id);
+        void DeleteCustomer(int id, string saveCommand = "SaveChanges");
         UpdateOfferWrapperVM UpdateOffer(int id);
         void SaveOfferUpdate(UpdateOfferWrapperVM model, int id);
     }

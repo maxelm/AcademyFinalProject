@@ -201,5 +201,10 @@ namespace AcademyFinalProject.Models
         {
             throw new NotImplementedException();
         }
+
+        public void DeleteCustomer(int id, string saveCommand = "SaveChanges")
+        {
+            throw new NotImplementedException();
+        }
     }
 }

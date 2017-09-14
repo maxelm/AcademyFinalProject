@@ -130,7 +130,7 @@ namespace AcademyFinalProject.Models
                 RequestedStartDate = c.Order.RequestedStartDate,
                 OrderReceived = c.Order.OrderReceived,
                 IsComplete = c.Order.IsComplete,
-            }).OrderBy(c => c.OrderReceived).ToArray();
+            }).OrderByDescending(c => c.OrderReceived).ToArray();
         }
 
         public ProductSelectionVM GetProductLists() // REDO FÖR TESTING
@@ -153,16 +153,6 @@ namespace AcademyFinalProject.Models
             var x = context.Product.Where(p => p.Category == Convert.ToInt32(productCategory)).Select(p => new SelectListItem { Text = $"{p.Name}\t({p.Price.ToString()} SEK)", Value = $"{p.ProductId.ToString()}_{p.Price}" }).ToArray();
             var y = new SelectListItem[x.Length + 1];
             y[x.Length] = new SelectListItem { Text = "-- Välj produkt --", Value = "0", Selected = true };
-            Array.Copy(x, y, x.Length);
-
-            return y;
-        }
-
-        private SelectListItem[] SetSelectItemUpdate(PCategory productCategory)
-        {
-            var x = context.Product.Where(p => p.Category == Convert.ToInt32(productCategory)).Select(p => new SelectListItem { Text = $"{p.Name}\t({p.Price.ToString()} SEK)", Value = $"{p.ProductId.ToString()}_{p.Price}" }).ToArray();
-            var y = new SelectListItem[x.Length + 1];
-            y[x.Length] = new SelectListItem { Text = "-- Ej vald --", Value = "0", Selected = true };
             Array.Copy(x, y, x.Length);
 
             return y;
@@ -258,6 +248,20 @@ namespace AcademyFinalProject.Models
             if (product != null)
             {
                 return product.Name;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private string GetProductNameUpdate(PCategory productCategory, Product[] productList)
+        {
+            Product product = productList.FirstOrDefault(p => p.Category == Convert.ToInt32(productCategory));
+
+            if (product != null)
+            {
+                return $"{product.ProductId.ToString()}_{product.Price}";
             }
             else
             {
@@ -602,7 +606,7 @@ namespace AcademyFinalProject.Models
             return price;
         }
 
-        public void DeleteCustomer(int customerID)
+        public void DeleteCustomer(int customerID, string saveCommand = "SaveChanges")
         {
             var customer = context.Customer.First(c => c.CustomerId == customerID);
             var order = context.Customer.Where(c => c.CustomerId == customerID).Select(c => c.Order).Single();
@@ -617,7 +621,10 @@ namespace AcademyFinalProject.Models
             context.Order.Remove(order);
             context.Customer.Remove(customer);
 
-            context.SaveChanges();
+            if (saveCommand == "SaveChanges")
+            {
+                context.SaveChanges();
+            }
         }
 
         public UpdateOfferWrapperVM UpdateOffer(int id)
@@ -631,7 +638,7 @@ namespace AcademyFinalProject.Models
             };
         }
 
-        private UpdateSelectedProductsVM GetSelectedProductsUpdate(int id) // TODO: Kolla varför selected inte blir förvalt..
+        private UpdateSelectedProductsVM GetSelectedProductsUpdate(int id)
         {
             var selectedProducts = context.Customer
                 .Where(c => c.CustomerId == id)
@@ -640,57 +647,62 @@ namespace AcademyFinalProject.Models
 
             var m = new UpdateSelectedProductsVM
             {
-                Shower = GetProductName(PCategory.Shower, selectedProducts),
-                Toilet = GetProductName(PCategory.Toilet, selectedProducts),
-                Sink = GetProductName(PCategory.Sink, selectedProducts),
-                Cabinet = GetProductName(PCategory.Cabinet, selectedProducts),
-                Faucet = GetProductName(PCategory.Faucet, selectedProducts),
-                Lighting = GetProductName(PCategory.Lighting, selectedProducts),
-                Tile = GetProductName(PCategory.Tile, selectedProducts),
-                Clinker = GetProductName(PCategory.Clinker, selectedProducts),
+                Shower = GetProductNameUpdate(PCategory.Shower, selectedProducts),
+                Toilet = GetProductNameUpdate(PCategory.Toilet, selectedProducts),
+                Sink = GetProductNameUpdate(PCategory.Sink, selectedProducts),
+                Cabinet = GetProductNameUpdate(PCategory.Cabinet, selectedProducts),
+                Faucet = GetProductNameUpdate(PCategory.Faucet, selectedProducts),
+                Lighting = GetProductNameUpdate(PCategory.Lighting, selectedProducts),
+                Tile = GetProductNameUpdate(PCategory.Tile, selectedProducts),
+                Clinker = GetProductNameUpdate(PCategory.Clinker, selectedProducts),
             };
 
-            m.ShowerItems = SetSelectItemUpdate(PCategory.Shower, m.Shower);
-            m.ToiletItems = SetSelectItemUpdate(PCategory.Toilet, m.Toilet);
-            m.SinkItems = SetSelectItemUpdate(PCategory.Sink, m.Sink);
-            m.CabinetItems = SetSelectItemUpdate(PCategory.Cabinet, m.Cabinet);
-            m.FaucetItems = SetSelectItemUpdate(PCategory.Faucet, m.Faucet);
-            m.LightingItems = SetSelectItemUpdate(PCategory.Lighting, m.Lighting);
-            m.TileItems = SetSelectItemUpdate(PCategory.Tile, m.Tile);
-            m.ClinkerItems = SetSelectItemUpdate(PCategory.Clinker, m.Clinker);          
-            
+            m.ShowerItems = SetSelectItemUpdate(PCategory.Shower);
+            m.ToiletItems = SetSelectItemUpdate(PCategory.Toilet);
+            m.SinkItems = SetSelectItemUpdate(PCategory.Sink);
+            m.CabinetItems = SetSelectItemUpdate(PCategory.Cabinet);
+            m.FaucetItems = SetSelectItemUpdate(PCategory.Faucet);
+            m.LightingItems = SetSelectItemUpdate(PCategory.Lighting);
+            m.TileItems = SetSelectItemUpdate(PCategory.Tile);
+            m.ClinkerItems = SetSelectItemUpdate(PCategory.Clinker);
+
             return m;
         }
 
-        private SelectListItem[] SetSelectItemUpdate(PCategory productCategory, string chosenProduct)
+        private SelectListItem[] SetSelectItemUpdate(PCategory productCategory)
         {
             var x = context.Product.Where(p => p.Category == (int)productCategory).Select(p => p);
 
             var selectListItems = new List<SelectListItem>();
 
-            if (chosenProduct != null)
-            {
-                selectListItems.Add(new SelectListItem { Text = $"-- Inget val --", Value = $"0" });
-            }
-            else
-            {
-                selectListItems.Add(new SelectListItem { Text = $"-- Inget val --", Value = $"0", Selected = true });
-            }
+            selectListItems.Add(new SelectListItem { Text = $"-- Inget val --", Value = $"0" });
 
             foreach (var product in x)
             {
-                if(product.Name == chosenProduct)
-                {
-                    selectListItems.Add(new SelectListItem { Text = $"{product.Name}\t({product.Price.ToString()} SEK)", Value = $"{product.ProductId.ToString()}_{product.Price}", Selected = true });
-                }
-                else
-                {
-                    selectListItems.Add(new SelectListItem { Text = $"{product.Name}\t({product.Price.ToString()} SEK)", Value = $"{product.ProductId.ToString()}_{product.Price}"});
-                }
+                selectListItems.Add(new SelectListItem { Text = $"{product.Name}\t({product.Price.ToString()} SEK)", Value = $"{product.ProductId.ToString()}_{product.Price}" });
             }
 
             return selectListItems.ToArray();
         }
+
+        #region RIP BeautifulCode
+        //private SelectListItem[] SetSelectItemUpdate(PCategory productCategory, string chosenProduct)
+        //{
+        //    var x = context.Product.Where(p => p.Category == (int)productCategory).Select(p => p);
+
+        //    var selectListItems = new List<SelectListItem>();
+
+        //    selectListItems.Add(new SelectListItem { Text = $"-- Inget val --", Value = $"0", Selected = (chosenProduct == null) });
+
+        //    foreach (var product in x)
+        //    {
+
+        //        selectListItems.Add(new SelectListItem { Text = $"{product.Name}\t({product.Price.ToString()} SEK)", Value = $"{product.ProductId.ToString()}_{product.Price}", Selected = (product.Name == chosenProduct) });
+        //    }
+
+        //    return selectListItems.ToArray();
+        //}
+        #endregion
 
         private UpdateAmountOfWorkVM GetAmountOfWorkUpdate(int id)
         {
@@ -719,7 +731,7 @@ namespace AcademyFinalProject.Models
 
                 MountingHours = GetAmountOfHours(WorkType.Mounting, y, workList),
                 HourlyRateMounting = GetHourlyRate(WorkType.Mounting, y, workList),
-            
+
                 TravelCost = z.TravelCost,
                 WorkDiscount = z.WorkDiscount,
 
@@ -750,11 +762,11 @@ namespace AcademyFinalProject.Models
                 WorkDiscount = cust.Order.WorkDiscount,
                 ProjectTypeItems = GetProjectTypeItemsUpdate(),
                 PropertyTypeItems = GetPropertyTypeItemsUpdate(),
-                
+
             }).SingleOrDefault();
         }
 
-        private UpdateCustomerInfoVM GetCustomerInfoUpdate(int id) 
+        private UpdateCustomerInfoVM GetCustomerInfoUpdate(int id)
         {
             return context.Customer.Where(c => c.CustomerId == id).Select(c => new UpdateCustomerInfoVM
             {
@@ -772,7 +784,7 @@ namespace AcademyFinalProject.Models
 
         public void SaveOfferUpdate(UpdateOfferWrapperVM m, int id)// måste testas
         {
-            DeleteCustomer(id);
+            DeleteCustomer(id, "SaveLater");
 
             Customer cust = new Customer
             {
@@ -783,7 +795,7 @@ namespace AcademyFinalProject.Models
                 City = m.UpdateCustomerInfoVM.City,
                 Email = m.UpdateCustomerInfoVM.Email,
                 Phone = m.UpdateCustomerInfoVM.Phone,
-                
+
                 Order = new Order
                 {
                     IsComplete = true,

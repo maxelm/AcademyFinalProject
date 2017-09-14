@@ -44,7 +44,7 @@ namespace AcademyFinalProject.Controllers
 
             contentService.SaveAmountOfWork(model.AmountOfWorkVM, id);
 
-            return RedirectToAction(nameof(FinalOffer), new { id = id });
+            return RedirectToAction(nameof(Inquiries));
         }
 
         [HttpGet]

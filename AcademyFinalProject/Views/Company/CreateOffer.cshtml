@@ -69,11 +69,11 @@
                 </tr>
                 <tr>
                     <td><label asp-for="ShowOrderInfoVM.OrderReceived" class="label_text"></label></td>
-                    <td>@Model.ShowOrderInfoVM.OrderReceived</td>
+                    <td>@Model.ShowOrderInfoVM.OrderReceived.ToShortDateString()</td>
                 </tr>
                 <tr>
                     <td><label asp-for="ShowOrderInfoVM.RequestedStartDate" class="label_text"></label></td>
-                    <td>@Model.ShowOrderInfoVM.RequestedStartDate</td>
+                    <td>@Model.ShowOrderInfoVM.RequestedStartDate.ToShortDateString()</td>
                 </tr>
                 <tr>
                     <td><label asp-for="ShowOrderInfoVM.ViableROTCandidates" class="label_text"></label></td>
@@ -178,7 +178,7 @@
                 </tr>
                 <tr>
                     <td><label asp-for="SelectedProductsVM.TotalProductCost" class="label_text"></label></td>
-                    <td>@Model.SelectedProductsVM.TotalProductCost SEK</td>
+                    <td>@Model.SelectedProductsVM.TotalProductCost.ToString("C")</td>
                 </tr>
             </table>
         </fieldset>
@@ -223,7 +223,7 @@
                     </tr>
                 <tr>
                     <td><b>Totalt:</b></td>
-                    <td><input type="text" class="sumHours input_readOnly" readonly /></td>
+                    <td><span class="input-symbol-tim"><input type="text" class="sumHours input_readOnly" readonly /></span></td>
                     <td><span class="input-symbol-sek"><input type="text" class="sumCost input_readOnly" readonly /></span></td>
                 </tr>
                 <tr>

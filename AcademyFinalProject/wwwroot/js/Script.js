@@ -85,7 +85,6 @@ $(document).ready(function () {
 
         $('.sumProducts').val(showerCost + toiletCost + sinkCost + cabinetCost + faucetCost + lightingCost + tileCost + clinkerCost);
     }
-    console.log($('.sumProducts'))
 
     if ($('.sumProducts').length > 0) {
         

@@ -44,6 +44,7 @@ namespace AcademyFinalProject.Models.ViewModels
         [Display(Name = "Öns. byggstart")]
         [Required(ErrorMessage = "Ange önskad byggstart")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0: dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime RequestedStartDate { get; set; }
     }
 }

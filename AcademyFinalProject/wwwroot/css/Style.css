@@ -11,6 +11,21 @@
     padding-top:20px;
 }
 
+.hideFieldset:after {
+    content: " \25b6";
+    cursor: pointer;
+}
+
+.showFieldset:after {
+    content: " \25bc";
+    cursor: pointer;
+}
+
+.hiddenFieldset {
+    display: none;
+    cursor: pointer;
+}
+
 .div_buttons {
     text-align:right;
     padding-top:40px;
@@ -64,6 +79,21 @@ textarea {
     border-right:hidden;
     border-top:hidden;
     padding: 6px;
+}
+
+#header {
+    margin:10px;
+}
+
+#confirm {
+    text-align:center;
+    width:800px;
+    height:250px;
+    padding:20px;
+    background-color:#c7ffbf;
+    margin:auto;
+    position:relative;
+    border:8px dashed #527e54;
 }
 
 fieldset {
@@ -205,6 +235,10 @@ textarea {
 /* END */
 
 /* Nikola - Final Offer */
+
+#myTable2 tr {
+    cursor:pointer;
+}
 
 #BigFieldset {
     background-color: #eeeeee;

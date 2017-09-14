@@ -22,7 +22,7 @@ namespace AcademyFinalProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Confirm()
         {
             return View();
         }
@@ -43,7 +43,7 @@ namespace AcademyFinalProject.Controllers
 
             contentService.SaveContact(customer);
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Confirm));
         }
     }
 }

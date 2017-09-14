@@ -2,13 +2,13 @@
 
 <link rel="stylesheet" href="~/bootstrap/css/bootstrap.css" />
 <div class="container">
-    <h1>Nya förfrågningar</h1>
+    <h2>Nya förfrågningar</h2>
     <table class="table table-striped table-bordered table-hover sortable" id="myTable2">
         <thead>
             <tr>
                 <th>Namn</th>
-                <th>Fastighet</th>
-                <th>KVM</th>
+                <th>Uppdragstyp</th>
+                <th>Kvm</th>
                 <th>Öns. byggstart</th>
                 <th>Inskickat</th>
             </tr>
@@ -16,32 +16,31 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    @if (item.IsComplete == false)
-                    {
-                        <td>
-                            <a asp-controller="Company" asp-action="CreateOffer" asp-route-id="@item.CID">
-                                @item.FirstName @item.LastName
-                            </a>
-                        </td>
-                            <td>@item.ProjectType</td>
-                                <td>@item.SquareMeter</td>
-                                <td>@item.RequestedStartDate</td>
-                                <td>@item.OrderReceived</td>
-                                <td align="center"><a asp-controller="Company" asp-action="DeleteCustomer" asp-route-id="@item.CID"><img src="~/img/delete-icon.png" width="20" alt="Radera" title="Radera" /></a></td>
-                    }
-                 </tr>
+
+                @if (item.IsComplete == false)
+                {
+                    <tr class="rowNew-click" data-repair-id="@item.CID">
+                        <td>@item.FirstName @item.LastName</td>
+                        <td>@item.ProjectType</td>
+                        <td>@item.SquareMeter</td>
+                        <td>@item.RequestedStartDate.ToShortDateString()</td>
+                        <td>@item.OrderReceived.ToShortDateString()</td>
+                        <td align="center"><a asp-controller="Company" asp-action="DeleteCustomer" asp-route-id="@item.CID"><img src="~/img/delete-icon.png" width="20" alt="Radera" title="Radera" /></a></td>
+                        <td align="center"><a asp-controller="Company" asp-action="UpdateOffer" asp-route-id="@item.CID"><img src="~/img/edit-icon.png" width="20" alt="Uppdatera" title="Uppdatera" /></a></td>
+                    </tr>
+                }
+
             }
         </tbody>
     </table>
-    <br /><br /><br /><br /><br />
-    <h1>Färdiga offerter</h1>
-    <table class="table table-striped table-bordered table table-hover sortable">
+    <br /><br /><br />
+    <h2>Färdiga offerter</h2>
+    <table class="table table-striped table-bordered table table-hover sortable" id="myTable2">
         <thead>
             <tr>
                 <th>Namn</th>
-                <th>Fastighet</th>
-                <th>KVM</th>
+                <th>Uppdragstyp</th>
+                <th>Kvm</th>
                 <th>Öns. byggstart</th>
                 <th>Inskickat</th>
             </tr>
@@ -49,27 +48,53 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    @if (item.IsComplete == true)
-                    {
-                        <td>
-                            <a asp-controller="Company" asp-action="FinalOffer" asp-route-id="@item.CID">
-                                @item.FirstName @item.LastName
-                            </a>
-                        </td>
-                            <td>@item.ProjectType</td>
-                            <td>@item.SquareMeter</td>
-                            <td>@item.RequestedStartDate</td>
-                            <td data-dateformat="MM-DD-YYYY" data-value="@item.OrderReceived">@item.OrderReceived</td>
-                            <td align="center"><a asp-controller="Company" asp-action="DeleteCustomer" asp-route-id="@item.CID"><img src="~/img/delete-icon.png" width="20" alt="Radera" title="Radera" /></a></td>
-                            <td align="center"><a asp-controller="Company" asp-action="UpdateOffer" asp-route-id="@item.CID"><img src="~/img/edit-icon.png" width="20" alt="Uppdatera" title="Uppdatera" /></a></td>
-                    }
-                </tr>
+
+                @if (item.IsComplete == true)
+                {
+                    <tr class="rowDone-click" data-repair-id="@item.CID">
+                        <td>@item.FirstName @item.LastName</td>
+                        <td>@item.ProjectType</td>
+                        <td>@item.SquareMeter</td>
+                        <td>@item.RequestedStartDate.ToShortDateString()</td>
+                        <td>@item.OrderReceived.ToShortDateString()</td>
+                        <td align="center"><a asp-controller="Company" asp-action="DeleteCustomer" asp-route-id="@item.CID"><img src="~/img/delete-icon.png" width="20" alt="Radera" title="Radera" /></a></td>
+                        <td align="center"><a asp-controller="Company" asp-action="UpdateOffer" asp-route-id="@item.CID"><img src="~/img/edit-icon.png" width="20" alt="Uppdatera" title="Uppdatera" /></a></td>
+                    </tr>
+                }
+
             }
         </tbody>
     </table>
 </div>
-<script src="~/js/moment.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="~/js/bootstrap-sortable.js"></script>
-<script src="~/js/Script.js"></script>
+
+@section Scripts
+    {
+    <script src="~/js/moment.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="~/js/bootstrap-sortable.js"></script>
+    <script src="~/js/Script.js"></script>
+    <script>
+        $(document).ready(function (e) {
+            $(".rowNew-click").on("click",
+                function () {
+                    var element = $(this);
+
+                    var eleId = element.data("repair-id")
+                    var url = '@Url.Action("CreateOffer", "Company")';
+            url = url + '?id=' + eleId;
+            window.location.href = url;
+         });
+
+        $(".rowDone-click").on("click",
+        function() {
+            var element = $(this);
+
+            var eleId= element.data("repair-id")
+            var url = '@Url.Action("FinalOffer", "Company")';
+            url = url + '?id=' + eleId;
+            window.location.href = url;
+         });
+    });
+
+    </script>
+}

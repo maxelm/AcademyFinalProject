@@ -162,7 +162,7 @@ namespace AcademyFinalProject.Models
 
         private SelectListItem[] SetSelectItem(PCategory productCategory) // REDO FÖR TESTING TODO: Add currrency.
         {
-            var x = context.Product.Where(p => p.Category == Convert.ToInt32(productCategory)).Select(p => new SelectListItem { Text = $"{p.Name}\t({p.Price.ToString()} SEK)", Value = $"{p.ProductId.ToString()}_{p.Price}" }).ToArray();
+            var x = context.Product.Where(p => p.Category == Convert.ToInt32(productCategory)).Select(p => new SelectListItem { Text = $"{p.Name}\t({p.Price.ToString("C")})", Value = $"{p.ProductId.ToString()}_{p.Price}" }).ToArray();
             var y = new SelectListItem[x.Length + 1];
             y[x.Length] = new SelectListItem { Text = "-- Välj produkt --", Value = "0", Selected = true };
             Array.Copy(x, y, x.Length);
@@ -281,10 +281,13 @@ namespace AcademyFinalProject.Models
             }
         }
 
-        public void SaveAmountOfWork(AmountOfWorkVM work, int cid) // REDO FÖR TESTING (kanske bör göra extra metod)
+        public void SaveAmountOfWork(AmountOfWorkVM work, int id) // REDO FÖR TESTING (kanske bör göra extra metod)
         {
-            var order = context.Customer.Where(c => c.CustomerId == cid).Select(c => c.Order).SingleOrDefault();
+            var order = context.Customer.Where(c => c.CustomerId == id).Select(c => c.Order).SingleOrDefault();
             var orderId = order.OrderId;
+
+            var orderToWork = context.OrderToWork.Where(o => o.OrderId == orderId).ToArray();
+            context.OrderToWork.RemoveRange(orderToWork);
 
             context.OrderToWork.Add(new OrderToWork { OrderId = orderId, WorkId = (int)WorkType.Demolition, HourlyRate = work.HourlyRateDemolition, AmountOfHours = work.DemolitionHours });
 
@@ -355,14 +358,14 @@ namespace AcademyFinalProject.Models
             }
         }
 
-        public CreateOfferWrapperVM GetOfferRequestByCID(int cid) // REDO FÖR TESTING
+        public CreateOfferWrapperVM GetOfferRequestByCID(int id) // REDO FÖR TESTING
         {
             return new CreateOfferWrapperVM
             {
-                ShowCustomerInfoVM = GetCustomerInfoByCID(cid),
-                ShowOrderInfoVM = GetOrderInfoByCID(cid),
-                SelectedProductsVM = GetSelectedProductsByCID(cid),
-                AmountOfWorkVM = GetAmountOfWorkVM(),
+                ShowCustomerInfoVM = GetCustomerInfoByCID(id),
+                ShowOrderInfoVM = GetOrderInfoByCID(id),
+                SelectedProductsVM = GetSelectedProductsByCID(id),
+                AmountOfWorkVM = GetAmountOfWorkVM(id),
             };
         }
 
@@ -379,19 +382,62 @@ namespace AcademyFinalProject.Models
             }).SingleOrDefault();
         }
 
-        private AmountOfWorkVM GetAmountOfWorkVM()
+        private AmountOfWorkVM GetAmountOfWorkVM(int id)
         {
+            var orderToWork = context.Customer.Where(c => c.CustomerId == id).SelectMany(c => c.Order.OrderToWork.Where(i => i.OrderId == c.Order.OrderId)).ToArray();
+
             var workList = context.Work.Select(w => w).ToArray();
 
-            return new AmountOfWorkVM
+            if (orderToWork.Count() > 0)
             {
-                HourlyRateDemolition = GetHrlyRate(WorkType.Demolition, workList),
-                HourlyRateDrain = GetHrlyRate(WorkType.Drain, workList),
-                HourlyRateVentilation = GetHrlyRate(WorkType.Ventilation, workList),
-                HourlyRateTile = GetHrlyRate(WorkType.Tile, workList),
-                HourlyRateElectricity = GetHrlyRate(WorkType.Electricity, workList),
-                HourlyRateMounting = GetHrlyRate(WorkType.Mounting, workList),
-            };
+                if (orderToWork.Count() > 6)
+                {
+                    throw new Exception("ska bara kunna ha 6 ordertoproducts..");
+                }
+                var order = context.Customer.Where(c => c.CustomerId == id).Select(c => c.Order).Single();
+
+                var x = context.Customer.Where(c => c.CustomerId == id).Select(c => new AmountOfWorkVM
+                {
+                    DemolitionHours = GetAmountOfHours(WorkType.Demolition, orderToWork, workList),
+                    HourlyRateDemolition = GetHourlyRate(WorkType.Demolition, orderToWork, workList),
+
+                    DrainHours = GetAmountOfHours(WorkType.Drain, orderToWork, workList),
+                    HourlyRateDrain = GetHourlyRate(WorkType.Drain, orderToWork, workList),
+
+                    VentilationHours = GetAmountOfHours(WorkType.Ventilation, orderToWork, workList),
+                    HourlyRateVentilation = GetHourlyRate(WorkType.Ventilation, orderToWork, workList),
+
+                    TileHours = GetAmountOfHours(WorkType.Tile, orderToWork, workList),
+                    HourlyRateTile = GetHourlyRate(WorkType.Tile, orderToWork, workList),
+
+                    ElectricityHours = GetAmountOfHours(WorkType.Electricity, orderToWork, workList),
+                    HourlyRateElectricity = GetHourlyRate(WorkType.Electricity, orderToWork, workList),
+
+                    MountingHours = GetAmountOfHours(WorkType.Mounting, orderToWork, workList),
+                    HourlyRateMounting = GetHourlyRate(WorkType.Mounting, orderToWork, workList),
+
+                    TravelCost = order.TravelCost,
+                    WorkDiscount = order.WorkDiscount,
+
+                }).Single();
+
+                x.TotalAmountOfHours = CalculateFinalTotalAmountOfHours(x);
+                x.TotalWorkCost = CalculateFinalTotalWorkCost(x);
+
+                return x;
+            }
+            else
+            {
+                return new AmountOfWorkVM
+                {
+                    HourlyRateDemolition = GetHrlyRate(WorkType.Demolition, workList),
+                    HourlyRateDrain = GetHrlyRate(WorkType.Drain, workList),
+                    HourlyRateVentilation = GetHrlyRate(WorkType.Ventilation, workList),
+                    HourlyRateTile = GetHrlyRate(WorkType.Tile, workList),
+                    HourlyRateElectricity = GetHrlyRate(WorkType.Electricity, workList),
+                    HourlyRateMounting = GetHrlyRate(WorkType.Mounting, workList),
+                };
+            }
         }
 
         private decimal GetHrlyRate(WorkType workType, Work[] wList)
@@ -533,6 +579,17 @@ namespace AcademyFinalProject.Models
                 (x.MountingHours);
         }
 
+        private int CalculateFinalTotalAmountOfHours(AmountOfWorkVM x)
+        {
+            return
+                (x.DemolitionHours) +
+                (x.DrainHours) +
+                (x.VentilationHours) +
+                (x.TileHours) +
+                (x.ElectricityHours) +
+                (x.MountingHours);
+        }
+
         private int CalculateFinalTotalAmountOfHours(UpdateAmountOfWorkVM x)
         {
             return
@@ -558,6 +615,17 @@ namespace AcademyFinalProject.Models
         }
 
         private decimal CalculateFinalTotalWorkCost(FinalOfferVM x)
+        {
+            return
+                (x.DemolitionHours * x.HourlyRateDemolition) +
+                (x.DrainHours * x.HourlyRateDrain) +
+                (x.VentilationHours * x.HourlyRateVentilation) +
+                (x.TileHours * x.HourlyRateTile) +
+                (x.ElectricityHours * x.HourlyRateElectricity) +
+                (x.MountingHours * x.HourlyRateMounting);
+        }
+
+        private decimal CalculateFinalTotalWorkCost(AmountOfWorkVM x)
         {
             return
                 (x.DemolitionHours * x.HourlyRateDemolition) +
@@ -691,7 +759,7 @@ namespace AcademyFinalProject.Models
 
             foreach (var product in x)
             {
-                selectListItems.Add(new SelectListItem { Text = $"{product.Name}\t({product.Price.ToString()} SEK)", Value = $"{product.ProductId.ToString()}_{product.Price}" });
+                selectListItems.Add(new SelectListItem { Text = $"{product.Name}\t({product.Price.ToString("C")})", Value = $"{product.ProductId.ToString()}_{product.Price}" });
             }
 
             return selectListItems.ToArray();
@@ -718,15 +786,17 @@ namespace AcademyFinalProject.Models
 
         private UpdateAmountOfWorkVM GetAmountOfWorkUpdate(int id)
         {
-
             var orderToWork = context.Customer.Where(c => c.CustomerId == id).SelectMany(c => c.Order.OrderToWork.Where(i => i.OrderId == c.Order.OrderId)).ToArray();
 
             var workList = context.Work.Select(w => w).ToArray();
 
             if (orderToWork.Count() > 0)
             {
+                if (orderToWork.Count() > 6)
+                {
+                    throw new Exception("ska bara kunna ha 6 ordertoproducts..");
+                }
                 var order = context.Customer.Where(c => c.CustomerId == id).Select(c => c.Order).Single();
-
 
                 var x = context.Customer.Where(c => c.CustomerId == id).Select(c => new UpdateAmountOfWorkVM
                 {
@@ -763,7 +833,7 @@ namespace AcademyFinalProject.Models
                 return new UpdateAmountOfWorkVM
                 {
                     HourlyRateDemolition = GetHrlyRate(WorkType.Demolition, workList),
-                    HourlyRateDrain = GetHrlyRate(WorkType.Drain, workList),
+                    HourlyRateDrain = GetHrlyRate(WorkType.Drain, workList), //TODO : HÄR SMÄLLER DET
                     HourlyRateVentilation = GetHrlyRate(WorkType.Ventilation, workList),
                     HourlyRateTile = GetHrlyRate(WorkType.Tile, workList),
                     HourlyRateElectricity = GetHrlyRate(WorkType.Electricity, workList),
@@ -871,60 +941,48 @@ namespace AcademyFinalProject.Models
 
         private void AddWorkToOrder(UpdateAmountOfWorkVM m, ICollection<OrderToWork> orderToWork)
         {
-            if (m.DemolitionHours > 0)
+            orderToWork.Add(new OrderToWork
             {
-                orderToWork.Add(new OrderToWork
-                {
-                    WorkId = (int)WorkType.Demolition,
-                    AmountOfHours = m.DemolitionHours,
-                    HourlyRate = m.HourlyRateDemolition
-                });
-            }
-            if (m.DrainHours > 0)
+                WorkId = (int)WorkType.Demolition,
+                AmountOfHours = m.DemolitionHours,
+                HourlyRate = m.HourlyRateDemolition
+            });
+
+            orderToWork.Add(new OrderToWork
             {
-                orderToWork.Add(new OrderToWork
-                {
-                    WorkId = (int)WorkType.Drain,
-                    AmountOfHours = m.DrainHours,
-                    HourlyRate = m.HourlyRateDrain
-                });
-            }
-            if (m.ElectricityHours > 0)
+                WorkId = (int)WorkType.Drain,
+                AmountOfHours = m.DrainHours,
+                HourlyRate = m.HourlyRateDrain
+            });
+
+            orderToWork.Add(new OrderToWork
             {
-                orderToWork.Add(new OrderToWork
-                {
-                    WorkId = (int)WorkType.Electricity,
-                    AmountOfHours = m.ElectricityHours,
-                    HourlyRate = m.HourlyRateElectricity
-                });
-            }
-            if (m.MountingHours > 0)
+                WorkId = (int)WorkType.Electricity,
+                AmountOfHours = m.ElectricityHours,
+                HourlyRate = m.HourlyRateElectricity
+            });
+
+            orderToWork.Add(new OrderToWork
             {
-                orderToWork.Add(new OrderToWork
-                {
-                    WorkId = (int)WorkType.Mounting,
-                    AmountOfHours = m.MountingHours,
-                    HourlyRate = m.HourlyRateMounting
-                });
-            }
-            if (m.TileHours > 0)
+                WorkId = (int)WorkType.Mounting,
+                AmountOfHours = m.MountingHours,
+                HourlyRate = m.HourlyRateMounting
+            });
+
+            orderToWork.Add(new OrderToWork
             {
-                orderToWork.Add(new OrderToWork
-                {
-                    WorkId = (int)WorkType.Tile,
-                    AmountOfHours = m.TileHours,
-                    HourlyRate = m.HourlyRateTile
-                });
-            }
-            if (m.VentilationHours > 0)
+                WorkId = (int)WorkType.Tile,
+                AmountOfHours = m.TileHours,
+                HourlyRate = m.HourlyRateTile
+            });
+
+            orderToWork.Add(new OrderToWork
             {
-                orderToWork.Add(new OrderToWork
-                {
-                    WorkId = (int)WorkType.Ventilation,
-                    AmountOfHours = m.VentilationHours,
-                    HourlyRate = m.HourlyRateVentilation
-                });
-            }
+                WorkId = (int)WorkType.Ventilation,
+                AmountOfHours = m.VentilationHours,
+                HourlyRate = m.HourlyRateVentilation
+            });
+
         }
     }
 }

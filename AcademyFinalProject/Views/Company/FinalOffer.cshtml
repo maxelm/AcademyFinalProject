@@ -1,5 +1,6 @@
 ﻿@model FinalOfferVM
 
+
 <fieldset id="BigFieldset">
     <legend id="BigFieldsetLegend">Offert</legend>
     <div>
@@ -66,37 +67,37 @@
             <tbody>
                 @if (Model.Cabinet != null)
                 {
-                    <tr><td>@Model.Cabinet</td><td>@Model.CabinetPrice</td></tr>
+                    <tr><td>@Model.Cabinet</td><td>@Model.CabinetPrice.ToString("0.00")</td></tr>
                 }
                 @if (Model.Clinker != null)
                 {
-                    <tr><td>@Model.Clinker</td><td>@Model.ClinkerPrice</td></tr>
+                    <tr><td>@Model.Clinker</td><td>@Model.ClinkerPrice.ToString("0.00")</td></tr>
                 }
                 @if (Model.Lightning != null)
                 {
-                    <tr><td>@Model.Lightning</td><td>@Model.LightningPrice</td></tr>
+                    <tr><td>@Model.Lightning</td><td>@Model.LightningPrice.ToString("0.00")</td></tr>
                 }
                 @if (Model.Shower != null)
                 {
-                    <tr><td>@Model.Shower</td><td>@Model.ShowerPrice</td></tr>
+                    <tr><td>@Model.Shower</td><td>@Model.ShowerPrice.ToString("0.00")</td></tr>
                 }
                 @if (Model.Sink != null)
                 {
-                    <tr><td>@Model.Sink</td><td>@Model.SinkPrice</td></tr>
+                    <tr><td>@Model.Sink</td><td>@Model.SinkPrice.ToString("0.00")</td></tr>
                 }
                 @if (Model.Tile != null)
                 {
-                    <tr><td>@Model.Tile</td><td>@Model.TilePrice</td></tr>
+                    <tr><td>@Model.Tile</td><td>@Model.TilePrice.ToString("0.00")</td></tr>
                 }
                 @if (Model.Toilet != null)
                 {
-                    <tr><td>@Model.Toilet</td><td>@Model.ToiletPrice</td></tr>
+                    <tr><td>@Model.Toilet</td><td>@Model.ToiletPrice.ToString("0.00")</td></tr>
                 }
                 @if (Model.Faucet != null)
                 {
-                    <tr><td>@Model.Faucet</td><td>@Model.FaucetPrice</td></tr>
+                    <tr><td>@Model.Faucet</td><td>@Model.FaucetPrice.ToString("0.00")</td></tr>
                 }
-                <tr style="font-weight:bold;"><td>Totala produktkostnader</td><td>@Model.TotalProductCost</td></tr>
+                <tr style="font-weight:bold;"><td>Totala produktkostnader</td><td>@Model.TotalProductCost.ToString("0.00")</td></tr>
             </tbody>
         </table>
     </div><br />
@@ -118,7 +119,7 @@
                     <tr>
                         <td><label asp-for="DemolitionHours"></label></td>
                         <td>@Model.DemolitionHours</td>
-                        <td>@Model.HourlyRateDemolition</td>
+                        <td>@Model.HourlyRateDemolition.ToString("0.00")</td>
                     </tr>
                 }
                 @if (Model.VentilationHours != 0)
@@ -126,7 +127,7 @@
                     <tr>
                         <td><label asp-for="VentilationHours"></label></td>
                         <td>@Model.VentilationHours</td>
-                        <td>@Model.HourlyRateVentilation</td>
+                        <td>@Model.HourlyRateVentilation.ToString("0.00")</td>
                     </tr>
                 }
                 @if (Model.ElectricityHours != 0)
@@ -134,7 +135,7 @@
                     <tr>
                         <td><label asp-for="ElectricityHours"></label></td>
                         <td>@Model.ElectricityHours</td>
-                        <td>@Model.HourlyRateElectricity</td>
+                        <td>@Model.HourlyRateElectricity.ToString("0.00")</td>
                     </tr>
                 }
                 @if (Model.TileHours != 0)
@@ -142,7 +143,7 @@
                     <tr>
                         <td><label asp-for="TileHours"></label></td>
                         <td>@Model.TileHours</td>
-                        <td>@Model.HourlyRateTile</td>
+                        <td>@Model.HourlyRateTile.ToString("0.00")</td>
                     </tr>
                 }
                 @if (Model.DrainHours != 0)
@@ -150,7 +151,7 @@
                     <tr>
                         <td><label asp-for="DrainHours"></label></td>
                         <td>@Model.DrainHours</td>
-                        <td>@Model.HourlyRateDrain</td>
+                        <td>@Model.HourlyRateDrain.ToString("0.00")</td>
                     </tr>
                 }
                 @if (Model.MountingHours != 0)
@@ -158,7 +159,7 @@
                     <tr>
                         <td><label asp-for="MountingHours"></label></td>
                         <td>@Model.MountingHours</td>
-                        <td>@Model.HourlyRateMounting</td>
+                        <td>@Model.HourlyRateMounting.ToString("0.00")</td>
                     </tr>
                 }
                 <tr style="border:hidden; border-top:1px solid black;">
@@ -169,7 +170,7 @@
                 <tr style="border:hidden;">
                     <td></td>
                     <td><b><label asp-for="TotalWorkCost"></label></b></td>
-                    <td><b>@Model.TotalWorkCost</b></td>
+                    <td><b>@Model.TotalWorkCost.ToString("0.00")</b></td>
                 </tr>
             </tbody>
         </table>
@@ -191,7 +192,7 @@
             <tbody>
                 <tr>
                     <td><label asp-for="TravelCost"></label></td>
-                    <td>@Model.TravelCost</td>
+                    <td>@Model.TravelCost.ToString("0.00")</td>
                 </tr>
             </tbody>
         </table>
@@ -206,7 +207,7 @@
                 <tbody>
                     <tr>
                         <td>Summa</td>
-                        <td>@Model.ROTDiscount</td>
+                        <td>@Model.ROTDiscount.ToString("0.00")</td>
                     </tr>
                 </tbody>
             </table>
@@ -225,18 +226,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr><td><b>Total</b></td><td><b>@Model.TotalPrice</b></td></tr>
+                <tr><td><b>Total</b></td><td><b>@Model.TotalPrice.ToString("0.00")</b></td></tr>
                 @if (@Model.ROTDiscount != 0)
                 {
-                    <tr><td><b>ROT-Avdrag</b></td><td style="color:red"><b>-@Model.ROTDiscount</b></td></tr>
+                    <tr><td><b>ROT-Avdrag</b></td><td style="color:red"><b>-@Model.ROTDiscount.ToString("0.00")</b></td></tr>
                 }
                 @if (Model.WorkDiscount != 0)
                 {
-                    <tr><td><b><label asp-for="WorkDiscount"></label></b></td><td style="color:red"><b>-@Model.WorkDiscount</b></td></tr>
+                    <tr><td><b><label asp-for="WorkDiscount"></label></b></td><td style="color:red"><b>-@Model.WorkDiscount.ToString("0.00")</b></td></tr>
                 }
                 @if (@Model.TotalPrice != Model.TotalPriceAfterDiscount)
                 {
-                    <tr><td><b>Totalt efter Avdrag</b></td><td><b>@Model.TotalPriceAfterDiscount</b></td></tr>
+                    <tr><td><b>Totalt efter Avdrag</b></td><td><b>@Model.TotalPriceAfterDiscount.ToString("0.00")</b></td></tr>
                 }
             </tbody>
         </table>

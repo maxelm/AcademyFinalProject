@@ -42,9 +42,13 @@ namespace AcademyFinalProject.Models.ViewModels
         public SelectListItem[] ROTCandidateItems { get; set; }
 
         [Display(Name = "Resekostnad")]
+        [Required(ErrorMessage = "Skriv in rabbatt")]
+        [Range(0, int.MaxValue, ErrorMessage = "Rabatten får inte vara ett negativ nummer")]
         public decimal TravelCost { get; set; }
 
         [Display(Name = "Rabatt")]
+        [Required(ErrorMessage = "Skriv in rabbatt")]
+        [Range(0, int.MaxValue, ErrorMessage = "Rabatten får inte vara ett negativ nummer")]
         public decimal WorkDiscount { get; set; }
 
         [Display(Name = "Övrigt")]

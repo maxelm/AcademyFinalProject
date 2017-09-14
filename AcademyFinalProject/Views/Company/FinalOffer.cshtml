@@ -1,252 +1,210 @@
 ﻿@model FinalOfferVM
-@using System.Globalization;
+
 <link rel="stylesheet" href="~/bootstrap/css/bootstrap.css" />
-<fieldset id="BigFieldset">
-    <legend id="BigFieldsetLegend">Offert</legend>
-    <div>
-        <fieldset id="CustomerInfo">
-            <table id="Bestallare">
-                <thead>
-                    <tr>
-                        <th>Beställare:</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>@Model.FirstName @Model.LastName</td></tr>
-                    <tr><td>@Model.Street</td></tr>
-                    <tr><td>@Model.Zip @Model.City</td></tr>
-                    <tr><td>@Model.Phone</td></tr>
-                </tbody>
-            </table>
-        </fieldset>
+<br />
+<div id="wrapper">
 
-        <fieldset id="WorkInfo">
-            <table id="Bestallare">
-                <thead>
-                    <tr>
-                        <th>Uppdrag:</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>@Model.SelectedProjectType</tr>
-                    <tr><td>@Model.SquareMeter kvm</td></tr>
-                    <tr><td>@Model.SelectedPropertyType</td></tr>
-                    <tr><td><label asp-for="RequestedStartDate"></label>: @Model.RequestedStartDate.ToShortDateString()</td></tr>
-                </tbody>
-            </table>
-        </fieldset>
-
-        <fieldset id="CompanyInfo">
-            <table id="Bestallare">
-                <thead>
-                    <tr>
-                        <th>Företaget:</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>JM Vatteservice</td></tr>
-                    <tr><td>Org.nr: 1234-5678-12</td></tr>
-                    <tr><td>Kungsgatan 4</td></tr>
-                    <tr><td>123 43 Stockholm</td></tr>
-                </tbody>
-            </table>
-        </fieldset>
-        <hr id="BigHr" /><br />
+    <div class="aboutleft">
+        <h4 class="offer_h4">Uppdragsgivare</h4>
+        @Model.FirstName @Model.LastName<br />
+        @Model.Street<br />
+        @Model.Zip @Model.City<br />
+        @Model.Phone
     </div>
 
-    <div>
-        <h3>Materialkostnader</h3>
-        <table id="Artiklar">
-            <thead>
-                <tr>
-                    <th>Artiklar:</th>
-                    <th>Pris:</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.Cabinet != null)
-                {
-                    <tr><td>@Model.Cabinet</td><td>@Model.CabinetPrice</td></tr>
-                }
-                @if (Model.Clinker != null)
-                {
-                    <tr><td>@Model.Clinker</td><td>@Model.ClinkerPrice</td></tr>
-                }
-                @if (Model.Lightning != null)
-                {
-                    <tr><td>@Model.Lightning</td><td>@Model.LightningPrice</td></tr>
-                }
-                @if (Model.Shower != null)
-                {
-                    <tr><td>@Model.Shower</td><td>@Model.ShowerPrice</td></tr>
-                }
-                @if (Model.Sink != null)
-                {
-                    <tr><td>@Model.Sink</td><td>@Model.SinkPrice</td></tr>
-                }
-                @if (Model.Tile != null)
-                {
-                    <tr><td>@Model.Tile</td><td>@Model.TilePrice</td></tr>
-                }
-                @if (Model.Toilet != null)
-                {
-                    <tr><td>@Model.Toilet</td><td>@Model.ToiletPrice</td></tr>
-                }
-                @if (Model.Faucet != null)
-                {
-                    <tr><td>@Model.Faucet</td><td>@Model.FaucetPrice</td></tr>
-                }
-                <tr style="font-weight:bold;"><td>Totala produktkostnader</td><td>@Model.TotalProductCost</td></tr>
-            </tbody>
+    <div class="vline">
+        <h4 class="offer_h4">Uppdragsinfo</h4>
+        <table width="230">
+            <tr>
+                <td><b>Uppdragstyp:</b></td>
+                <td>@Model.SelectedProjectType</td>
+            </tr>
+            <tr>
+                <td><b>Antal kvm:</b> </td>
+                <td>@Model.SquareMeter kvm</td>
+            </tr>
+            <tr>
+                <td><b>Fastighet:</b> </td>
+                <td>@Model.SelectedPropertyType</td>
+            </tr>
+            <tr>
+                <td><b>Öns. byggstart:</b> </td>
+                <td>@Model.RequestedStartDate.ToShortDateString()</td>
+            </tr>
         </table>
-    </div><br />
-    <hr id="SmallHr" /><br />
+    </div>
 
-    <div>
-        <h3>Arbetskostnader</h3>
-        <table id="Arbete">
-            <thead>
-                <tr>
-                    <th>Arbete</th>
-                    <th>Antal tim</th>
-                    <th>Tim deb</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.DemolitionHours != 0)
-                {
-                    <tr>
-                        <td><label asp-for="DemolitionHours"></label></td>
-                        <td>@Model.DemolitionHours</td>
-                        <td>@Model.HourlyRateDemolition</td>
-                    </tr>
-                }
-                @if (Model.VentilationHours != 0)
-                {
-                    <tr>
-                        <td><label asp-for="VentilationHours"></label></td>
-                        <td>@Model.VentilationHours</td>
-                        <td>@Model.HourlyRateVentilation.ToString("C")</td>
-                    </tr>
-                }
-                @if (Model.ElectricityHours != 0)
-                {
-                    <tr>
-                        <td><label asp-for="ElectricityHours"></label></td>
-                        <td>@Model.ElectricityHours</td>
-                        <td>@Model.HourlyRateElectricity</td>
-                    </tr>
-                }
-                @if (Model.TileHours != 0)
-                {
-                    <tr>
-                        <td><label asp-for="TileHours"></label></td>
-                        <td>@Model.TileHours</td>
-                        <td>@Model.HourlyRateTile</td>
-                    </tr>
-                }
-                @if (Model.DrainHours != 0)
-                {
-                    <tr>
-                        <td><label asp-for="DrainHours"></label></td>
-                        <td>@Model.DrainHours</td>
-                        <td>@Model.HourlyRateDrain</td>
-                    </tr>
-                }
-                @if (Model.MountingHours != 0)
-                {
-                    <tr>
-                        <td><label asp-for="MountingHours"></label></td>
-                        <td>@Model.MountingHours</td>
-                        <td>@Model.HourlyRateMounting</td>
-                    </tr>
-                }
-                <tr style="border:hidden; border-top:1px solid black;">
-                    <td></td>
-                    <td><b><label asp-for="TotalAmountOfHours"></label></b></td>
-                    <td><b>@Model.TotalAmountOfHours</b></td>
-                </tr>
-                <tr style="border:hidden;">
-                    <td></td>
-                    <td><b><label asp-for="TotalWorkCost"></label></b></td>
-                    <td><b>@Model.TotalWorkCost</b></td>
-                </tr>
-            </tbody>
+    <div class="aboutright">
+        <h4 class="offer_h4">Företaget</h4>
+        JM Vattenservice AB<br />
+        Org.nr: 1234-5678-12<br />
+        Kungsgatan 4<br />
+        123 43 Stockholm
+    </div>
+    <br /><br />
+    <div class="vline2">
+        <h4 class="offer_h4">Material</h4>
+        <table class="table">
+            <tr>
+                <th>Artiklar:</th>
+                <th>Pris:</th>
+            </tr>
+            @if (Model.Cabinet != null)
+            {
+                <tr><td>@Model.Cabinet</td><td>@Model.CabinetPrice.ToString("C")</td></tr>
+            }
+            @if (Model.Clinker != null)
+            {
+                <tr><td>@Model.Clinker</td><td>@Model.ClinkerPrice.ToString("C")</td></tr>
+            }
+            @if (Model.Lightning != null)
+            {
+                <tr><td>@Model.Lightning</td><td>@Model.LightningPrice.ToString("C")</td></tr>
+            }
+            @if (Model.Shower != null)
+            {
+                <tr><td>@Model.Shower</td><td>@Model.ShowerPrice.ToString("C")</td></tr>
+            }
+            @if (Model.Sink != null)
+            {
+                <tr><td>@Model.Sink</td><td>@Model.SinkPrice.ToString("C")</td></tr>
+            }
+            @if (Model.Tile != null)
+            {
+                <tr><td>@Model.Tile</td><td>@Model.TilePrice.ToString("C")</td></tr>
+            }
+            @if (Model.Toilet != null)
+            {
+                <tr><td>@Model.Toilet</td><td>@Model.ToiletPrice.ToString("C")</td></tr>
+            }
+            @if (Model.Faucet != null)
+            {
+                <tr><td>@Model.Faucet</td><td>@Model.FaucetPrice</td></tr>
+            }
+            <tr style="font-weight:bold; color:#a30000;"><td>Summa:</td><td>@Model.TotalProductCost.ToString("C")</td></tr>
         </table>
-        <br />
 
-    </div><br />
-    <hr id="SmallHr" /><br />
-
-
-    <div>
-        <h3>Resekostnader</h3>
-        <table id="Resekostnader">
-            <thead>
+    </div>
+    <br />
+    <div class="vline2">
+        <h4 class="offer_h4">Arbete</h4>
+        <table class="table">
+            <tr>
+                <th>Arbete</th>
+                <th>Antal tim</th>
+                <th>Tim deb</th>
+            </tr>
+            @if (Model.DemolitionHours != 0)
+            {
                 <tr>
-                    <th>Resekostnad</th>
-                    <th>Pris</th>
+                    <td><label asp-for="DemolitionHours"></label></td>
+                    <td>@Model.DemolitionHours</td>
+                    <td>@Model.HourlyRateDemolition.ToString("C")</td>
                 </tr>
-            </thead>
-            <tbody>
+            }
+            @if (Model.VentilationHours != 0)
+            {
                 <tr>
-                    <td><label asp-for="TravelCost"></label></td>
-                    <td>@Model.TravelCost</td>
+                    <td><label asp-for="VentilationHours"></label></td>
+                    <td>@Model.VentilationHours</td>
+                    <td>@Model.HourlyRateVentilation.ToString("C")</td>
                 </tr>
-            </tbody>
+            }
+            @if (Model.ElectricityHours != 0)
+            {
+                <tr>
+                    <td><label asp-for="ElectricityHours"></label></td>
+                    <td>@Model.ElectricityHours</td>
+                    <td>@Model.HourlyRateElectricity.ToString("C")</td>
+                </tr>
+            }
+            @if (Model.TileHours != 0)
+            {
+                <tr>
+                    <td><label asp-for="TileHours"></label></td>
+                    <td>@Model.TileHours</td>
+                    <td>@Model.HourlyRateTile.ToString("C")</td>
+                </tr>
+            }
+            @if (Model.DrainHours != 0)
+            {
+                <tr>
+                    <td><label asp-for="DrainHours"></label></td>
+                    <td>@Model.DrainHours</td>
+                    <td>@Model.HourlyRateDrain.ToString("C")</td>
+                </tr>
+            }
+            @if (Model.MountingHours != 0)
+            {
+                <tr>
+                    <td><label asp-for="MountingHours"></label></td>
+                    <td>@Model.MountingHours</td>
+                    <td>@Model.HourlyRateMounting.ToString("C")</td>
+                </tr>
+            }
+            <tr style="border:hidden; border-top:1px solid black; color:#a30000;">
+                <td><b><label asp-for="TotalWorkCost"></label></b></td>
+                <td><b>@Model.TotalAmountOfHours tim</b></td>
+                <td><b>@Model.TotalWorkCost.ToString("C")</b></td>
+            </tr>
+
         </table>
-    </div><br />
-    <hr id="SmallHr" /><br />
 
+    </div>
+    <br />
+    <div class="vline2">
+        <h4 class="offer_h4">Resekostnad</h4>
+        <table class="table">
+            <tr>
+                <td><label asp-for="TravelCost"></label></td>
+                <td>@Model.TravelCost.ToString("C")</td>
+            </tr>
+        </table>
+    </div>
     @if (Model.ROTDiscount != 0)
     {
-        <div>
-            <h3>Rotavdrag</h3>
-            <table id="Resekostnader">
-                <tbody>
-                    <tr>
-                        <td>Summa</td>
-                        <td>@Model.ROTDiscount</td>
-                    </tr>
-                </tbody>
+        <br />
+        <div class="vline2">
+            <h4 class="offer_h4">Rotavdrag</h4>
+            <table class="table">
+                <tr>
+                    <td><label asp-for="ROTDiscount"></label>&nbsp;&nbsp;</td>
+                    <td>@Model.ROTDiscount.ToString("C")</td>
+                </tr>
             </table>
         </div>
-        <br />
-        <hr id="SmallHr" /><br />
     }
-
-    <div>
-        <h3>Totalt</h3>
-        <table id="Resekostnader">
-            <thead>
-                <tr>
-                    <th> </th>
-                    <th>Summa</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr><td><b>Total</b></td><td><b>@Model.TotalPrice</b></td></tr>
-                @if (@Model.ROTDiscount != 0)
-                {
-                    <tr><td><b>ROT-Avdrag</b></td><td style="color:red"><b>-@Model.ROTDiscount</b></td></tr>
-                }
-                @if (Model.WorkDiscount != 0)
-                {
-                    <tr><td><b><label asp-for="WorkDiscount"></label></b></td><td style="color:red"><b>-@Model.WorkDiscount</b></td></tr>
-                }
-                @if (@Model.TotalPrice != Model.TotalPriceAfterDiscount)
-                {
-                    <tr><td><b>Totalt efter Avdrag</b></td><td><b>@Model.TotalPriceAfterDiscount</b></td></tr>
-                }
-            </tbody>
+    <br />
+    <div class="vline2">
+        <h4 class="offer_h4">Totalt</h4>
+        <table class="table">
+            <tr>
+                <td><b>Summa</b></td>
+                <td><b>@Model.TotalPrice.ToString("C")</b></td>
+            </tr>
+            @if (@Model.ROTDiscount != 0)
+            {
+                <tr><td><b>ROT-Avdrag</b></td><td style="color:red"><b>-@Model.ROTDiscount.ToString("C")</b></td></tr>
+            }
+            @if (Model.WorkDiscount != 0)
+            {
+                <tr><td><b><label asp-for="WorkDiscount"></label></b></td><td style="color:red"><b>-@Model.WorkDiscount.ToString("C")</b></td></tr>
+            }
+            @if (@Model.TotalPrice != Model.TotalPriceAfterDiscount)
+            {
+                <tr><td><b>Totalt efter avdrag</b></td><td><b>@Model.TotalPriceAfterDiscount.ToString("C")</b></td></tr>
+            }
         </table>
-    </div><br />
-</fieldset>
-
-<div class="div_buttons"><p><button onclick="GoBack()" style="vertical-align:middle;" class="button"><span>Tillbaka</span></button></p></div>
-
+    </div>
+    <br />
+    <div class="vline2_button">
+        <button onclick="goBack()" style="vertical-align:middle;" class="button_back"><span>Tillbaka</span></button>
+    </div>
+</div>
 @section Scripts
-{
-    <script src="~/bootstrap/js/bootstrap.min.js"></script>
+    {
+    <script src="~/js/moment.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="~/js/bootstrap-sortable.js"></script>
     <script src="~/js/Script.js"></script>
 }

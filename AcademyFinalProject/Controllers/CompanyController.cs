@@ -22,14 +22,14 @@ namespace AcademyFinalProject.Controllers
             return View();
         }
 
-        [Route("offertlista")]
+        //[Route("offertlista")]
         [HttpGet]
         public IActionResult Inquiries()
         {
             return View(contentService.GetOfferInquiries());
         }
 
-        [Route("skapaoffert")]
+        //[Route("skapaoffert")]
         [HttpGet]
         public IActionResult CreateOffer(int id)
         {
@@ -49,7 +49,7 @@ namespace AcademyFinalProject.Controllers
             return RedirectToAction(nameof(Inquiries));
         }
 
-        [Route("slutoffert")]
+        //[Route("slutoffert")]
         [HttpGet]
         public IActionResult FinalOffer(int id)
         {
@@ -64,7 +64,7 @@ namespace AcademyFinalProject.Controllers
             return RedirectToAction(nameof(Inquiries));
         }
 
-        [Route("uppdatera-offert")]
+        //[Route("uppdatera-offert")]
         [HttpGet]
         public IActionResult UpdateOffer(int id)
         {

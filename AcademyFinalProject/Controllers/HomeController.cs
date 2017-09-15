@@ -20,7 +20,7 @@ namespace AcademyFinalProject.Controllers
             this.contentService = contentService;
         }
 
-        [Route("bekraftelse")]
+        //[Route("bekraftelse")]
         [HttpGet]
         public IActionResult Confirm()
         {
@@ -33,7 +33,7 @@ namespace AcademyFinalProject.Controllers
             return RedirectToAction(nameof(CustomerRequestOffer));
         }
 
-        [Route("offertforfragan")]
+        //[Route("offertforfragan")]
         [HttpGet]
         public IActionResult CustomerRequestOffer()
         { 

@@ -73,6 +73,7 @@ namespace AcademyFinalProject.Models.ViewModels
         public string Clinker { get; set; }
         public decimal ClinkerPrice { get; set; }
 
+
         [Display(Name = "Total summa")]
         public decimal TotalProductCost { get; set; }
 
@@ -102,7 +103,7 @@ namespace AcademyFinalProject.Models.ViewModels
 
         [Display(Name = "Totalt antal timmar")]
         public int TotalAmountOfHours { get; set; }
-        [Display(Name = "Summa arbetskostnader")]
+        [Display(Name = "Summa")]
         public decimal TotalWorkCost { get; set; }
 
         [Display(Name = "Resekostnad")]
@@ -126,5 +127,12 @@ namespace AcademyFinalProject.Models.ViewModels
 
         [Display(Name = "Rabatt")]
         public decimal WorkDiscount { get; set; }
+
+        public decimal DemlitionTotal { get; set; }
+        public decimal VentilationTotal { get; set; }
+        public decimal ElectricityTotal { get; set; }
+        public decimal TileTotal { get; set; }
+        public decimal DrainTotal { get; set; }
+        public decimal MountingTotal { get; set; }
     }
 }

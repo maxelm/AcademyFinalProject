@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using AcademyFinalProject.Models;
 using AcademyFinalProject.Models.ViewModels;
 
-// For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace AcademyFinalProject.Controllers
 {
     public class CompanyController : Controller
@@ -46,7 +44,7 @@ namespace AcademyFinalProject.Controllers
 
             contentService.SaveAmountOfWork(model.AmountOfWorkVM, id);
 
-            return RedirectToAction(nameof(FinalOffer), new { id = id });
+            return RedirectToAction(nameof(Inquiries));
         }
 
         [HttpGet]

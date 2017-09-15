@@ -177,7 +177,7 @@ textarea {
     vertical-align: top;
     width: 30%;
     background-color: aliceblue;
-    padding: 10px;
+    padding: 15px;
     margin: 0;
     border-radius:10px;
 }
@@ -188,15 +188,16 @@ textarea {
     background-color: aliceblue;
     margin: 0;
     width: 30%;
-    padding: 10px;
+    padding: 15px;
     border-radius: 10px;
 }
 
 .vline2 {
     background-color: aliceblue;
     width: 90.6%;
-    padding: 10px;
-    clear:both;
+    padding: 20px;
+    clear: both;
+    border-radius: 10px;
 }
 
 .vline2_button {

@@ -77,7 +77,7 @@ namespace AcademyFinalProject.Models.ViewModels
         public decimal TravelCost { get; set; }
 
         [Display(Name = "Rabatt")]
-        [Required(ErrorMessage = "Skriv in rabbatt")]
+        [Required(ErrorMessage = "Skriv in rabatt")]
         [DisplayFormat(DataFormatString = "{0:0}", ApplyFormatInEditMode = true)]
         [Range(0, int.MaxValue, ErrorMessage = "Rabatten får inte vara ett negativ nummer")]
         public decimal WorkDiscount { get; set; }

@@ -153,53 +153,53 @@
         &emsp;&emsp;
         <!-- Material uppgifter fieldset -->
         <fieldset>
-            <legend class="hideFieldset">Material: (ej obligatorisk)</legend>
+            <legend class="hideFieldset">Material</legend>
             <div class="hiddenFieldset">
                 <table class="CustReqOffer_table">
                     <tr>
                         <td><label asp-for="UpdateSelectedProductsVM.Shower" class="label_text"></label></td>
-                        <td><select asp-for="UpdateSelectedProductsVM.Shower" asp-items="Model.UpdateSelectedProductsVM.ShowerItems" class="input_field"></select></td>
+                        <td><select asp-for="UpdateSelectedProductsVM.Shower" asp-items="Model.UpdateSelectedProductsVM.ShowerItems" class="input_field product_Select" id="selectedShower"></select></td>
                         <td><span asp-validation-for="UpdateSelectedProductsVM.Shower" class="span_validation"></span></td>
                     </tr>
 
                     <tr>
                         <td><label asp-for="UpdateSelectedProductsVM.Toilet" class="label_text"></label></td>
-                        <td><select asp-for="UpdateSelectedProductsVM.Toilet" asp-items="Model.UpdateSelectedProductsVM.ToiletItems" class="input_field"></select></td>
+                        <td><select asp-for="UpdateSelectedProductsVM.Toilet" asp-items="Model.UpdateSelectedProductsVM.ToiletItems" class="input_field product_Select" id="selectedToilet"></select></td>
                         <td><span asp-validation-for="UpdateSelectedProductsVM.Toilet" class="span_validation"></span></td>
                     </tr>
                     <tr>
                         <td><label asp-for="UpdateSelectedProductsVM.Sink" class="label_text"></label></td>
-                        <td><select asp-for="UpdateSelectedProductsVM.Sink" asp-items="Model.UpdateSelectedProductsVM.SinkItems" class="input_field"></select></td>
+                        <td><select asp-for="UpdateSelectedProductsVM.Sink" asp-items="Model.UpdateSelectedProductsVM.SinkItems" class="input_field product_Select" id="selectedSink"></select></td>
                         <td><span asp-validation-for="UpdateSelectedProductsVM.Sink" class="span_validation"></span></td>
                     </tr>
 
                     <tr>
                         <td><label asp-for="UpdateSelectedProductsVM.Cabinet" class="label_text"></label></td>
-                        <td><select asp-for="UpdateSelectedProductsVM.Cabinet" asp-items="Model.UpdateSelectedProductsVM.CabinetItems" class="input_field"></select></td>
+                        <td><select asp-for="UpdateSelectedProductsVM.Cabinet" asp-items="Model.UpdateSelectedProductsVM.CabinetItems" class="input_field product_Select" id="selectedCabinet"></select></td>
                         <td><span asp-validation-for="UpdateSelectedProductsVM.Cabinet" class="span_validation"></span></td>
                     </tr>
 
                     <tr>
                         <td><label asp-for="UpdateSelectedProductsVM.Faucet" class="label_text"></label></td>
-                        <td><select asp-for="UpdateSelectedProductsVM.Faucet" asp-items="Model.UpdateSelectedProductsVM.FaucetItems" class="input_field"></select></td>
+                        <td><select asp-for="UpdateSelectedProductsVM.Faucet" asp-items="Model.UpdateSelectedProductsVM.FaucetItems" class="input_field product_Select" id="selectedFaucet"></select></td>
                         <td><span asp-validation-for="UpdateSelectedProductsVM.Faucet" class="span_validation"></span></td>
                     </tr>
 
                     <tr>
                         <td><label asp-for="UpdateSelectedProductsVM.Lighting" class="label_text"></label></td>
-                        <td><select asp-for="UpdateSelectedProductsVM.Lighting" asp-items="Model.UpdateSelectedProductsVM.LightingItems" class="input_field"></select></td>
+                        <td><select asp-for="UpdateSelectedProductsVM.Lighting" asp-items="Model.UpdateSelectedProductsVM.LightingItems" class="input_field product_Select" id="selectedLighting"></select></td>
                         <td><span asp-validation-for="UpdateSelectedProductsVM.Lighting" class="span_validation"></span></td>
                     </tr>
 
                     <tr>
                         <td><label asp-for="UpdateSelectedProductsVM.Tile" class="label_text"></label></td>
-                        <td><select asp-for="UpdateSelectedProductsVM.Tile" asp-items="Model.UpdateSelectedProductsVM.TileItems" class="input_field"></select></td>
+                        <td><select asp-for="UpdateSelectedProductsVM.Tile" asp-items="Model.UpdateSelectedProductsVM.TileItems" class="input_field product_Select" id="selectedTile"></select></td>
                         <td><span asp-validation-for="UpdateSelectedProductsVM.Tile" class="span_validation"></span></td>
                     </tr>
 
                     <tr>
                         <td><label asp-for="UpdateSelectedProductsVM.Clinker" class="label_text"></label></td>
-                        <td><select asp-for="UpdateSelectedProductsVM.Clinker" asp-items="Model.UpdateSelectedProductsVM.ClinkerItems" class="input_field"></select></td>
+                        <td><select asp-for="UpdateSelectedProductsVM.Clinker" asp-items="Model.UpdateSelectedProductsVM.ClinkerItems" class="input_field product_Select" id="selectedClinker"></select></td>
                         <td><span asp-validation-for="UpdateSelectedProductsVM.Clinker" class="span_validation"></span></td>
                     </tr>
                     <tr>
@@ -207,7 +207,7 @@
                     </tr>
                     <tr>
                         <td><label asp-for="UpdateSelectedProductsVM.TotalProductCost" class="label_text"></label></td>
-                        <td></td>
+                        <td><input type="text" class="sumProducts input_readOnly" readonly /></td>
                     </tr>
                 </table>
             </div>

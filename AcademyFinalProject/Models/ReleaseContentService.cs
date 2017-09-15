@@ -555,6 +555,9 @@ namespace AcademyFinalProject.Models
             x.DrainTotal = x.DrainHours * x.HourlyRateDrain;
             x.MountingTotal = x.MountingHours * x.HourlyRateMounting;
 
+            x.TileTotalCost = x.SquareMeter * x.TilePrice;
+            x.ClinkerTotalCost = x.SquareMeter * x.ClinkerPrice;
+
             #endregion
 
             return x;

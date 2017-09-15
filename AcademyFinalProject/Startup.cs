@@ -19,7 +19,7 @@ namespace AcademyFinalProject
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var connString = @"Server=tcp:academyfinalprojectdb.database.windows.net,1433;Initial Catalog=AcademyFinalProjectDB;Persist Security Info=False;User ID=Academy;Password=MDNmdn123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
+            var connString = @"Server =tcp:academyfinalprojectdb.database.windows.net,1433;Initial Catalog=AcademyFinalProjectDB;Persist Security Info=False;User ID=Academy;Password=MDNmdn123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
 
             services.AddDbContext<AcademyDbContext>(o => o.UseSqlServer(connString));  //TODO: Add server retry + Ask if contextPOOL makes a difference
             services.AddMvc();

@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://jmvattenserviceab.azurewebsites.net/company/inquiries",
+      "applicationUrl": "http://jmvattenserviceab.azurewebsites.net",
       "sslPort": 0
     }
   },

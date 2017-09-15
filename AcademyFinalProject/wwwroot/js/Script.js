@@ -83,7 +83,9 @@ $(document).ready(function () {
         var tileCost = Number(GetPrice($('#selectedTile').val()));
         var clinkerCost = Number(GetPrice($('#selectedClinker').val()));
 
-        $('.sumProducts').val(showerCost + toiletCost + sinkCost + cabinetCost + faucetCost + lightingCost + tileCost + clinkerCost);
+        var square = Number($('#squareMeter').val());
+
+        $('.sumProducts').val(showerCost + toiletCost + sinkCost + cabinetCost + faucetCost + lightingCost + tileCost * square + clinkerCost * square);
     }
 
     if ($('.sumProducts').length > 0) {

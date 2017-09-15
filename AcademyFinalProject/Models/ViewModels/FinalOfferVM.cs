@@ -134,5 +134,8 @@ namespace AcademyFinalProject.Models.ViewModels
         public decimal TileTotal { get; set; }
         public decimal DrainTotal { get; set; }
         public decimal MountingTotal { get; set; }
+
+        public decimal TileTotalCost { get; set; }
+        public decimal ClinkerTotalCost { get; set; }
     }
 }

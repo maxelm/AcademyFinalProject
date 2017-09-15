@@ -20,12 +20,20 @@ namespace AcademyFinalProject.Controllers
             this.contentService = contentService;
         }
 
+        [Route("bekraftelse")]
         [HttpGet]
         public IActionResult Confirm()
         {
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return RedirectToAction(nameof(CustomerRequestOffer));
+        }
+
+        [Route("offertforfragan")]
         [HttpGet]
         public IActionResult CustomerRequestOffer()
         { 
